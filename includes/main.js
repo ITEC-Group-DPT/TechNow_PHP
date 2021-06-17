@@ -37,6 +37,7 @@ const getProducts = (item) => {
   xhr.open("GET", url, true);
   xhr.onload = function () {
     if (this.status == 200) {
+      console.log('asd');
       item = JSON.parse(this.responseText).Products;
       //loadProductSection(item, 'CPU');
       loadProductSection(item, 'CPU');

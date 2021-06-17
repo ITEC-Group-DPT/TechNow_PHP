@@ -39,7 +39,7 @@
     <div class="upper-container">
       <div class="row">
 
-        <a class="col-md-3 logo-wrapper text-center pt-1" href="index.html">
+        <a class="col-md-3 logo-wrapper text-center pt-1" href="index.php ">
           <img src="img/logo_sub.webp" style="width: 165px; height: 34px;" alt="">
         </a>
 
@@ -134,7 +134,7 @@
 
         <ul class="navbar-nav mr-auto row">
           <li class="nav-item main col-md-2 px-0">
-            <a class="nav-link category-btn text-center" href="./index.html">
+            <a class="nav-link category-btn text-center" href="./index.php">
               <i class="bi bi-house-door mr-2 text-white"></i>
               <span class="text-white">Home</span>
             </a>
@@ -155,7 +155,7 @@
           </li>
 
           <li class="nav-item main col-md-2 px-0">
-            <a class="nav-link text-center" href="./pages/Contact/contact.html">
+            <a class="nav-link text-center" href="./pages/Contact/contact.php">
               <i class="bi bi-telephone-inbound mr-2 text-white"></i>
               <span class="text-white">Contact us</span>
             </a>
