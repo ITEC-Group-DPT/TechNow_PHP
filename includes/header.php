@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--CSS-->
-  <link rel="stylesheet" href="includes/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <!--Website's icon (on browser's tab)-->
   <link rel="icon" href="img/logo.png">
   <!-- Bootstrap CSS -->
