@@ -17,35 +17,35 @@ $(document).ready(() => {
   updateNoItemInCart();
 });
 
-const getProducts = (item) => {
-  let url = 'https://technow-4b3ab.firebaseio.com/.json';
-  let xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-  xhr.onload = function () {
-    if (this.status == 200) {
-      item = JSON.parse(this.responseText).Products;
-      //loadProductSection(item, 'CPU');
-      loadProductSection(item, 'CPU');
-      //loadProductSection(item, 'GamingChair');
-      //loadProductSection(item, 'Headphone');
-      loadProductSection(item, 'Laptop');
-      // loadProductSection(item, 'Laptop');
-      // loadProductSection(item, 'Mainboard');
-      loadProductSection(item, 'Monitor');
-      // loadProductSection(item, 'Mouse');
-      // loadProductSection(item, 'PSU');
-      // loadProductSection(item, 'RAM');
-      // loadProductSection(item, 'SSD');
-      // loadProductSection(item, 'Speaker');
-      // loadProductSection(item, 'VGA');
-      sortingSold(item);
+// const getProducts = (item) => {
+//   let url = 'https://technow-4b3ab.firebaseio.com/.json';
+//   let xhr = new XMLHttpRequest();
+//   xhr.open("GET", url, true);
+//   xhr.onload = function () {
+//     if (this.status == 200) {
+//       item = JSON.parse(this.responseText).Products;
+//       //loadProductSection(item, 'CPU');
+//       loadProductSection(item, 'CPU');
+//       //loadProductSection(item, 'GamingChair');
+//       //loadProductSection(item, 'Headphone');
+//       loadProductSection(item, 'Laptop');
+//       // loadProductSection(item, 'Laptop');
+//       // loadProductSection(item, 'Mainboard');
+//       loadProductSection(item, 'Monitor');
+//       // loadProductSection(item, 'Mouse');
+//       // loadProductSection(item, 'PSU');
+//       // loadProductSection(item, 'RAM');
+//       // loadProductSection(item, 'SSD');
+//       // loadProductSection(item, 'Speaker');
+//       // loadProductSection(item, 'VGA');
+//       sortingSold(item);
 
-      products = item;
-      addToCart();
-    }
-  }
-  xhr.send();
-}
+//       products = item;
+//       addToCart();
+//     }
+//   }
+//   xhr.send();
+// }
 
 const loadProductSection = (item, section) => {
   let sectionObj = item[section];
