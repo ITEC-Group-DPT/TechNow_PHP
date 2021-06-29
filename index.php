@@ -1,8 +1,8 @@
-<?php include 'includes/header.php' ?>
-<?php include 'includes/nav.php' ?>
-
 <?php
+  include 'includes/header.php';
+  include 'includes/nav.php';
   var_dump($_SESSION);
+
 ?>
 
 <div class="menu-banners">

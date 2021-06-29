@@ -170,5 +170,5 @@
 </div>
 
 <?php
-  include 'includes/script.php';
+  include 'includes/footer.php';
 ?>
