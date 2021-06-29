@@ -50,29 +50,10 @@ a.active {
     transition: 000ms ease-in-out;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-family: 'Roboto Slab', serif;
-}
-
-p,
-a,
-li,
-span {
-    font-family: 'IBM Plex Serif', serif;
-}
-
 button:focus {
     outline: none !important;
 }
 
-.navbar.sticky-top {
-    padding-left: 5%;
-    top: -2px;
-}
 .col-md-6 {
     padding: 10px !important;
 }
@@ -85,10 +66,6 @@ button:focus {
 }
 input::-webkit-input-placeholder {
     font-size: 16px;
-}
-
-.navbar-nav .nav-item .nav-link.category-btn {
-    padding-left: 1rem;
 }
 
 .cart-btn {
@@ -110,38 +87,11 @@ input::-webkit-input-placeholder {
     background-color: #333333 !important;
 }
 
-.nav-footer-theme {
-    background-color: #333333 !important;
-}
-
-.navbar-container {
-    margin: 0 6%;
-    width: 100%;
-}
-
-.navbar-nav .nav-item>* {
-    color: black !important;
-    font-family: 'Roboto', sans-serif;
-    transition: all 400ms;
-    border-radius: 15px;
-    font-size: 16px;
-}
-
-.navbar-nav .nav-item {
-    margin-right: 0.5em;
-    margin-left: 0.5em;
-}
-
 .nav-item.main>*:hover,
 .pop-up-items .cart-btn:hover,
 .pop-up-items .user-btn:hover,
 .current-site {
     background: #737373;
-}
-
-.custom-toggler.navbar-toggler {
-    background-color: transparent !important;
-    border: none !important;
 }
 
 .cart-icon-wrapper {
@@ -166,9 +116,6 @@ input::-webkit-input-placeholder {
     display: none !important;
 }
 
-footer>* {
-    color: black !important;
-}
 
 .footer-title {
     margin-bottom: 20px;
@@ -191,36 +138,14 @@ footer>* {
     padding-top: 20px;
 }
 
-@media only screen and (max-width: 992px) {
-    .nav-item.main {
-        margin: 0 !important;
-    }
-}
-
 @media only screen and (max-width: 768px) {
 
     .mobile-cart-user {
         display: block;
     }
 
-    .nav-item.main .nav-link {
-        text-align: start !important;
-    }
-
-    .navbar-nav .nav-item .nav-link,
-    .cart-btn,
-    .user-btn {
-        padding-left: 12px !important;
-        margin-left: 20px;
-        padding-right: 12px !important;
-    }
-
     li#pop-up-desktop {
         display: none !important;
-    }
-
-    li.nav-item.main {
-        margin-top: 10px !important;
     }
 
     li.nav-item.popup.ml-auto {
@@ -236,19 +161,7 @@ footer>* {
         margin: 0;
     }
 
-    .navbar-nav .nav-item .nav-link,
-    .cart-btn,
-    .user-btn {
-        padding-left: 12px !important;
-        margin-left: 20px;
-        padding-right: 12px !important;
-    }
-
     a.user-btn.menu-upper.ml-4 {
-        margin-left: 0 !important;
-    }
-
-    .navbar-container {
         margin-left: 0 !important;
     }
 
