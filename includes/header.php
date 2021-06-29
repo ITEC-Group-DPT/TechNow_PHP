@@ -1,18 +1,3 @@
-<?php
-    session_start();
-    if(!isset($_SESSION['signedIn'])) {
-      $_SESSION['signedIn'] = false;
-    }
-
-    include "database/db.php";
-    include "link.php";
-
-    $PHPName = basename($_SERVER['SCRIPT_NAME'], ".php");
-    $pageTitle = PHPNameToPageName($PHPName);
-    $CSSName = PHPNameToCSSName($PHPName);
-    $JSName = PHPNameToJSName($PHPName);
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -22,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--CSS-->
-  <link rel="stylesheet" href="css/<?php echo $CSSName; ?>">
+  <link rel="stylesheet" href="css/style.css">
   <!--Website's icon (on browser's tab)-->
   <link rel="icon" href="img/logo.png">
   <!-- Bootstrap CSS -->
