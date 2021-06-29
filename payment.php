@@ -110,49 +110,30 @@
         <div class="tab-content mt-4">
             <div id="step-1" class="tab-pane" role="tabpanel">
                 <div class="row">
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Full Name"
+                    <div class="col-md-6"> <input type="text" name='name' class="form-control" placeholder="Full Name"
                             required>
                     </div>
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Email"
+                    <div class="col-md-6"> <input type="text" name='phone'  class="form-control" placeholder="Phone Number"
                             required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Phone Number"
-                            required>
-                    </div>
-                    <div class="col-md-6"> <input type="text" class="form-control"
-                            placeholder="Phone Number 2" required>
                     </div>
                 </div>
             </div>
             <div id="step-2" class="tab-pane" role="tabpanel">
                 <div class="row">
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Address" required>
+                    <div class="col-md-6"> <input type="text" name='address'  class="form-control" placeholder="Address" required>
                     </div>
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="City" required>
+                    <div class="col-md-6"> <input type="text"  name='city'  class="form-control" placeholder="City" required>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="State" required>
+                    <div class="col-md-6"> <input type="text" name="state" class="form-control" placeholder="State" required>
                     </div>
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Country" required>
+                    <div class="col-md-6"> <input type="text" name="country" class="form-control" placeholder="Country" required>
                     </div>
                 </div>
             </div>
             <div id="step-3" class="tab-pane" role="tabpanel">
-                <div class="row">
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Card Number" required>
-                    </div>
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Card Holder Name"
-                            required> </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="CVV" required>
-                    </div>
-                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Mobile Number" required>
-                    </div>
-                </div>
+              
             </div>
             <div id="step-4" class="tab-pane" role="tabpanel">
                 <div class="row">

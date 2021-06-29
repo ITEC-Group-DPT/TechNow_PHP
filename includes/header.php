@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <title>TechNow</title>
   <!-- Required meta tags -->
@@ -18,10 +19,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap">
   <!-- Slider -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+
 </head>
+
 <body>
-<div class="upper-nav">
+  <div class="upper-nav">
     <div class="upper-container">
       <div class="row">
 
@@ -32,8 +37,7 @@
         <div class="col-md-6 d-flex search-wrapper justify-content-center align-items-center">
 
           <div class="dropdown input-group w-100 ">
-            <input type="text" class="form-control rounded dropdown-toggle" id="searchbarinp"
-              placeholder="What are you looking for today?" data-toggle="dropdown">
+            <input type="text" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
 
 
             <ul class="dropdown-menu w-100" id="dropdownsearchbar">
@@ -57,8 +61,7 @@
             <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
           </a>
 
-          <a class="user-btn menu-upper ml-4 d-flex align-items-center justify-content-center" data-toggle="modal"
-            data-target="#user-login">
+          <a class="user-btn menu-upper ml-4 d-flex align-items-center justify-content-center" data-toggle="modal" data-target="#user-login">
             <div class="user-icon-wrapper mr-1">
               <button type="button" class="btn rounded-circle icon-upper p-0">
                 <i class="bi bi-person fa-lg" style="color: black;"></i>
@@ -81,25 +84,25 @@
           <li class="nav-item main col-md-2 px-0 pl-2">
             <a class="nav-link category-btn text-center" href="index.php">
               <i class="bi bi-house-door fa-lg mr-2 text-white"></i>
-              <span class = "text-white">Home</span>
+              <span class="text-white">Home</span>
             </a>
           </li>
           <li class="nav-item main col-md-2 px-0">
             <a class="nav-link text-center" href="#">
               <i class="bi bi-gift mr-2 text-white"></i>
-              <span class = "text-white">Hot Discount</span>
+              <span class="text-white">Hot Discount</span>
             </a>
           </li>
           <li class="nav-item main col-md-2 px-0">
             <a class="nav-link text-center" href="#">
               <i class="bi bi-truck mr-2 text-white"></i>
-              <span class = "text-white">Shipping policy</span>
+              <span class="text-white">Shipping policy</span>
             </a>
           </li>
           <li class="nav-item main col-md-2 px-0">
             <a class="nav-link text-center" href="contact.php">
               <i class="bi bi-telephone-inbound mr-2 text-white"></i>
-              <span class = "text-white">Contact us</span>
+              <span class="text-white">Contact us</span>
             </a>
           </li>
           <li class="nav-item popup ml-auto pr-0 mr-0">
