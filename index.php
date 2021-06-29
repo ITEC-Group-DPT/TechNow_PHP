@@ -2,7 +2,7 @@
 <?php include 'includes/nav.php' ?>
 
 <?php
-  #echo password_hash("Tory2611", PASSWORD_DEFAULT);
+  var_dump($_SESSION);
 ?>
 
 <div class="menu-banners">

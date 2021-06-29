@@ -18,18 +18,6 @@ body {
 	margin: -20px 0 50px;
 }
 
-.loading-logo img {
-    width: 120px;
-}
-.loading-logo {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-left: -50px;
-    margin-top: -120px;
-    z-index: 5;
-}
-
 h1 {
 	font-weight: bold;
 	margin: 0;
@@ -264,33 +252,7 @@ input::-webkit-input-placeholder {
 	border: 1px solid red !important;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-
 @media screen and (max-width: 950px) {
-
 	.desktop {
 		display: none;
 	}

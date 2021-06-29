@@ -16,8 +16,6 @@
             </ul>
           </div>
 
-
-
         </div>
 
         <div class="col-md-3 d-flex cart-user-wrapper align-items-center justify-content-center pt-2 pt-md-0">
@@ -32,14 +30,28 @@
             <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
           </a>
 
-          <a class="user-btn menu-upper ml-4 d-flex align-items-center justify-content-center" href="signin.php">
-            <div class="user-icon-wrapper mr-1">
-              <button type="button" class="btn rounded-circle icon-upper p-0">
-                <i class="bi bi-person fa-lg" style="color: black;"></i>
-              </button>
+          <?php if ($_SESSION['signedIn']): ?>
+            <div class="user dropdown">
+              <a tabindex="0" class="nav-link p-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="avatar mr-2" src="assets/defaultUserAvatar.png" alt="">
+              <?php echo htmlspecialchars($_SESSION['username']); ?>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
+                <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
+              </div>
             </div>
-            <p class="text-center m-0 name" style="font-size: 15px;">Login</p>
-          </a>
+          <?php else: ?>
+            <a class="user-btn menu-upper ml-4 d-flex align-items-center justify-content-center" href="signin.php">
+              <div class="user-icon-wrapper mr-1">
+                <button type="button" class="btn rounded-circle icon-upper p-0">
+                  <i class="bi bi-person fa-lg" style="color: black;"></i>
+                </button>
+              </div>
+              <p class="text-center m-0 name" style="font-size: 15px;">Login</p>
+            </a>
+          <?php endif; ?>
 
         </div>
       </div>

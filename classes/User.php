@@ -5,10 +5,10 @@
         private $email;
         private $username;
         private $password;
-        private $errors = [];
+        public $errors = [];
 
         # constructor
-        private function __construct($conn) {
+        public function __construct($conn) {
             $this->conn = $conn;
         }
 
@@ -42,41 +42,63 @@
         }
 
         # main functions
-        private function checkCreate($email, $username, $password1, $password2) {
+        public function checkCreate($email, $username, $password1, $password2) {
             $this->checkValidEmail($email);
             $this->checkValidUsername($username);
             $this->checkValidPasswords($password1, $password2);
             if(empty($this->errors)) {
                 $this->email = $email;
                 $this->username = $username;
-                $this->password = password_hash($this->password1, PASSWORD_DEFAULT);
+                $this->password = password_hash($password1, PASSWORD_DEFAULT);
                 $this->createUser();
             }
         }
-
         private function createUser() {
             $sql = "INSERT INTO users (email, username, password) VALUES (?,?,?)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("sss", $this->email, $this->username, $this->password);
             $stmt->execute();
             if ($stmt->affected_rows == 1) {
-                $this->logIn($stmt->insert_id);
+                $this->userID = $stmt->insert_id;
+                $this->logIn();
             }
-            else $this->errors["database"] = "Can't create new user in database";
+            else $this->errors["database"] = "Database error";
         }
-
-        private function checkSignIn() {
-
+        public function checkSignIn($email, $password) {
+            $this->checkValidEmail($email);
+            if(empty($this->errors)) {
+                $sql = "SELECT * FROM users WHERE email = ?";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows == 1) {
+                    $row = $result->fetch_assoc();
+                    if (password_verify($password, $row['password'])) {
+                        $this->userID = $row['userID'];
+                        $this->email = $row['email'];
+                        $this->username = $row['username'];
+                        $this->logIn();
+                    }
+                    else $this->errors["password"] = "Password is incorrect";
+                }
+                else $this->errors["email"] = "Email not found";
+            }
         }
-
-        private function logIn($userID) {
+        private function logIn() {
             $_SESSION['signedIn'] = true;
-            $_SESSION['userID'] = $userID;
+            $_SESSION['userID'] = $this->userID;
             $_SESSION['email'] = $this->email;
             $_SESSION['username'] = $this->username;
             header("Location: index.php");
             exit();
         }
 
+        public static function signOut() {
+            $_SESSION = [];
+            session_destroy();
+            header("Location: index.php");
+            exit();
+        }
     }
 ?>

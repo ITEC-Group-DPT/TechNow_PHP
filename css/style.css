@@ -10,6 +10,14 @@ button:focus {
     outline: none !important;
 }
 
+.avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
 .border.border-primary.custom-border-width {
     border-width: 2px !important;
 }

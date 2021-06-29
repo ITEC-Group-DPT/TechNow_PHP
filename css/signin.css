@@ -6,41 +6,31 @@
 	display: none;
 }
 
-body {
-	background-image: url(../image.php?loginbg);
-	background-repeat: no-repeat;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+.main {
 	font-family: 'Montserrat', sans-serif;
 	height: 95vh;
 	margin: -20px 0 50px;
 }
 
-.loading-logo img {
-    width: 120px;
-}
-.loading-logo {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    margin-left: -50px;
-    margin-top: -120px;
-    z-index: 5;
+.tab{
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25),
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 900px;
+	max-width: 100%;
+	min-height: 600px;
 }
 
-h1 {
+.title {
 	font-weight: bold;
 	margin: 0;
 	font-size: 1.8rem;
 }
 
-h2 {
-	text-align: center;
-}
-
-p {
+.content {
 	font-size: 14px;
 	font-weight: 100;
 	line-height: 20px;
@@ -48,18 +38,18 @@ p {
 	margin: 20px 0 30px;
 }
 
-span {
+.hint {
 	font-size: 12px;
 }
 
-a {
+.link {
 	color: #333;
 	font-size: 14px;
 	text-decoration: none;
 	margin: 15px 0;
 }
 
-button {
+.btn-custom {
 	border-radius: 20px;
 	border: 1px solid #e91e63;
     background-color: #e91e63;
@@ -72,20 +62,20 @@ button {
 	transition: transform 80ms ease-in;
 }
 
-button:active {
+.btn-custom:active {
 	transform: scale(0.95);
 }
 
-button:focus {
+.btn-custom:focus {
 	outline: none;
 }
 
-button.ghost {
+.btn-custom.ghost {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
 
-form {
+.form-wrapper {
 	position: relative;
 	background-color: #FFFFFF;
 	display: flex;
@@ -97,7 +87,7 @@ form {
 	text-align: center;
 }
 
-input {
+.inp {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
@@ -109,18 +99,6 @@ input {
 
 input::-webkit-input-placeholder {
 	font-size: 0.7rem;
-}
-
-.container {
-	background-color: #fff;
-	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25),
-			0 10px 10px rgba(0,0,0,0.22);
-	position: relative;
-	overflow: hidden;
-	width: 900px;
-	max-width: 100%;
-	min-height: 600px;
 }
 
 .form-container {
@@ -136,7 +114,7 @@ input::-webkit-input-placeholder {
 	z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
+.tab.right-panel-active .sign-in-container {
 	transform: translateX(100%);
 }
 
@@ -147,7 +125,7 @@ input::-webkit-input-placeholder {
 	z-index: 1;
 }
 
-.container.right-panel-active .sign-up-container {
+.tab.right-panel-active .sign-up-container {
 	transform: translateX(100%);
 	opacity: 1;
 	z-index: 5;
@@ -177,7 +155,7 @@ input::-webkit-input-placeholder {
 	z-index: 100;
 }
 
-.container.right-panel-active .overlay-container{
+.tab.right-panel-active .overlay-container{
 	transform: translateX(-100%);
 }
 
@@ -199,7 +177,7 @@ input::-webkit-input-placeholder {
 	transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay {
+.tab.right-panel-active .overlay {
   	transform: translateX(50%);
 }
 
@@ -222,7 +200,7 @@ input::-webkit-input-placeholder {
 	transform: translateX(-20%);
 }
 
-.container.right-panel-active .overlay-left {
+.tab.right-panel-active .overlay-left {
 	transform: translateX(0);
 }
 
@@ -231,7 +209,7 @@ input::-webkit-input-placeholder {
 	transform: translateX(0);
 }
 
-.container.right-panel-active .overlay-right {
+.tab.right-panel-active .overlay-right {
 	transform: translateX(20%);
 }
 
@@ -262,31 +240,6 @@ input::-webkit-input-placeholder {
 	border: 1px solid red !important;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 14px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-
 @media screen and (max-width: 950px) {
 	.desktop {
 		display: none;
@@ -304,7 +257,7 @@ footer a {
 		margin: -20px 0 50px;
 	}
 
-	.container {
+	.tab {
 		background-color: #fff;
 		border-radius: 10px;
 		  box-shadow: 0 14px 28px rgba(0,0,0,0.25),

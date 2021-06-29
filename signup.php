@@ -1,11 +1,16 @@
 <?php
 	include "includes/header.php";
 	include "classes/User.php";
+    if (isset($_POST['signup'])) {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $password1 = $_POST['password1'];
+        $password2 = $_POST['password2'];
+        $user = new User($conn);
+        $user->checkCreate($email, $username, $password1, $password2);
+        $errors = $user->errors;
+    }
 ?>
-
-<div class="loading-logo d-none">
-    <img src="image.php?loadinglogo" alt="">
-</div>
 
 <div class="container main-cont right-panel-active desktop" id="container">
 	<div class="form-container sign-up-container">
@@ -19,46 +24,46 @@
 			<span>or use your email for registration</span>
 
 			<input type="text" class="mb-0 <?php
-                    if(isset($errorsSignUp['email'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['email'])) echo htmlspecialchars("border-error");
                 ?>"
             name="email" id="inputEmail" placeholder="Email" value="<?php
                     if (isset($email)) echo htmlspecialchars($email);
                 ?>">
             <p class="m-0 error-msg" id="errorEmail"><?php
-                    if(isset($errorsSignUp['email'])) echo htmlspecialchars($errorsSignUp['email']);
+                    if(isset($errors['email'])) echo htmlspecialchars($errors['email']);
                 ?>
             </p>
 
 			<input type="text" class="mb-0 <?php
-                    if(isset($errorsSignUp['username'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['username'])) echo htmlspecialchars("border-error");
                 ?>"
             name="username" id="inputUsername" placeholder="Username" value="<?php
                     if (isset($username)) echo htmlspecialchars($username);
                 ?>">
             <p class="m-0 error-msg" id="errorUsername"><?php
-                    if(isset($errorsSignUp['username'])) echo htmlspecialchars($errorsSignUp['username']);
+                    if(isset($errors['username'])) echo htmlspecialchars($errors['username']);
                 ?>
             </p>
 
 			<input type="password" class="mb-0 <?php
-                    if(isset($errorsSignUp['password1'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['password1'])) echo htmlspecialchars("border-error");
                 ?>"
             name="password1" id="inputPassword1" placeholder="Password" value="<?php
                     if (isset($password1)) echo htmlspecialchars($password1);
                 ?>">
             <p class="m-0 error-msg" id="errorPassword1"><?php
-                    if(isset($errorsSignUp['password1'])) echo htmlspecialchars($errorsSignUp['password1']);
+                    if(isset($errors['password1'])) echo htmlspecialchars($errors['password1']);
                 ?>
             </p>
 
 			<input type="password" class="mb-0 <?php
-                    if(isset($errorsSignUp['password2'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['password2'])) echo htmlspecialchars("border-error");
                 ?>"
             name="password2" id="inputPassword2" placeholder="Confirm password" value="<?php
                     if (isset($password2)) echo htmlspecialchars($password2);
                 ?>">
             <p class="m-0 error-msg" id="errorPassword2"><?php
-                    if(isset($errorsSignUp['password2'])) echo htmlspecialchars($errorsSignUp['password2']);
+                    if(isset($errors['password2'])) echo htmlspecialchars($errors['password2']);
                 ?>
             </p>
 
@@ -89,12 +94,12 @@
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
-				<p>Time to get back to blogging, please login with your personal info</p>
+				<p>Time to get back to shopping, please login with your personal info</p>
 				<button class="ghost" id="signIn">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
-				<h1>Welcome To Belogy!</h1>
-				<p>Fill in some personal details and start blogging with us</p>
+				<h1>Welcome To TechNow!</h1>
+				<p>Fill in some personal details and start shopping with us</p>
 				<button class="ghost" id="signUp">Sign Up</button>
 			</div>
 		</div>
@@ -115,46 +120,46 @@
 			<span>or use your email for registration</span>
 
 			<input type="text" class="mb-0 mt-3 <?php
-                    if(isset($errorsSignUp['email'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['email'])) echo htmlspecialchars("border-error");
                 ?>"
             name="email" id="inputEmailMobile" placeholder="Email" value="<?php
                     if (isset($email)) echo htmlspecialchars($email);
                 ?>">
             <p class="m-0 error-msg" id="errorEmail"><?php
-                    if(isset($errorsSignUp['email'])) echo htmlspecialchars($errorsSignUp['email']);
+                    if(isset($errors['email'])) echo htmlspecialchars($errors['email']);
                 ?>
             </p>
 
 			<input type="text" class="mb-0 mt-3 <?php
-                    if(isset($errorsSignUp['username'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['username'])) echo htmlspecialchars("border-error");
                 ?>"
             name="username" id="inputUsernameMobile" placeholder="Username" value="<?php
                     if (isset($username)) echo htmlspecialchars($username);
                 ?>">
             <p class="m-0 error-msg" id="errorUsername"><?php
-                    if(isset($errorsSignUp['username'])) echo htmlspecialchars($errorsSignUp['username']);
+                    if(isset($errors['username'])) echo htmlspecialchars($errors['username']);
                 ?>
             </p>
 
 			<input type="password" class="mb-0 mt-3 <?php
-                    if(isset($errorsSignUp['password1'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['password1'])) echo htmlspecialchars("border-error");
                 ?>"
             name="password1" id="inputPassword1Mobile" placeholder="Password" value="<?php
                     if (isset($password1)) echo htmlspecialchars($password1);
                 ?>">
             <p class="m-0 error-msg" id="errorPassword1"><?php
-                    if(isset($errorsSignUp['password1'])) echo htmlspecialchars($errorsSignUp['password1']);
+                    if(isset($errors['password1'])) echo htmlspecialchars($errors['password1']);
                 ?>
             </p>
 
 			<input type="password" class="mb-0 mt-3 <?php
-                    if(isset($errorsSignUp['password2'])) echo htmlspecialchars("border-error");
+                    if(isset($errors['password2'])) echo htmlspecialchars("border-error");
                 ?>"
             name="password2" id="inputPassword2Mobile" placeholder="Confirm password" value="<?php
                     if (isset($password2)) echo htmlspecialchars($password2);
                 ?>">
             <p class="m-0 error-msg" id="errorPassword2"><?php
-                    if(isset($errorsSignUp['password2'])) echo htmlspecialchars($errorsSignUp['password2']);
+                    if(isset($errors['password2'])) echo htmlspecialchars($errors['password2']);
                 ?>
             </p>
 
