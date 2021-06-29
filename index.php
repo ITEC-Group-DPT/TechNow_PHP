@@ -1,9 +1,14 @@
-<?php include './includes/header.php' ?>
+<?php include 'includes/header.php' ?>
+<?php include 'includes/nav.php' ?>
+
+<?php
+  #echo password_hash("Tory2611", PASSWORD_DEFAULT);
+?>
 
 <div class="menu-banners">
   <div class="row">
 
-    <div class="col-lg-2 col-md-4 px-0 menu-list my-2 border border-2 rounded  shadow-sm bg-white">
+    <div class="col-lg-2 col-md-4 px-0 menu-list my-2 border border-2 rounded shadow-sm bg-white">
       <img src="./assets/left-banner.png" alt="">
     </div>
 
@@ -118,4 +123,7 @@
 
 </div>
 
-<?php include './includes/footer.php' ?>
+<?php
+  include 'includes/footer.php';
+  include 'includes/script.php';
+?>
