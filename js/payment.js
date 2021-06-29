@@ -156,20 +156,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             $(".finish").click(function (e) {
                 window.location.href = 'index.php'
-                removeAll();
+                // removeAll();
             });
 
-            // setTimeout(() => {
-            //     if ($('#smartwizard').smartWizard("getStepIndex") == 3) {
-            //         document.querySelector(".alert").classList.remove('d-none')
-            //         toolbarbtn.classList.remove('disabled')
-            //         setTimeout(() => {
-            //             $(".finish").click()
-            //             removeAll();
-            //         }, 4000);
-            //     }
-            // }, 3000);
-
+           
 
         } else {
             document.querySelector('.addressbook').classList.remove('invisible')

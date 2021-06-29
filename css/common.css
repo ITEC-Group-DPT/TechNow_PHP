@@ -1,0 +1,80 @@
+/* header */
+h1,h2,h3,h4,h5 {
+    font-family: 'Roboto Slab', serif;
+}
+
+p, a,li,span {
+    font-family: 'IBM Plex Serif', serif;
+}
+
+.navbar.sticky-top {
+    padding-left: 5%;
+    top: -2px;
+}
+
+.custom-toggler.navbar-toggler {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.upper-container,.navbar-container{
+    margin: 0 6%;
+    width: 100%;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}
+
+.navbar-nav .nav-item .nav-link.category-btn {
+    padding-left: 1rem;
+}
+.navbar-nav .nav-item>* {
+    color: #ffffff !important;
+    font-family: 'Roboto', sans-serif;
+    transition: 400ms;
+    border-radius: 15px;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 992px) {
+    .nav-item.main {
+        margin: 0 !important;
+    }
+
+    li.nav-item.main {
+        margin-top: 10px !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-container {
+        margin-left: 0 !important;
+    }
+    li.nav-item.main {
+        padding-left: 0 !important;
+        margin-top: 10px !important;
+    }
+    .nav-item.main .nav-link {
+        text-align: start !important;
+    }
+    /* ?? */
+    .navbar-nav .nav-item .nav-link,
+    .cart-btn,
+    .user-btn {
+        padding-left: 12px !important;
+        margin-left: 20px;
+        padding-right: 12px !important;
+    }
+}
+
+/* footer */
+.nav-footer-theme {
+    background-color: #333333!important;
+}
+
+footer > * {
+    color: black !important;
+}

@@ -1,3 +1,7 @@
+<?php
+  include "./functions/footer_func.php";
+  $current_page = basename($_SERVER['SCRIPT_NAME'],".php");
+?>
 <footer class="nav-footer-theme text-center text-white mt-5 w-100">
   <div class="container p-4">
     <section class="mb-4">
@@ -58,7 +62,6 @@
 <script type="text/javascript" src="./js/main.js"></script> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
-
 <script src="js/payment.js"></script>
 </body>
 </html>

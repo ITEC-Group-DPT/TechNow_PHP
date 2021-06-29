@@ -1,0 +1,179 @@
+#smartwizard {
+    background-color: white;
+    border-radius: 10px;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a.done {
+    background-color: #495057 !important;
+    border-color:  #495057 !important;
+}
+.sw-theme-arrows>.nav .nav-link.done::after {
+    border-left-color: #495057 !important;
+}
+
+a.active {
+    background-color: #333333 !important;
+    border-color:  #333333 !important;
+}
+.sw-theme-arrows>.nav .nav-link.active::after {
+    border-left-color: #333333 !important;
+}
+.sw-theme-arrows .toolbar>.btn {
+    background-color: #495057 ;
+    border-color:  #495057 ;
+}
+.sw-btn-prev {
+    background-color: #797c80 !important;
+    border-color:  #797c80 !important;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0rem rgba(0, 123, 255, .25)
+}
+
+.btn-secondary:focus {
+    box-shadow: 0 0 0 0rem rgba(108, 117, 125, .5)
+}
+
+.mt-200 {
+    margin-top: 200px
+}
+
+.alert {
+    transition: 000ms ease-in-out;
+}
+
+button:focus {
+    outline: none !important;
+}
+
+.col-md-6 {
+    padding: 10px !important;
+}
+.tab-content {
+    height: fit-content !important;
+}
+.toolbar {
+    margin-top: 20px;
+    margin-left: -1.8% !important;
+}
+input::-webkit-input-placeholder {
+    font-size: 16px;
+}
+
+.cart-btn {
+    text-decoration: none;
+    padding-right: 10px;
+    color: black;
+}
+
+.user-btn {
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+.user-btn:hover {
+    text-decoration: none;
+}
+
+.bg-dark {
+    background-color: #333333 !important;
+}
+
+.nav-item.main>*:hover,
+.pop-up-items .cart-btn:hover,
+.pop-up-items .user-btn:hover,
+.current-site {
+    background: #737373;
+}
+
+.cart-icon-wrapper {
+    position: relative;
+}
+
+.number-item-cart {
+    position: absolute;
+    right: -10px;
+    top: -3px;
+    font-size: 0.6rem !important;
+}
+
+.cart-icon-wrapper button,
+.user-icon-wrapper button {
+    border: transparent;
+    height: 40px;
+    width: 40px;
+}
+
+#pop-up-mobile {
+    display: none !important;
+}
+
+
+.footer-title {
+    margin-bottom: 20px;
+}
+
+.footer-content {
+    font-size: 0.7rem;
+}
+
+.footer-social-icons img {
+    width: 30px;
+}
+
+.container-footer {
+    margin: 0% 10%;
+}
+
+.copyright {
+    border-top: 1px solid rgb(179, 179, 179);
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .mobile-cart-user {
+        display: block;
+    }
+
+    li#pop-up-desktop {
+        display: none !important;
+    }
+
+    li.nav-item.popup.ml-auto {
+        margin-left: 0 !important;
+    }
+
+    button#cart-icon,
+    button#user-icon {
+        width: fit-content;
+    }
+
+    .pop-up-items .nav-item {
+        margin: 0;
+    }
+
+    a.user-btn.menu-upper.ml-4 {
+        margin-left: 0 !important;
+    }
+
+    .nav-wrapper-mobile {
+        width: 100%;
+    }
+
+    #pop-up-mobile {
+        display: block !important;
+    }
+
+    .cart-mobile {
+        padding-left: 0 !important;
+    }
+}

@@ -1,3 +1,7 @@
+<?php
+  include "./functions/header_func.php";
+  $current_page = basename($_SERVER['SCRIPT_NAME'],".php");
+?>
 <!doctype html>
 <html lang="en">
 
@@ -7,7 +11,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--CSS-->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href= <?php chooseCSSFile($current_page)?>>
   <!--Website's icon (on browser's tab)-->
   <link rel="icon" href="img/logo.png">
   <!-- Bootstrap CSS -->
@@ -26,7 +31,10 @@
 </head>
 
 <body>
-  <div class="upper-nav">
+<?php
+  if ($current_page == "index"):
+?>
+<div class="upper-nav">
     <div class="upper-container">
       <div class="row">
 
@@ -74,6 +82,9 @@
       </div>
     </div>
   </div>
+<?php
+  endif;
+?>
   <nav class="navbar sticky-top navbar-expand-md navbar-light nav-footer-theme">
     <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
