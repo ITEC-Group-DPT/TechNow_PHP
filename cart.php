@@ -1,4 +1,9 @@
-<?php include 'includes/header.php'; ?>
+<?php
+  include 'includes/db.php';
+  include 'includes/header.php';
+  include 'classes/Cart.php'
+  // $cart = new Cart($conn);
+?>
 <div class="modal fade" id="shipping-policy" tabindex="-1" role="dialog" aria-labelledby="shippingPolicyModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -74,17 +79,18 @@
       </div>
     </div>
   </div>
-
-  <div class="cart-container" style="min-height: 70vh;">
-    <div class="cart-empty">
-      <div class="empty-img-wrapper text-center">
-        <img src="assets/empty-cart.png" alt="">
-      </div>
-      <div class="btn-continue-wrapper text-center">
-        <a href="index.php"><button type="button" class="btn" style="font-size: 0.9rem;">Continue shopping</button></a>
+  <?php if (!isset($_SESSION['user_id']) || $cart.getCartArr() == []): ?>
+    <div class="cart-container" style="min-height: 70vh;">
+      <div class="cart-empty">
+        <div class="empty-img-wrapper text-center">
+          <img src="assets/empty-cart.png" alt="">
+        </div>
+        <div class="btn-continue-wrapper text-center">
+          <a href="index.php"><button type="button" class="btn" style="font-size: 0.9rem;">Continue shopping</button></a>
+        </div>
       </div>
     </div>
-
+  <?php else: ?>
     <div class="cart-available">
       <div class="cart-title-wrapper mt-4 pr-4">
         <div class="row">
@@ -95,7 +101,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="row">
         <ul class="cart-list col-md-8 pr-5">
 
@@ -136,7 +142,6 @@
           </div>
         </div>
       </div>
-
     </div>
-  </div>
+  <?php endif; ?>
 <?php include 'includes/footer.php'; ?>
