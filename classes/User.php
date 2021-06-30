@@ -31,7 +31,7 @@
         private function checkValidEmail($email) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
                 $this->errors["email"] = "Email is invalid";
-            else if ($this->checkExist("email", $this->email) == false)
+            else if ($this->checkExist("email", $email) == false)
                 $this->errors["email"] = "Email is already taken";
         }
         private function checkValidPasswords($password1, $password2) {
