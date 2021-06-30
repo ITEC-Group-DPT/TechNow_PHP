@@ -1,6 +1,5 @@
 <?php
   include "./functions/header_func.php";
-  $current_page = basename($_SERVER['SCRIPT_NAME'],".php");
 ?>
 <!doctype html>
 <html lang="en">
