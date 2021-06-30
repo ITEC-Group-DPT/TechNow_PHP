@@ -1,5 +1,5 @@
 <?php
-  include 'includes/db.php';
+  include 'includes/config.php';
   class Cart{
     private $conn;
     private $userID;
@@ -8,14 +8,15 @@
 
     public function __construct($conn){
       $this->conn = $conn;
-      // if (isset($_SESSION['user_id']))  $this->userID = $_SESSION['user_id'];
-      // else $this->userID = 0;
-      // $this->cartID = $this->userID;
+      if (isset($_SESSION['user_id']))  $this->userID = $_SESSION['user_id'];
+      else $this->userID = 0;
+      $this->cartID = $this->userID;
     }
 
     private function addItemToCart($itemID, $price){
       if (checkCart('count') >= 10) $itemOrder = "Item";
       else $itemOrder = "Item0";
+      
       $cartArr[$itemOrder] = ["ID"=>$itemID, "price"=>$value, "quantity"=>1];
       $stmt = $conn->prepare("INSERT into cartdetails values (?, ?, ?)");
       $stmt->bind_param("iii",$this->cartID, $itemID, 1);

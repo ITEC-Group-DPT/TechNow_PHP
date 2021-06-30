@@ -1,8 +1,10 @@
 <?php
-  include 'includes/db.php';
+  include 'classes/Cart.php';
+  $cart = new Cart($conn);
+
+
+
   include 'includes/header.php';
-  include 'classes/Cart.php'
-  // $cart = new Cart($conn);
 ?>
 <div class="modal fade" id="shipping-policy" tabindex="-1" role="dialog" aria-labelledby="shippingPolicyModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -79,7 +81,7 @@
       </div>
     </div>
   </div>
-  <?php if (!isset($_SESSION['user_id']) || $cart.getCartArr() == []): ?>
+
     <div class="cart-container" style="min-height: 70vh;">
       <div class="cart-empty">
         <div class="empty-img-wrapper text-center">
@@ -90,7 +92,7 @@
         </div>
       </div>
     </div>
-  <?php else: ?>
+
     <div class="cart-available">
       <div class="cart-title-wrapper mt-4 pr-4">
         <div class="row">
@@ -143,5 +145,5 @@
         </div>
       </div>
     </div>
-  <?php endif; ?>
+
 <?php include 'includes/footer.php'; ?>

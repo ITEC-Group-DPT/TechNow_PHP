@@ -23,7 +23,6 @@ $(document).ready(() => {
   if (temp != null) cartList = temp;
   console.log("CART ON PAGE LOAD");
   console.log(cartList);
-  checkCartList();
   updateNoItemInCart();
   outputCartList(cartList);
   updateTotalPrice();
@@ -90,8 +89,8 @@ function outputCartList(cartList) {
 
           <div class="product-info ml-2 d-flex align-items-center">
             <div class="product-info-wrapper">
-          
-              <div class="product-name-wrapper">           
+
+              <div class="product-name-wrapper">
                 <p class="product-name">${product.data.name}</p>
               </div>
 
@@ -122,7 +121,7 @@ function outputCartList(cartList) {
                 </button>
               </div>
 
-              <div class="product-price-wrapper d-flex align-items-center">          
+              <div class="product-price-wrapper d-flex align-items-center">
                 <p href="#" class="product-price m-0">${product.data.price.toLocaleString()}₫</p>
               </div>
             </div>
@@ -193,7 +192,6 @@ function removeProduct(removeBtn) {
   removeProductUI(removeBtn);
   updateNoItemInCart();
   updateTotalPrice()
-  checkCartList();
 }
 
 function removeAll() {
@@ -203,7 +201,6 @@ function removeAll() {
   storeLocalStorage(cartList);
   updateNoItemInCart();
   updateTotalPrice()
-  checkCartList();
 }
 
 function getTotalItemsInCart() {
@@ -216,16 +213,6 @@ function getTotalItemsInCart() {
 
 
 // UI functions
-function checkCartList() {
-  if (cartList == null || cartList.length == 0) {
-    cartAvailable.style = "display: none";
-    cartEmpty.style = "display: block";
-
-  } else {
-    cartEmpty.style = "display: none";
-    cartAvailable.style = "display: initial";
-  }
-}
 
 function removeProductUI(removeBtn) {
   fadeOutRemoveItem(removeBtn.parentElement.parentElement);
