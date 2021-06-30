@@ -1,4 +1,5 @@
 <?php
+  include "includes/config.php";
   include 'classes/Cart.php';
   $cart = new Cart($conn);
 

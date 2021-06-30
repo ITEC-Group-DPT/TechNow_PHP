@@ -213,6 +213,16 @@ function getTotalItemsInCart() {
 
 
 // UI functions
+function checkCartList() {
+  if (cartList == null || cartList.length == 0) {
+    cartAvailable.style = "display: none";
+    cartEmpty.style = "display: block";
+
+  } else {
+    cartEmpty.style = "display: none";
+    cartAvailable.style = "display: initial";
+  }
+}
 
 function removeProductUI(removeBtn) {
   fadeOutRemoveItem(removeBtn.parentElement.parentElement);
