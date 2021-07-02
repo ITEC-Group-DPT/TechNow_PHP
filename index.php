@@ -3,6 +3,8 @@ include "./includes/config.php";
 include "./classes/Product.php";
 include "./functions/UI_func.php";
 
+$topRating = Product::getTopRating($conn);
+
 $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
 $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
 $monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
@@ -92,6 +94,7 @@ include "./includes/header.php"
     <div class="d-flex align-items-center">
       <i class="bi bi-award fa-2x red-text"></i>
       <div class="mb-0 top-seller-name"><span> Top Seller</span></div>
+
     </div>
 
     <div id="controls" class="rounded">
@@ -100,7 +103,9 @@ include "./includes/header.php"
       <button class="auto"></button>
       <div class="my-3 mx-4 py-2 px-3">
         <div class="my-slider d-flex">
-
+          <?php
+            renderTopRating($topRating);
+          ?>
         </div>
       </div>
     </div>
@@ -111,7 +116,7 @@ include "./includes/header.php"
   </div>
   <div class="row Laptop-row w-100 mx-0 rounded">
     <?php
-    outputProductCategory($laptops)
+    renderProductCategory($laptops)
     ?>
   </div>
 
@@ -120,7 +125,7 @@ include "./includes/header.php"
   </div>
   <div class="row CPU-row w-100 mx-0 rounded">
     <?php
-    outputProductCategory($cpus)
+    renderProductCategory($cpus)
     ?>
   </div>
 
@@ -129,7 +134,7 @@ include "./includes/header.php"
   </div>
   <div class="row Monitor-row w-100 mx-0 rounded">
     <?php
-    outputProductCategory($monitors)
+    renderProductCategory($monitors)
     ?>
   </div>
 
@@ -137,5 +142,4 @@ include "./includes/header.php"
 
 <?php
   include 'includes/footer.php';
-  include 'includes/script.php';
 ?>

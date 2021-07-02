@@ -28,4 +28,13 @@
             $results = $stmt->get_result();
             return $results->fetch_all(MYSQLI_ASSOC);
         }
+        public static function getTopRating(&$conn, $limit = 20) {
+            $sql = "SELECT * FROM products p, productimage pimg WHERE p.productID = pimg.productID ORDER BY p.sold desc LIMIT ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i",$limit);
+            $stmt->execute();
+            
+            $results = $stmt->get_result();
+            return $results->fetch_all(MYSQLI_ASSOC);
+        }
     }

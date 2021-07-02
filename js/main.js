@@ -7,6 +7,9 @@ let cartList = [];
 
 $(document).ready(() => {
   getProducts(products);
+  loadSlider();
+  searchbarfunc();
+  
   let temp = JSON.parse(localStorage.getItem("cartList"));
   if (temp != null) cartList = temp;
 
@@ -24,8 +27,6 @@ const getProducts = (item) => {
   xhr.onload = function () {
     if (this.status == 200) {
       item = JSON.parse(this.responseText).Products;
-      sortingSold(item);
-
       products = item;
       addToCart();
     }
@@ -168,65 +169,6 @@ function popOver() {
 
 //top rating
 let list = [];
-
-function sortingSold(itemset) {
-  for (const catalog in itemset) {
-    for (const item in itemset[catalog]) {
-      //console.log(item);
-      if (Number.isInteger(itemset[catalog][item].sold)) {
-        let product = itemset[catalog][item];
-        product.id = catalog + '.' + item;
-        //console.log(itemset[catalog][item]);
-        list.push(product)
-      }
-      // sort theo từng catalog top rating 2 cái / catalog
-      // if (productlist.length == 0 || productlist.length == 1){
-      //   productlist.push(item[key][keyinkey]);
-      //   continue;
-      // }
-      // if(item[key][keyinkey].sold >= productlist[0].sold){
-      //   productlist.pop();
-      //   let prevsold = productlist.pop();
-      //   productlist.push(item[key][keyinkey])
-      //   productlist.push(prevsold);
-      // }
-    }
-  }
-
-  searchbarfunc();
-  list.sort(function (a, b) {
-    return b.sold - a.sold;
-  })
-  let slider = document.querySelector(".my-slider")
-  for (let index = 0; index < 20; index++) {
-
-    let newData =
-      ` <div class="product card-product-wrapper-ts">
-        <div class="card product rounded w-100 h-100">
-          <img class="card-img-top" src="${list[index].avatarURL}" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title rounded">${list[index].name}</h5>
-            <div class="bottom-price-star">
-              <div class="rating">
-                <span class="fa fa-star text-warning"></span>
-                <span class="fa fa-star text-warning"></span>
-                <span class="fa fa-star text-warning"></span>
-                <span class="fa fa-star text-warning"></span>
-                <span class="fa fa-star"></span>
-                <span>(${list[index].sold})</span>
-              </div>
-            </div>
-            <p href="#" class="text-danger mb-0 price">${list[index].price.toLocaleString()}đ</p>
-          </div>
-          <div class = "add-cart" id="${list[index].id}">
-            <i class="bi bi-cart2"></i>
-          </div>
-        </div>
-      </div>`
-    $('.my-slider').append(newData);
-  }
-  loadSlider();
-}
 
 function loadSlider() {
   let slider = tns({
