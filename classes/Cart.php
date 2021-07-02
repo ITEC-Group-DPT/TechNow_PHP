@@ -14,7 +14,7 @@
       else $itemOrder = "Item0";
 
       $this->cartArr[$itemOrder] = ["ID"=>$itemID, "price"=>$value, "quantity"=>1];
-      $stmt = $conn->prepare("INSERT into cartdetails values (?, ?, ?)");
+      $stmt = $this->conn->prepare("INSERT into cartdetails values (?, ?, ?)");
       $stmt->bind_param("iii",$this->cartID, $itemID, 1);
       $stmt->execute();
       $result = $stmt->get_result();
