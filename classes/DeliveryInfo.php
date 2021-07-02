@@ -19,8 +19,8 @@ class DeliveryInfo {
             array_push($delivery,$row);
         }
         return $delivery;
-
     }
+
 }
 
 include '../db.php';
@@ -29,5 +29,7 @@ if (isset($_POST['getdelivery'])){
     $array = $book->getDeliveryInfo($_POST['user_id']);
     echo json_encode($array);
 }
-
+if (isset($_POST['orderinfo'])){
+    print(1);
+}
 ?>

@@ -1,3 +1,5 @@
+let cartList = []
+
 async function displayDeliverybook(user_id) {
     let myPromise = new Promise(function (myResolve, myReject) {
         let xhttp = new XMLHttpRequest();
@@ -12,9 +14,6 @@ async function displayDeliverybook(user_id) {
                     myResolve(deliarr);
                 }
                 else myReject('Norows')
-
-
-
             }
         };
     });
@@ -70,6 +69,114 @@ async function displayDeliverybook(user_id) {
         })
     }
 }
+
+async function CreateCartListStep3() {
+    let getcartlist = new Promise(function (myResolve, myReject) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "classes/Cart.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("getcartlist=1");
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let arr = JSON.parse(this.response)
+                //console.log(arr)
+                myResolve(arr);
+            }
+        };
+    });
+
+    cartList = await getcartlist;
+    checkCartList(cartList);
+    //updateNoItemInCart();
+    outputCartList(cartList);
+    updateTotalPrice(cartList);
+    // addListeners();
+}
+function checkCartList(cartList) {
+    let cartAvailable = document.querySelector(".cart-available");
+    let cartEmpty = document.querySelector(".cart-empty");
+    if (cartList == null || cartList.length == 0) {
+        cartAvailable.style = "display: none";
+        cartEmpty.style = "display: block";
+
+    } else {
+        cartEmpty.style = "display: none";
+        cartAvailable.style = "display: initial";
+    }
+}
+function updateNoItemInCart() {
+    let numberItemCart = document.querySelectorAll(".number-item-cart");
+    numberItemCart.forEach(number => {
+        number.innerText = getTotalItemsInCart();
+    });
+}
+function outputCartList(cartList) {
+    $(".cart-list").empty();
+    cartList.forEach(product => {
+        console.log(product);
+        if (product.quantity == null) product.quantity = 1;
+        let data = `
+      <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
+        <div class="product d-flex h-100">
+
+          <div class="product-img-wrapper">
+            <img class="product-img" src="${product.img1}" alt="product-img">
+          </div>
+
+          <div class="product-info ml-2 d-flex align-items-center">
+            <div class="product-info-wrapper">
+          
+              <div class="product-name-wrapper">           
+                <p class="product-name">${product.name}</p>
+              </div>
+
+              <div class="product-rating-wrapper">
+
+                <div class="product-rating">
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star"></span>
+                  <span>(${product.sold})</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="quantity-price-wrapper d-flex align-items-center">
+            <div class="quantity-price w-100">
+              <div class="quantity-control rounded">
+                <input type="number" class="quantity-input" id="${product.productID}" value="${product.quantity}" step="1" min="1" disabled name="quantity">
+              </div>
+              <div class="px-2 text-center"><i class="fas fa-times"></i></div>
+              
+
+              <div class="product-price-wrapper d-flex align-items-center">          
+                <p href="#" class="product-price m-0">${product.price.toLocaleString()}₫</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>`
+
+        $(".cart-list").append(data);
+    });
+
+}
+function updateTotalPrice(cartList) {
+    let totalPrice = document.querySelector(".total-price");
+    let sumPrice = 0;
+    cartList.forEach(product => {
+        sumPrice += product.price * product.quantity;
+    });
+    totalPrice.innerText = sumPrice.toLocaleString() + "₫";
+}
+
+
+CreateCartListStep3();
+
 let selectedaddress = 0 //default, new address cus no id is 0
 let userid = parseInt(document.querySelector('[userid]').getAttribute('userid'), 10)
 displayDeliverybook(userid);
@@ -127,7 +234,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let inputarr = document.querySelectorAll('.tab-content input')
             for (const input of inputarr) {
                 if (input.value == '') {
-                    console.log(1);
                     toolbarbtn.classList.add('disabled')
                     document.querySelector(".fillinput").classList.remove('d-none')
                     $('#smartwizard').smartWizard("stepState", [3], "disable");
@@ -153,13 +259,26 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let country = inputarr[5].value
             address = address + ', ' + city + ', ' + state + ', ' + country
             console.log(name, phone, address);
+            //insert in order 
+            // removeAllcartinDTB();
+            let productIDs = []
+            for (const product of cartList) {
+                let arr = [product.productID, product.quantity]
+                productIDs.push(arr)
+            }
+            console.log(productIDs);
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "classes/DeliveryInfo.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("orderinfo="+ JSON.stringify(productIDs));
+            
 
             $(".finish").click(function (e) {
                 window.location.href = 'index.php'
-                // removeAll();
             });
 
-           
+
 
         } else {
             document.querySelector('.addressbook').classList.remove('invisible')
@@ -169,6 +288,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.querySelector(".alert").classList.add('d-none')
         }
     });
+
 
 
 });
