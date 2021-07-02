@@ -1,8 +1,13 @@
 <?php
-  include 'includes/header.php';
-  include 'includes/nav.php';
-  var_dump($_SESSION);
+include "./includes/config.php";
+include "./classes/Product.php";
+include "./functions/UI_func.php";
 
+$laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
+$cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
+$monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
+// var_dump($laptops);
+include "./includes/header.php"
 ?>
 
 <div class="menu-banners">
@@ -105,20 +110,27 @@
     <h3 class="mb-0 catalog-name"><span>Laptop</span></h3>
   </div>
   <div class="row Laptop-row w-100 mx-0 rounded">
-
+    <?php
+    outputProductCategory($laptops)
+    ?>
   </div>
 
   <div class="d-flex justify-content-between  align-items-center mt-5">
     <h3 class="mb-0 catalog-name"><span>CPU</span></h3>
   </div>
   <div class="row CPU-row w-100 mx-0 rounded">
+    <?php
+    outputProductCategory($cpus)
+    ?>
   </div>
 
   <div class="d-flex justify-content-between  align-items-center mt-5">
     <h3 class="mb-0 catalog-name"><span>Monitor</span></h3x>
   </div>
   <div class="row Monitor-row w-100 mx-0 rounded">
-
+    <?php
+    outputProductCategory($monitors)
+    ?>
   </div>
 
 </div>

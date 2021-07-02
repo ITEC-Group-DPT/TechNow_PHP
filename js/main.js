@@ -24,20 +24,6 @@ const getProducts = (item) => {
   xhr.onload = function () {
     if (this.status == 200) {
       item = JSON.parse(this.responseText).Products;
-      //loadProductSection(item, 'CPU');
-      loadProductSection(item, 'CPU');
-      //loadProductSection(item, 'GamingChair');
-      //loadProductSection(item, 'Headphone');
-      loadProductSection(item, 'Laptop');
-      // loadProductSection(item, 'Laptop');
-      // loadProductSection(item, 'Mainboard');
-      loadProductSection(item, 'Monitor');
-      // loadProductSection(item, 'Mouse');
-      // loadProductSection(item, 'PSU');
-      // loadProductSection(item, 'RAM');
-      // loadProductSection(item, 'SSD');
-      // loadProductSection(item, 'Speaker');
-      // loadProductSection(item, 'VGA');
       sortingSold(item);
 
       products = item;
@@ -46,48 +32,6 @@ const getProducts = (item) => {
   }
   xhr.send();
 }
-
-const loadProductSection = (item, section) => {
-  let sectionObj = item[section];
-  //console.log(sectionObj);
-  for (let i = 10; i <= 17; i++) {
-    let product = sectionObj[section + i];
-    let id = section + '.' + section + i;
-    //console.log(id);
-    //console.log(product);
-    let productRating = parseInt(product.rating);
-    let starRating = "";
-    for (let j = 0; j < productRating; j++) {
-      starRating += '<span class="fa fa-star text-warning"></span>';
-    }
-    for (let j = 0; j < 5 - productRating; j++) {
-      starRating += '<span class="fa fa-star"></span>';
-    }
-    let newData =
-      `<div class="col-lg-3 col-6 card-product-wrapper">
-        <div class="card product">
-          <a href="#" class="img-card"><img class="card-img-top" src="${product.avatarURL}" alt="Card image cap"></a>
-        <div class="card-body h-75">
-          <h5 class="card-title rounded">${product.name}</h5>
-          <div class="rating">
-            ${starRating}
-            <span>(${product.sold})</span>
-          </div>
-          <p href="#" class="mb-0 price">${product.price.toLocaleString()} đ</p>
-            <div class = "add-cart" id="${id}">
-              <i class="bi bi-cart2"></i>
-            </div>
-          
-        </div>
-
-      </div>
-    </div>`
-    let section_row = '.' + section + '-row';
-    $(section_row).append(newData);
-  }
-}
-
-
 // add to cart 
 function getProductIndexByID(id) {
   return cartList.findIndex(product => {
