@@ -1,6 +1,6 @@
-<?php 
-include "./includes/config.php";
-include 'includes/header.php'; 
+<?php
+  include "./includes/config.php";
+  include 'includes/header.php';
 ?>
 <div class="modal fade" id="shipping-policy" tabindex="-1" role="dialog" aria-labelledby="shippingPolicyModalLabel"
   aria-hidden="true">

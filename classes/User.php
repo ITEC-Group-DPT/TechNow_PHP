@@ -65,7 +65,6 @@
             else $this->errors["database"] = "Database error";
         }
         public function checkSignIn($email, $password) {
-            $this->checkValidEmail($email);
             if(empty($this->errors)) {
                 $sql = "SELECT * FROM users WHERE email = ?";
                 $stmt = $this->conn->prepare($sql);

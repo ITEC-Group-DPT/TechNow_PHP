@@ -1,6 +1,7 @@
 <?php
-	include "includes/header.php";
+    include "./includes/config.php";
 	include "classes/User.php";
+    
     if (isset($_POST['signup'])) {
         $username = $_POST['username'];
         $email = $_POST['email'];
@@ -10,6 +11,7 @@
         $user->checkCreate($email, $username, $password1, $password2);
         $errors = $user->errors;
     }
+    include "includes/header.php";
 ?>
 
 <div class="container main-cont right-panel-active desktop" id="container">

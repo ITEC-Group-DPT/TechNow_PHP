@@ -1,6 +1,7 @@
 <?php
-	include "includes/header.php";
+	include "./includes/config.php";
 	include "classes/User.php";
+
 	if (isset($_POST['signin'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -8,6 +9,8 @@
         $user->checkSignIn($email, $password);
         $errors = $user->errors;
     }
+
+	include "includes/header.php";
 ?>
 <div class="container main d-flex justify-content-center align-items-center">
 	<div class="tab desktop" id="container">
