@@ -7,12 +7,9 @@
 
     public function __construct($conn){
       $this->conn = $conn;
-      if (isset($_SESSION['user_id']))  $this->userID = $_SESSION['user_id'];
-      else $this->userID = 0;
-      $this->cartID = $this->userID;
     }
 
-    private function addItemToCart($itemID, $price){
+    public function addItemToCart($itemID, $price){
       if (checkCart('count') >= 10) $itemOrder = "Item";
       else $itemOrder = "Item0";
 
@@ -25,8 +22,8 @@
       else return false;
     }
 
-    private function getCartList(){
-      $stmt = $this->conn
+    public function getCartList(){
+      $stmt = $this->conn->prepare
         ("SELECT pri.img1, p.name, p.sold, p.productID, cd.quantity, p.price
         from cartdetails cd, carts c, products p, productimage pri
         where cd.cartID = ? and cd.cartID = c.cartID and c.userID = ? and cd.productID = p.productID and p.productID = pri.productID");
@@ -36,9 +33,9 @@
       return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    private function printCartList(){
-      $output = ``;
-      $cartList = getCartList();
+    public function printCartList(){
+      $output = '';
+      $cartList = $this->getCartList();
       foreach ($cartList as $item) {
         $output .= `
         <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
@@ -99,7 +96,7 @@
       return $output;
     }
 
-    private function checkCart($case){
+    public function checkCart($case){
       $total = 0;
       foreach ($cartArr as $item) {
         if ($case == 'price') $total .= $item['price'];

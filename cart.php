@@ -107,7 +107,10 @@
 
     <div class="row">
       <ul class="cart-list col-md-8 pr-5">
-
+        <!-- output cardList here -->
+        <?php
+          echo $cart->printCartList();
+        ?>
       </ul>
       <div class="summary-wrapper col-md-3">
         <div class="summary card shadow-sm mt-3" style="height: 200px;">
