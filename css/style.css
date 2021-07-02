@@ -198,6 +198,7 @@ h5{
 
 h5.card-title.rounded{
   height: 90px;
+  font-weight: 600;
   padding: 0;
   margin: 0;
 }
