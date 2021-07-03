@@ -1,17 +1,14 @@
 <?php
-  //include class
-  include "./classes/User.php";
-  include "./classes/Product.php";
-
-  //include other func
   include "./includes/config.php";
+  include "./classes/Product.php";
   include "./functions/UI_func.php";
 
+  $topRating = Product::getTopRating($conn);
   $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
   $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
   $monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
+  // var_dump($laptops);
 
-  //include header
   include "./includes/header.php"
 ?>
 

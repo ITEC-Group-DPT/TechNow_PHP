@@ -77,8 +77,8 @@ include "./functions/header_func.php";
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
                   <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
                   <div class="dropdown-divider"></div>
-                  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-                        <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
+                  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
                   </form>
                 </div>
               </div>
@@ -146,19 +146,21 @@ include "./functions/header_func.php";
                 </li>
                 <li class="nav-item user dropdown">
                   <?php if ($_SESSION['signedIn']) : ?>
-                      <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-icon-wrapper">
-                          <button type="button" class="btn rounded-circle icon-upper p-0">
-                            <i class="bi bi-person fa-lg text-white"></i>
-                          </button>
-                        </div>
-                        <p class="text-center m-0 name text-white" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
-                        <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
+                    <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <div class="user-icon-wrapper">
+                        <button type="button" class="btn rounded-circle icon-upper p-0">
+                          <i class="bi bi-person fa-lg text-white"></i>
+                        </button>
                       </div>
+                      <p class="text-center m-0 name text-white" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
+                      <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                        <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
+                      </form>
+                    </div>
                   <?php else : ?>
                     <a class="user-btn d-flex align-items-center" href="signin.php">
                       <div class="user-icon-wrapper">
