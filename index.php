@@ -1,4 +1,5 @@
 <?php
+  include "./classes/User.php";
   include "./includes/config.php";
   include "./classes/Product.php";
   include "./functions/UI_func.php";
