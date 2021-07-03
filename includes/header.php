@@ -1,6 +1,6 @@
 <?php
-include "database/db.php";
-include "./functions/header_func.php";
+  include "database/db.php";
+  include "./functions/header_func.php";
 ?>
 
 <!doctype html>
@@ -99,7 +99,7 @@ include "./functions/header_func.php";
     </div>
   <?php endif; ?>
 
-  <?php if ($current_page != "signin" && $current_page != "signup") : ?>
+  <?php if ($current_page != "signin" && $current_page != "signup"): ?>
     <nav class="navbar sticky-top navbar-expand-md navbar-light nav-footer-theme">
       <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -164,13 +164,28 @@ include "./functions/header_func.php";
                   <?php else : ?>
                     <a class="user-btn d-flex align-items-center" href="signin.php">
                       <div class="user-icon-wrapper">
-                        <button type="button" class="btn rounded-circle p-0">
-                          <i class="bi bi-person fa-1x text-white"></i>
+                        <button type="button" class="btn rounded-circle icon-upper p-0">
+                          <i class="bi bi-person fa-lg text-white"></i>
                         </button>
                       </div>
-                      <p class="text-center m-0 name text-white" style="font-size: 15px;">Login</p>
+                      <p class="text-center m-0 name text-white" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                     </a>
-                  <?php endif; ?>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
+                      <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
+                    </div>
+                  </div>
+                <?php else : ?>
+                  <a class="user-btn d-flex align-items-center" href="signup.php">
+                    <div class="user-icon-wrapper">
+                      <button type="button" class="btn rounded-circle p-0">
+                        <i class="bi bi-person fa-1x text-white"></i>
+                      </button>
+                    </div>
+                    <p class="text-center m-0 name text-white" style="font-size: 15px;">Login</p>
+                  </a>
+                <?php endif; ?>
                 </li>
               </ul>
             </li>
