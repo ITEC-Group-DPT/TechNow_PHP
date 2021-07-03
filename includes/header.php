@@ -77,7 +77,9 @@ include "./functions/header_func.php";
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
                   <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
+                  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                        <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
+                  </form>
                 </div>
               </div>
             <?php else : ?>
@@ -158,7 +160,7 @@ include "./functions/header_func.php";
                         <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
                       </div>
                   <?php else : ?>
-                    <a class="user-btn d-flex align-items-center" href="signup.php">
+                    <a class="user-btn d-flex align-items-center" href="signin.php">
                       <div class="user-icon-wrapper">
                         <button type="button" class="btn rounded-circle p-0">
                           <i class="bi bi-person fa-1x text-white"></i>

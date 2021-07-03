@@ -45,8 +45,6 @@
             if ($this->getUser("email", $email) != false)
                 $this->errors["email"] = "Email is already taken";
             $this->checkValidUsername($username);
-            if ($this->getUser("username", $username) != false)
-                $this->errors["username"] = "Username is already taken";
             $this->checkValidPasswords($password1, $password2);
             if(empty($this->errors)) {
                 $this->email = $email;

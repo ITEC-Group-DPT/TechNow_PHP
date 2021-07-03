@@ -1,15 +1,18 @@
 <?php
-include "./includes/config.php";
-include "./classes/Product.php";
-include "./functions/UI_func.php";
+  //include class
+  include "./classes/User.php";
+  include "./classes/Product.php";
 
-$topRating = Product::getTopRating($conn);
+  //include other func
+  include "./includes/config.php";
+  include "./functions/UI_func.php";
 
-$laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
-$cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
-$monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
-// var_dump($laptops);
-include "./includes/header.php"
+  $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
+  $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
+  $monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
+
+  //include header
+  include "./includes/header.php"
 ?>
 
 <div class="menu-banners">
