@@ -13,26 +13,24 @@
         }
 
         # helper functions
-        private function checkExist($type, $data) {
+        private function getUser($type, $data) {
             $sql = "SELECT * FROM users WHERE $type = ?";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("s", $data);
             $stmt->execute();
             $result = $stmt->get_result();
-            if ($result->num_rows >= 1) return false;
-            else return true;
+            if ($result->num_rows == 1) {
+                return $result->fetch_assoc();
+            }
+            else return false;
         }
         private function checkValidUsername($username) {
             if (mb_strlen($username, "utf-8") < 5 || mb_strlen($username, "utf-8") > 20)
                 $this->errors["username"] = "Username must be between 5 and 20 characters";
-            else if ($this->checkExist("username", $username) == false)
-                $this->errors["username"] = "Username is already taken";
         }
         private function checkValidEmail($email) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
                 $this->errors["email"] = "Email is invalid";
-            else if ($this->checkExist("email", $email) == false)
-                $this->errors["email"] = "Email is already taken";
         }
         private function checkValidPasswords($password1, $password2) {
             if (mb_strlen($password1, "utf-8") < 6)
@@ -44,7 +42,11 @@
         # main functions
         public function checkCreate($email, $username, $password1, $password2) {
             $this->checkValidEmail($email);
+            if ($this->getUser("email", $email) != false)
+                $this->errors["email"] = "Email is already taken";
             $this->checkValidUsername($username);
+            if ($this->getUser("username", $username) != false)
+                $this->errors["username"] = "Username is already taken";
             $this->checkValidPasswords($password1, $password2);
             if(empty($this->errors)) {
                 $this->email = $email;
@@ -65,14 +67,10 @@
             else $this->errors["database"] = "Database error";
         }
         public function checkSignIn($email, $password) {
+            $this->checkValidEmail($email);
             if(empty($this->errors)) {
-                $sql = "SELECT * FROM users WHERE email = ?";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("s", $email);
-                $stmt->execute();
-                $result = $stmt->get_result();
-                if ($result->num_rows == 1) {
-                    $row = $result->fetch_assoc();
+                if ($this->getUser("email", $email) != false) {
+                    $row = $this->getUser("email", $email);
                     if (password_verify($password, $row['password'])) {
                         $this->userID = $row['userID'];
                         $this->email = $row['email'];

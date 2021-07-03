@@ -3,21 +3,20 @@
 	include "classes/User.php";
 
 	if (isset($_POST['signin'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
         $user = new User($conn);
-        $user->checkSignIn($email, $password);
+        $user->checkSignIn($_POST['email'], $_POST['password']);
         $errors = $user->errors;
     }
 
 	include "includes/header.php";
 ?>
+
 <div class="container main d-flex justify-content-center align-items-center">
 	<div class="tab desktop" id="container">
 		<div class="form-container sign-up-container">
 			<form class="form-wrapper" action="signup.php" method="post">
 				<h1 class="title">Create Account</h1>
-				<div class="social-container">
+				<div class="social-container mt-4">
 					<a href="#" class="social link"><i class="fab fa-facebook-f"></i></a>
 					<a href="#" class="social link"><i class="fab fa-google-plus-g"></i></a>
 					<a href="#" class="social link"><i class="fab fa-linkedin-in"></i></a>
@@ -35,6 +34,7 @@
 				<button type="submit" class="mt-1 btn-custom" name="signup">Sign up</button>
 			</form>
 		</div>
+
 		<div class="form-container sign-in-container">
 			<form class="form-wrapper" action="signin.php" method="post">
 				<h1 class="title">Sign in</h1>
@@ -69,6 +69,7 @@
 				<button type="submit" class="btn-custom" name="signin">Sign in</button>
 			</form>
 		</div>
+
 		<div class="overlay-container">
 			<div class="overlay">
 				<div class="overlay-panel overlay-left">
@@ -85,7 +86,7 @@
 		</div>
 	</div>
 
-	<div class="tab form-container sign-in-container mobile" id="container">
+	<div class="tab mobile form-container sign-in-container" id="container">
 			<form class="form-wrapper" action="signin.php" method="post">
 				<h1 class="title">Sign in</h1>
 				<div class="social-container mt-4">
