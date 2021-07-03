@@ -1,10 +1,11 @@
 <?php
 	include "./includes/config.php";
-	include "classes/User.php";
 
 	if (isset($_POST['signin'])) {
+		$email = $_POST['email'];
+		$password = $_POST['password'];
         $user = new User($conn);
-        $user->checkSignIn($_POST['email'], $_POST['password']);
+        $user->checkSignIn($email, $password);
         $errors = $user->errors;
     }
 

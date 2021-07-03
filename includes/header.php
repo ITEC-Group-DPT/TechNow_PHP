@@ -76,7 +76,9 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
                   <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
+                  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                        <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
+                  </form>
                 </div>
               </div>
             <?php else : ?>
@@ -155,7 +157,9 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
                       <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item text-danger async-task" href="signout.php"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</a>
+                      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                        <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
+                      </form>
                     </div>
                   </div>
                 <?php else : ?>

@@ -1,10 +1,13 @@
 <?php
     include "./includes/config.php";
-	include "classes/User.php";
 
     if (isset($_POST['signup'])) {
+        $email = $_POST['email'];
+        $username = $_POST['username'];
+		$password1 = $_POST['password1'];
+        $password2 = $_POST['password2'];
         $user = new User($conn);
-        $user->checkCreate($_POST['email'], $_POST['username'], $_POST['password1'], $_POST['password2']);
+        $user->checkCreate($email, $username, $password1, $password2);
         $errors = $user->errors;
     }
 
