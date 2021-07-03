@@ -2,9 +2,9 @@
 <!-- change userid = session || if no login, noti by jumpbotron-->
 <link rel="stylesheet" href="css/cart.css">
 <div class="container m-5 addressbook" userid='1'>
-    <h3>Address Book</h3>
+    <h3>Address Book</h3><span><p>(you can edit exists address book by choosing and editing below)</p></span>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault0" checked>
+        <input class="form-check-input" type="radio" name="addressbook" id="flexRadioDefault0" checked>
         <label class="form-check-label" for="flexRadioDefault0">
             New address <i class="bi bi-plus-square"></i>
         </label>
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-md-6"> <input type="text" name='name' class="form-control" placeholder="Full Name" required>
                 </div>
-                <div class="col-md-6"> <input type="phone" name='phone' class="form-control" placeholder="Phone Number" required>
+                <div class="col-md-6"> <input type="number" name='phone' class="form-control" placeholder="Phone Number" required>
                 </div>
             </div>
         </div>

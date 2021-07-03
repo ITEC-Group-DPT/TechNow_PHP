@@ -20,7 +20,18 @@ class DeliveryInfo {
         }
         return $delivery;
     }
-
+    function updateDeliveryInfo($deliID,$name,$address, $phone){
+        $sql = 'update deliveryinfo set address = ?, name = ?, phone = ? where deliveryID = ?';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('ssss', $address,$name,$phone,$deliID);
+        $stmt->execute();
+    }
+    function createDeliveryInfo($name,$address, $phone,$userid){
+        $sql = 'insert into deliveryinfo (address,name,phone,userid) values (?,?,?,?)';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('sssi', $address,$name,$phone,$userid);
+        $stmt->execute();
+    }
 }
 
 include '../db.php';
@@ -29,7 +40,12 @@ if (isset($_POST['getdelivery'])){
     $array = $book->getDeliveryInfo($_POST['user_id']);
     echo json_encode($array);
 }
-if (isset($_POST['orderinfo'])){
-    print(1);
+elseif (isset($_POST['update'])){
+    $book = new DeliveryInfo($conn);
+    $book->updateDeliveryInfo($_POST['deliID'],$_POST['name'],$_POST['address'],$_POST['phone']);
+}
+elseif (isset($_POST['create'])){
+    $book = new DeliveryInfo($conn);
+    $book->createDeliveryInfo($_POST['name'],$_POST['address'],$_POST['phone'],$_POST['userid']);
 }
 ?>
