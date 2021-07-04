@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $("#smartwizard").on("showStep", function (e, anchorObject, stepIndex, stepDirection) {
         if (stepIndex == 2) {
-            console.log('2');
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.remove('finish')
             toolbarbtn.innerHTML = 'Checkout'
@@ -59,15 +58,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             let addressbook = document.getElementsByName('addressbook')
             for (const input of addressbook) {
-                console.log(input);
                 let attr = document.createAttribute("disabled");
                 input.setAttributeNode(attr);
             }
 
             let inputarr = document.querySelectorAll('.tab-content input')
+
+
+
             for (const input of inputarr) {
                 if (input.value == '') {
                     toolbarbtn.classList.add('disabled')
+                    console.log('hehe:' , input);
                     document.querySelector(".fillinput").classList.remove('d-none')
                     $('#smartwizard').smartWizard("stepState", [3], "disable");
                     return;
@@ -78,6 +80,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
             if (cartList.length != 0) {
                 toolbarbtn.classList.remove('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "enable");
+            }else{
+                toolbarbtn.classList.add('disabled')
+                $('#smartwizard').smartWizard("stepState", [3], "disable");
             }
 
         }
@@ -119,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function updateDeliInfoAndCreateOrder() {
-    console.log('3');
     let inputarr = document.querySelectorAll('.tab-content input')
     let name = inputarr[0].value
     let phone = inputarr[1].value
