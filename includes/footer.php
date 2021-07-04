@@ -1,8 +1,8 @@
 <?php
-  include "./functions/footer_func.php";
-  $current_page = basename($_SERVER['SCRIPT_NAME'],".php");
+include "./functions/footer_func.php";
+$current_page = basename($_SERVER['SCRIPT_NAME'], ".php");
 ?>
-<?php if ($current_page != "signin" && $current_page != "signup"): ?>
+<?php if ($current_page != "signin" && $current_page != "signup") : ?>
   <footer class="nav-footer-theme text-center text-white mt-5 w-100">
     <div class="container p-4">
       <section class="mb-4">
@@ -63,10 +63,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js%22%3E"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
 <script type="text/javascript" src=<?php chooseJSFile($current_page) ?>></script>
 </body>
 
 </html>
-

@@ -1,5 +1,5 @@
 <?php
-  include "./functions/header_func.php";
+include "./functions/header_func.php";
 ?>
 
 <!doctype html>
@@ -28,8 +28,9 @@
   <!-- Slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
   <?php
-  if($current_page == "payment")
-  echo '<link href=https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />'
+  if ($current_page == "payment")
+    echo '<link rel="stylesheet" href="css/cart.css">';
+    echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />'
   ?>
 </head>
 
@@ -64,9 +65,9 @@
                 </button>
                 <span class="badge badge-pill badge-danger number-item-cart">
                   <?php
-                    if (isset($cart))
-                      echo $cart->getTotalQuantity();
-                    else echo "0";
+                  if (isset($cart))
+                    echo $cart->getTotalQuantity();
+                  else echo "0";
                   ?></span>
               </div>
               <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
@@ -149,9 +150,9 @@
                       </button>
                       <span class="badge badge-pill badge-danger number-item-cart">
                         <?php
-                          if (isset($cart))
-                            echo $cart->getTotalQuantity();
-                          else echo "0";
+                        if (isset($cart))
+                          echo $cart->getTotalQuantity();
+                        else echo "0";
                         ?></span>
                     </div>
                     <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>

@@ -55,7 +55,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.remove('finish')
             toolbarbtn.innerHTML = 'Checkout'
-            document.querySelector('.addressbook').classList.add('invisible') //cannot change address in step 3
+            // document.querySelector('.addressbook').classList.add('invisible') //cannot change address in step 3
+
+            let addressbook = document.getElementsByName('addressbook')
+            for (const input of addressbook) {
+                console.log(input);
+                let attr = document.createAttribute("disabled");
+                input.setAttributeNode(attr);
+            }
+
             let inputarr = document.querySelectorAll('.tab-content input')
             for (const input of inputarr) {
                 if (input.value == '') {
@@ -66,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 }
             }
             document.querySelector(".fillinput").classList.add('d-none') //alert, empty input 
-
 
             if (cartList.length != 0) {
                 toolbarbtn.classList.remove('disabled')
@@ -80,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             toolbarbtn.classList.add('finish')
             toolbarbtn.innerHTML = 'Back to Homepage'
             updateDeliInfoAndCreateOrder()
-          
+            
 
             // let xhttp = new XMLHttpRequest();
             // xhttp.open("POST", "classes/DeliveryInfo.php", true);
@@ -95,7 +102,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
         } else {
-            document.querySelector('.addressbook').classList.remove('invisible')
+            // document.querySelector('.addressbook').classList.remove('invisible')
+            let addressbook = document.getElementsByName('addressbook')
+            for (const input of addressbook) {
+                input.removeAttribute("disabled");   
+            }
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.remove('finish')
             toolbarbtn.innerHTML = 'Next'
@@ -108,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function updateDeliInfoAndCreateOrder() {
+    console.log('3');
     let inputarr = document.querySelectorAll('.tab-content input')
     let name = inputarr[0].value
     let phone = inputarr[1].value
@@ -124,9 +136,9 @@ function updateDeliInfoAndCreateOrder() {
     if (selectedaddress != 0) str = 'update'
 
     let xhttp = new XMLHttpRequest();
-    // xhttp.open("POST", "classes/DeliveryInfo.php", true);
-    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    // xhttp.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}=1`);
+    xhttp.open("POST", "classes/DeliveryInfo.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}=1`);
 
 
     let productIDs = []
@@ -134,11 +146,17 @@ function updateDeliInfoAndCreateOrder() {
         let arr = [product.productID, product.quantity]
         productIDs.push(arr)
     }
+    console.log(productIDs);
     console.log(JSON.stringify(productIDs));
     str = "order"
     xhttp.open("POST", "classes/Order.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&${str}=1`);
+
+    xhttp.open("POST", "ajaxCart.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(`remove_all`);
+
 }
 
 
@@ -150,6 +168,7 @@ async function displayDeliverybook(user_id) {
         xhttp.send("getdelivery=1&user_id=" + user_id);
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+               
                 if (this.responseText != 'No rows') {
                     let deliarr = JSON.parse(this.response)
                     // console.log(deliarr)
@@ -160,6 +179,7 @@ async function displayDeliverybook(user_id) {
         };
     });
     let arr = await myPromise;
+    console.log(arr);
     if (arr != 'No rows') {
         let str = ''
         arr.forEach(deli => {
@@ -214,7 +234,7 @@ async function displayDeliverybook(user_id) {
 async function CreateCartListStep3() {
     let getcartlist = new Promise(function (myResolve, myReject) {
         let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "classes/Cart.php", true);
+        xhttp.open("POST", "ajaxCart.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("getcartlist=1");
         xhttp.onreadystatechange = function () {

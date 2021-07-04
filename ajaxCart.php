@@ -33,6 +33,10 @@
       //   echo $cart->getTotalPrice() . " " . $cart->getTotalQuantity();
       // else echo "error";
     }
+    elseif (isset($_POST['getcartlist'])) {
+      $arr = $cart->getCartList();
+      echo json_encode($arr);
+    }
   }
   else echo "not signed in";
  ?>
