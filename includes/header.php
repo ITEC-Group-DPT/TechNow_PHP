@@ -26,10 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&amp;display=swap">
   <!-- Slider -->
-  <link rel="stylesheet" href="css/style.css">
-  <!-- CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
 </head>
 
 <body>
