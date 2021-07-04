@@ -60,6 +60,12 @@
             $stmt->execute();
             if ($stmt->affected_rows == 1) {
                 $this->userID = $stmt->insert_id;
+                
+                //add cart to db
+                $sql2 = "INSERT INTO carts (userID) values ($this->userID)";
+                var_dump($sql2);
+                $stmt2 = $this->conn->prepare($sql2);
+                $stmt2->execute();
                 $this->logIn();
             }
             else $this->errors["database"] = "Database error";

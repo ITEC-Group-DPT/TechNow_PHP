@@ -1,22 +1,32 @@
 <?php
   class Cart{
     private $conn;
+    private $cartID;
     private $userID;
 
     public function __construct($conn, $userID){
       $this->conn = $conn;
       $this->userID = $userID;
+
+      $sql = "SELECT * from carts WHERE userID = ?";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->bind_param("i", $userID);
+      $stmt->execute();
+
+      $result = $stmt->get_result();
+      $row = $result->fetch_assoc();
+      $this->cartID = $row["cartID"];
     }
 
     public function addItemToCart($itemID){
       $stmt1 = $this->conn->prepare("SELECT * from cartdetails where cartID = ? and productID = ?");
-      $stmt1->bind_param("ii", $this->userID, $itemID);
+      $stmt1->bind_param("ii", $this->cartID, $itemID);
       $stmt1->execute();
       $result1 = $stmt1->get_result();
       if ($result1->num_rows == 0) {
         $quantity = 1;
         $stmt2 = $this->conn->prepare("INSERT into cartdetails (cartID, productID, quantity) values (?, ?, ?)");
-        $stmt2->bind_param("iii", $this->userID, $itemID, $quantity);
+        $stmt2->bind_param("iii", $this->cartID, $itemID, $quantity);
         $stmt2->execute();
         if ($stmt2->affected_rows == 1) return true;
         else return false;
@@ -92,7 +102,7 @@
       $stmt = $this->conn->prepare("UPDATE cartdetails
                                   set quantity = ?
                                   where cartID = ? and productID = ?");
-      $stmt->bind_param("iii", $quantity, $this->userID, $itemID);
+      $stmt->bind_param("iii", $quantity, $this->cartID, $itemID);
       $stmt->execute();
       if ($stmt->affected_rows == 1) return true;
       else return false;
@@ -104,7 +114,7 @@
       $stmt = $this->conn->prepare("UPDATE cartdetails
                                   set quantity = ?
                                   where cartID = ? and productID = ?");
-      $stmt->bind_param("iii", $quantity, $this->userID, $itemID);
+      $stmt->bind_param("iii", $quantity, $this->cartID, $itemID);
       $stmt->execute();
       if ($stmt->affected_rows == 1) return true;
       else return false;
@@ -114,7 +124,7 @@
       $stmt = $this->conn->prepare("SELECT *
                                   from cartdetails
                                   where cartID = ? and productID = ?");
-      $stmt->bind_param("ii", $this->userID, $itemID);
+      $stmt->bind_param("ii", $this->cartID, $itemID);
       $stmt->execute();
       $result = $stmt->get_result();
       $result = $result->fetch_assoc();
@@ -126,7 +136,7 @@
         ("DELETE
         from cartdetails
         where cartID = ? and productID = ?");
-      $stmt->bind_param("ii", $this->userID, $itemID);
+      $stmt->bind_param("ii", $this->cartID, $itemID);
       $stmt->execute();
       if ($stmt->affected_rows == 1) return true;
       else return false;
@@ -137,7 +147,7 @@
         ("DELETE
         from cartdetails
         where cartID = ?");
-      $stmt->bind_param("i", $this->userID);
+      $stmt->bind_param("i", $this->cartID);
       $stmt->execute();
       if ($stmt->affected_rows == 1) return true;
       else return false;
@@ -148,11 +158,14 @@
         ("SELECT sum(quantity) as 'totalQuantity'
         from cartdetails
         where cartID = ?");
-      $stmt->bind_param("i", $this->userID);
+      $stmt->bind_param("i", $this->cartID);
       $stmt->execute();
       $result = $stmt->get_result();
       $result = $result->fetch_assoc();
-      return $result['totalQuantity'];
+
+      $total = $result['totalQuantity'];
+      if ($total == NULL) $total = 0;
+      return $total;
     }
 
     public function getTotalPrice(){
@@ -160,7 +173,7 @@
         ("SELECT SUM(p.price*cd.quantity) as 'totalPrice'
         from cartdetails cd, products p
         where cd.cartID = ? and cd.productID = p.productID");
-      $stmt->bind_param("i", $this->userID);
+      $stmt->bind_param("i", $this->cartID);
       $stmt->execute();
       $result = $stmt->get_result();
       $result = $result->fetch_assoc();
