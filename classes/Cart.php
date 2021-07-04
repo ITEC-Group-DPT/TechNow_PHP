@@ -1,16 +1,4 @@
 <?php
-  /*
-  TODO
-
-  addToCart() mainjs.12,
-  delete LocalStorage, Ajax index.php add item to db,updateNoItem
-
-  index.php
-  catch POST['cart']
-
-  check duplicate item in db
-  */
-
   class Cart{
     private $conn;
     private $userID;
