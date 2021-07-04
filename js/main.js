@@ -43,7 +43,8 @@ function addToCart() {
   addToCartBtns = document.querySelectorAll(".add-cart");
   addToCartBtns.forEach(addBtn => {
     addBtn.addEventListener("click", () => {
-      addProductToCart(addBtn.id);
+      console.log('addBtnID: ', addBtn.id);
+      // addProductToCart(addBtn.id);
     });
   });
 }

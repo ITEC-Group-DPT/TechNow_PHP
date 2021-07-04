@@ -92,7 +92,9 @@
     </div>
   </div>
 
-
+  <?php
+  else:
+  ?>
 
   <div class="cart-available">
     <div class="cart-title-wrapper mt-4 pr-4">
