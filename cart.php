@@ -77,7 +77,7 @@
       </div>
     </div>
   </div>
-<?php if ($cart->getCartList() == []): ?>
+<?php if (!isset($cart) || $cart->getCartList() == []): ?>
   <div class="cart-container" style="min-height: 70vh;">
     <div class="cart-empty">
       <div class="empty-img-wrapper text-center">

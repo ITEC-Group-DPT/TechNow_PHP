@@ -58,7 +58,12 @@
                 <button type="button" class="btn rounded-circle icon-upper p-0">
                   <i class="bi bi-cart fa-lg" style="color: black;"></i>
                 </button>
-                <span class="badge badge-pill badge-danger number-item-cart"><?php echo $cart->getTotalQuantity(); ?></span>
+                <span class="badge badge-pill badge-danger number-item-cart">
+                  <?php
+                    if (isset($cart))
+                      echo $cart->getTotalQuantity();
+                    else echo "0";
+                  ?></span>
               </div>
               <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
             </a>
@@ -138,7 +143,12 @@
                       <button type="button" class="btn rounded-circle p-0" id="cart-icon" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
                         <i class="bi bi-cart fa-1x text-white"></i>
                       </button>
-                      <span class="badge badge-pill badge-danger number-item-cart"><?php echo $cart->getTotalQuantity(); ?></span>
+                      <span class="badge badge-pill badge-danger number-item-cart">
+                        <?php
+                          if (isset($cart))
+                            echo $cart->getTotalQuantity();
+                          else echo "0";
+                        ?></span>
                     </div>
                     <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>
                   </a>

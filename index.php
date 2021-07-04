@@ -3,7 +3,6 @@
   include "./classes/Product.php";
   include "./functions/UI_func.php";
 
-  //if isset POST['cart']
 
   $topRating = Product::getTopRating($conn);
   $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
