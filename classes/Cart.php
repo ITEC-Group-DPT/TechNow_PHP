@@ -21,19 +21,19 @@
     }
 
     public function addItemToCart($itemID){
-      // $stmt = $this->conn->prepare("SELECT * from cartdetails where cartID = ? and productID = ?");
-      // $stmt->bind_param("ii", $this->cartID, $itemID)
-      // $stmt->execute();
-      // $result = $stmt->get_result();
-      // if ($result->num_rows == 0) {
-      //   $this->cartArr = ["ID"=>$itemID, "quantity"=>1];
-      //   $stmt = $this->conn->prepare("INSERT into cartdetails values (?, ?, ?)");
-      //   $stmt->bind_param("iii",$this->cartID, $itemID, 1);
-      //   $stmt->execute();
-      //   $result = $stmt->get_result();
-      //   if ($result->affected_rows == 1) return true;
-      //   else return false;
-      // }
+      $stmt1 = $this->conn->prepare("SELECT * from cartdetails where cartID = ? and productID = ?");
+      $stmt1->bind_param("ii", $this->userID, $itemID);
+      $stmt1->execute();
+      $result1 = $stmt1->get_result();
+      if ($result1->num_rows == 0) {
+        $quantity = 1;
+        $stmt2 = $this->conn->prepare("INSERT into cartdetails (cartID, productID, quantity) values (?, ?, ?)");
+        $stmt2->bind_param("iii", $this->userID, $itemID, $quantity);
+        $stmt2->execute();
+        if ($stmt2->affected_rows == 1) return true;
+        else return false;
+      }
+      else return $this->increaseQuantity($itemID);
     }
 
     public function getCartList(){

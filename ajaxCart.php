@@ -1,6 +1,12 @@
 <?php
   include "includes/config.php";
 
+  if(isset($_POST['id']) && isset($_POST['add'])) {
+    if($cart->addItemToCart($_POST['id']))
+      echo $cart->getTotalQuantity();
+    else echo "error";
+  }
+
   if(isset($_POST['id']) && isset($_POST['remove'])) {
     if($cart->removeItem($_POST['id']))
       echo $cart->getTotalPrice() . " " . $cart->getTotalQuantity();

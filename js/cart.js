@@ -1,16 +1,10 @@
 //variables
 let numberItemCart = document.querySelector(".number-item-cart");
-let cartList = [];
-let cart = document.querySelector(".cart-list");
-let cartAvailable = document.querySelector(".cart-available");
 let totalPrice = document.querySelector(".total-price");
 let decreaseBtns;
 let increaseBtns;
-let inputQties;
 let removeBtns;
 let removeAllBtn = document.querySelector(".remove-all-btn");
-
-
 //document ready
 $(document).ready(() => {
   addListeners();
@@ -39,21 +33,7 @@ function addListeners() {
     });
   });
 
-  inputQties = document.querySelectorAll(".quantity-input");
-  inputQties.forEach(inputQty => {
-    inputQty.addEventListener("focusout", () => {
-      inputQuantity(inputQty);
-    });
-  });
-
   removeAllBtn.addEventListener("click", removeAll)
-}
-
-// note 2
-function getProductIndexByID(id) {
-  return cartList.findIndex(product => {
-    return product.id == id;
-  });
 }
 
 //cart functions
@@ -102,19 +82,6 @@ function increaseQuantity(increaseBtn) {
   xhr.send("id=" + productID + "&increase");
 }
 
-// note 1
-function inputQuantity(inputQty) {
-  let index = getProductIndexByID(inputQty.id);
-  if (inputQty.value < 1 || inputQty.value == null) {
-    cartList[index].quantity = 1;
-    inputQty.value = 1;
-  } else cartList[index].quantity = parseInt(inputQty.value);
-  console.log("AFTER INPUT");
-  console.log(cartList);
-  updateTotalPrice();
-  updateNoItemInCart();
-}
-
 function removeProduct(removeBtn) {
   let productID = removeBtn.getAttribute("data-id");
   let xhr = new XMLHttpRequest();
@@ -155,7 +122,6 @@ function removeAll() {
   xhr.send("remove_all");
   location.reload();
 }
-
 // UI functions
 function removeProductUI(removeBtn) {
   fadeOutRemoveItem(removeBtn.parentElement.parentElement);
@@ -163,22 +129,6 @@ function removeProductUI(removeBtn) {
 
 function updateNoItemInCart(noItem) {
   numberItemCart.innerText = noItem;
-}
-
-function fadeIn(el) {
-  document.querySelector('#dropdownsearchbar').style.opacity = 0
-  el.style = "display: flex";
-  setTimeout(function () {
-    el.style = "opacity: 1";
-  }, 300);
-}
-
-function fadeOut(el) {
-  document.querySelector('#dropdownsearchbar').style.opacity = 1
-  el.style = "opacity: 0";
-  setTimeout(function () {
-    el.style = "display: none";
-  }, 300);
 }
 
 function fadeOutRemoveItem(el) {
