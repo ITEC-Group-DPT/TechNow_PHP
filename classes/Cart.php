@@ -5,15 +5,13 @@
     private $cartID;
     private $cartArr = [];
 
-    public function __construct($conn){
+    public function __construct($conn, $userID){
       $this->conn = $conn;
+      $this->userID = $userID;
     }
 
     public function addItemToCart($itemID, $price){
-      if ($this->checkCart('quantity') >= 10) $itemOrder = "Item";
-      else $itemOrder = "Item0";
-
-      $this->cartArr[$itemOrder] = ["ID"=>$itemID, "price"=>$price, "quantity"=>1];
+      $this->cartArr = ["ID"=>$itemID, "price"=>$price, "quantity"=>1];
       $stmt = $this->conn->prepare("INSERT into cartdetails values (?, ?, ?)");
       $stmt->bind_param("iii",$this->cartID, $itemID, 1);
       $stmt->execute();

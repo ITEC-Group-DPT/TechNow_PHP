@@ -1,8 +1,8 @@
 <?php
   include "./includes/config.php";
-  include "./classes/Product.php";
+  include "classes/Product.php";
   include "./functions/UI_func.php";
-
+  include 'classes/Cart.php';
   $topRating = Product::getTopRating($conn);
   $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
   $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);

@@ -1,7 +1,7 @@
 <?php
   include "includes/config.php";
   include 'classes/Cart.php';
-  $cart = new Cart($conn);
+  $cart = new Cart($conn,$_SESSION['user_id']);
 
   include 'includes/header.php';
 ?>
