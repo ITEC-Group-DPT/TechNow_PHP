@@ -512,7 +512,7 @@ div#carouselId {
   /* searchbar */
   #searchbarinp{
       border: 1.5px solid rgb(63, 62, 62);
-      background: url(assets/loupe.png) no-repeat scroll 7px 0px;
+      background: url('../assets/loupe.png') no-repeat scroll 7px 0px;
       background-size: 18px 18px;
       background-color: white;
       background-position-y: center;

@@ -1,5 +1,4 @@
 <?php
-include "database/db.php";
 include "./functions/header_func.php";
 ?>
 
@@ -28,6 +27,11 @@ include "./functions/header_func.php";
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&amp;display=swap">
   <!-- Slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
+  <?php
+  if ($current_page == "payment")
+    echo '<link rel="stylesheet" href="css/cart.css">';
+    echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />'
+  ?>
 </head>
 
 <body>
@@ -59,7 +63,12 @@ include "./functions/header_func.php";
                 <button type="button" class="btn rounded-circle icon-upper p-0">
                   <i class="bi bi-cart fa-lg" style="color: black;"></i>
                 </button>
-                <span class="badge badge-pill badge-danger number-item-cart">0</span>
+                <span class="badge badge-pill badge-danger number-item-cart">
+                  <?php
+                  if (isset($cart))
+                    echo $cart->getTotalQuantity();
+                  else echo "0";
+                  ?></span>
               </div>
               <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
             </a>
@@ -139,7 +148,12 @@ include "./functions/header_func.php";
                       <button type="button" class="btn rounded-circle p-0" id="cart-icon" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
                         <i class="bi bi-cart fa-1x text-white"></i>
                       </button>
-                      <span class="badge badge-pill badge-danger number-item-cart">0</span>
+                      <span class="badge badge-pill badge-danger number-item-cart">
+                        <?php
+                        if (isset($cart))
+                          echo $cart->getTotalQuantity();
+                        else echo "0";
+                        ?></span>
                     </div>
                     <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>
                   </a>

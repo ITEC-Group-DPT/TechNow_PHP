@@ -8,16 +8,17 @@ let cartList = [];
 $(document).ready(() => {
   getProducts(products);
   loadSlider();
-  searchbarfunc();
-  
-  let temp = JSON.parse(localStorage.getItem("cartList"));
-  if (temp != null) cartList = temp;
+  // searchbarfunc();
+  addToCart();
+
+  // let temp = JSON.parse(localStorage.getItem("cartList"));
+  // if (temp != null) cartList = temp;
 
   console.log("CART ON PAGE LOAD");
   console.log(cartList);
 
   numberItemCart = document.querySelectorAll(".number-item-cart");
-  updateNoItemInCart();
+  //updateNoItemInCart();
 });
 
 const getProducts = (item) => {
@@ -28,12 +29,11 @@ const getProducts = (item) => {
     if (this.status == 200) {
       item = JSON.parse(this.responseText).Products;
       products = item;
-      addToCart();
     }
   }
   xhr.send();
 }
-// add to cart 
+// add to cart
 function getProductIndexByID(id) {
   return cartList.findIndex(product => {
     return product.id == id;
@@ -44,58 +44,41 @@ function addToCart() {
   addToCartBtns = document.querySelectorAll(".add-cart");
   addToCartBtns.forEach(addBtn => {
     addBtn.addEventListener("click", () => {
+      console.log('addBtnID: ', addBtn.id);
       addProductToCart(addBtn.id);
     });
   });
 }
 
-function addToCartSearch() {
-  addToCartSearchBtns = document.querySelectorAll(".add-cart-search");
-  addToCartSearchBtns.forEach(addSearchBtn => {
-    addSearchBtn.addEventListener("click", () => {
-      addProductToCart(addSearchBtn.id);
-    });
-  });
-}
+// function addToCartSearch() {
+//   addToCartSearchBtns = document.querySelectorAll(".add-cart-search");
+//   addToCartSearchBtns.forEach(addSearchBtn => {
+//     addSearchBtn.addEventListener("click", () => {
+//       addProductToCart(addSearchBtn.id);
+//     });
+//   });
+// }
 
-function addProductToCart(id) {
-  cartList = cartList || [];
-  let res = id.split(".");
-  if (getProductIndexByID(res[1]) != -1) {
-    console.log("DUPLICATE ITEM");
-    let index = getProductIndexByID(res[1]);
-    cartList[index].quantity++;
-  } else {
-    console.log("NEW ITEM");
-    let product = {
-      id: res[1],
-      data: products[res[0]][res[1]],
-      quantity: 1
-    }
-    cartList.push(product);
+function addProductToCart(productID) {
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "ajaxCart.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.onload = function() {
+      if(this.status == 200) {
+        if(this.responseText != "not signed in") {
+          updateNoItemInCart(this.responseText);
+        }
+        else {
+          console.log("not signed in");
+        }
+      }
   }
-  console.log("CART AFTER ADD");
-  console.log(cartList);
-  storeLocalStorage(cartList);
-  updateNoItemInCart();
-  popOver();
+  xhr.send("id=" + productID + "&add");
 }
 
-function storeLocalStorage(cartList) {
-  localStorage.setItem("cartList", JSON.stringify(cartList));
-}
-
-function getTotalItemsInCart() {
-  let total = 0;
-  cartList.forEach(product => {
-    total += product.quantity;
-  });
-  return total;
-}
-
-function updateNoItemInCart() {
-  numberItemCart.forEach(number => {
-    number.innerText = getTotalItemsInCart();
+function updateNoItemInCart(noItem) {
+  numberItemCart.forEach((item) => {
+    item.innerText = noItem;
   });
 }
 
