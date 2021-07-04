@@ -1,8 +1,6 @@
 <?php
   include "./includes/config.php";
   include "./classes/Product.php";
-  include "./classes/Cart.php";
-
   include "./functions/UI_func.php";
 
   //if isset POST['cart']

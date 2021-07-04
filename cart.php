@@ -1,8 +1,5 @@
 <?php
   include "includes/config.php";
-  include 'classes/Cart.php';
-  $cart = new Cart($conn,$_SESSION['user_id']);
-
   include 'includes/header.php';
 ?>
 <div class="modal fade" id="shipping-policy" tabindex="-1" role="dialog" aria-labelledby="shippingPolicyModalLabel" aria-hidden="true">
@@ -80,7 +77,7 @@
       </div>
     </div>
   </div>
-<?php if ($cart->getCartArr() == []): ?>
+<?php if ($cart->getCartList() == []): ?>
   <div class="cart-container" style="min-height: 70vh;">
     <div class="cart-empty">
       <div class="empty-img-wrapper text-center">
@@ -92,10 +89,7 @@
     </div>
   </div>
 
-  <?php
-  else:
-  ?>
-
+<?php else: ?>
   <div class="cart-available">
     <div class="cart-title-wrapper mt-4 pr-4">
       <div class="row">
@@ -106,13 +100,10 @@
         </div>
       </div>
     </div>
-
     <div class="row">
-      <ul class="cart-list col-md-8 pr-5">
+      <ul class="card-list col-md-8 pr-5">
         <!-- output cardList here -->
-        <?php
-          echo $cart->printCartList();
-        ?>
+        <?php echo $cart->printCartList();?>
       </ul>
       <div class="summary-wrapper col-md-3">
         <div class="summary card shadow-sm mt-3" style="height: 200px;">
@@ -124,7 +115,7 @@
           <hr>
           <div class="total d-flex">
             <h5 class="mr-auto" style="font-weight: 100;">Total</h5>
-            <p class="mb-0 total-price"></p>
+            <p class="mb-0 total-price"><?php echo $cart->getTotalPrice(); ?></p>
           </div>
         </div>
         <a href="payment.php"><button type="button" class="btn btn-danger w-100 mt-3 check-out-btn">Checkout</button></a>

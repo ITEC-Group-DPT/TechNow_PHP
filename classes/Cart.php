@@ -10,34 +10,38 @@
 
   check duplicate item in db
   */
-  
+
   class Cart{
     private $conn;
     private $userID;
-    private $cartID;
-    private $cartArr = [];
 
     public function __construct($conn, $userID){
       $this->conn = $conn;
       $this->userID = $userID;
     }
 
-    public function addItemToCart($itemID, $price){
-      $this->cartArr = ["ID"=>$itemID, "price"=>$price, "quantity"=>1];
-      $stmt = $this->conn->prepare("INSERT into cartdetails values (?, ?, ?)");
-      $stmt->bind_param("iii",$this->cartID, $itemID, 1);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      if ($result->affected_rows == 1) return true;
-      else return false;
+    public function addItemToCart($itemID){
+      // $stmt = $this->conn->prepare("SELECT * from cartdetails where cartID = ? and productID = ?");
+      // $stmt->bind_param("ii", $this->cartID, $itemID)
+      // $stmt->execute();
+      // $result = $stmt->get_result();
+      // if ($result->num_rows == 0) {
+      //   $this->cartArr = ["ID"=>$itemID, "quantity"=>1];
+      //   $stmt = $this->conn->prepare("INSERT into cartdetails values (?, ?, ?)");
+      //   $stmt->bind_param("iii",$this->cartID, $itemID, 1);
+      //   $stmt->execute();
+      //   $result = $stmt->get_result();
+      //   if ($result->affected_rows == 1) return true;
+      //   else return false;
+      // }
     }
 
     public function getCartList(){
       $stmt = $this->conn->prepare
         ("SELECT pri.img1, p.name, p.sold, p.productID, cd.quantity, p.price
         from cartdetails cd, carts c, products p, productimage pri
-        where cd.cartID = ? and cd.cartID = c.cartID and c.userID = ? and cd.productID = p.productID and p.productID = pri.productID");
-      $stmt->bind_param("ii", $this->cartID, $this->userID);
+        where cd.cartID = c.cartID and c.userID = ? and cd.productID = p.productID and p.productID = pri.productID");
+      $stmt->bind_param("i", $this->userID);
       $stmt->execute();
       $result = $stmt->get_result();
       return $result->fetch_all(MYSQLI_ASSOC);
@@ -45,78 +49,134 @@
 
     public function printCartList(){
       $output = '';
-      $cartList = $this->getCartList();
-      foreach ($cartList as $item) {
-        $output .= `
-        <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
-          <div class="product d-flex h-100">
-
-            <div class="product-img-wrapper">
-              <img class="product-img" src="{$item['img1']}" alt="product-img">
+      $cardList = $this->getCartList();
+      foreach ($cardList as $item) {
+        $output .=
+        "<li class='product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center'>
+          <div class='product d-flex h-100'>
+            <div class='product-img-wrapper'>
+              <img class='product-img' src='". $item['img1'] ."' alt='product-img'>
             </div>
-
-            <div class="product-info ml-2 d-flex align-items-center">
-              <div class="product-info-wrapper">
-
-                <div class="product-name-wrapper">
-                  <p class="product-name">{$item['name']}</p>
+            <div class='product-info ml-2 d-flex align-items-center'>
+              <div class='product-info-wrapper'>
+                <div class='product-name-wrapper'>
+                  <p class='product-name'>". $item['name'] ."</p>
                 </div>
-
-                <div class="product-rating-wrapper">
-
-                  <div class="product-rating">
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star"></span>
-                    <span>({$item['sold']})</span>
+                <div class='product-rating-wrapper'>
+                  <div class='product-rating'>
+                    <span class='fa fa-star text-warning'></span>
+                    <span class='fa fa-star text-warning'></span>
+                    <span class='fa fa-star text-warning'></span>
+                    <span class='fa fa-star text-warning'></span>
+                    <span class='fa fa-star'></span>
+                    <span>(". $item['sold'] .")</span>
                   </div>
-
                 </div>
               </div>
             </div>
-
-            <div class="quantity-price-wrapper d-flex align-items-center">
-              <div class="quantity-price w-100">
-                <div class="quantity-control rounded">
-                  <button class="quantity-btn quantity-btn-minus" id="{$item['productID']}" data-toggle="tooltip" data-placement="right" title="Decrease Quantity">
-                    <i class="bi bi-dash"></i>
+            <div class='quantity-price-wrapper d-flex align-items-center'>
+              <div class='quantity-price w-100'>
+                <div class='quantity-control rounded'>
+                  <button class='quantity-btn quantity-btn-minus' data-id='". $item['productID'] ."' data-toggle='tooltip' data-placement='right' title='Decrease Quantity'>
+                    <i class='bi bi-dash'></i>
                   </button>
-                  <input type="number" class="quantity-input" id="{$item['productID']}" value="{$item['quantity']}" step="1" min="1"  name="quantity">
-                  <button class="quantity-btn quantity-btn-plus" id="{$item['productID']}" data-toggle="tooltip" data-placement="right" title="Increase Quantity">
-                    <i class="bi bi-plus"></i>
+                  <input type='number' class='quantity-input' data-id='". $item['productID'] ."' value='". $item['quantity'] ."' step='1' min='1'  name='quantity' readonly>
+                  <button class='quantity-btn quantity-btn-plus' data-id='". $item['productID'] ."' data-toggle='tooltip' data-placement='right' title='Increase Quantity'>
+                    <i class='bi bi-plus'></i>
                   </button>
                 </div>
-
-                <div class="product-price-wrapper d-flex align-items-center">
-                  <p href="#" class="product-price m-0">{$item['price']}₫</p>
+                <div class='product-price-wrapper d-flex align-items-center'>
+                  <p class='product-price m-0'>". number_format($item['price']) ."₫</p>
                 </div>
               </div>
             </div>
-
-            <button type="button" class="btn btn-light remove-btn" id="{$item['productID']}" data-toggle="tooltip" data-placement="right" title="Remove Item">
-              <i class="bi bi-x fa-lg"></i>
+            <button type='button' class='btn btn-light remove-btn' data-id='". $item['productID'] ."' data-toggle='tooltip' data-placement='right' title='Remove Item'>
+              <i class='bi bi-x fa-lg'></i>
             </button>
-
           </div>
-        </li>
-        `;
-      }
-      return $output;
+        </li>";
+       }
+       return $output;
     }
 
-    public function checkCart($case){
-      $total = 0;
-      foreach ($this->cartArr as $item) {
-        if ($case == 'price') $total .= $item['price'];
-        elseif ($case == 'quantity') $total .= $item['quantity'];
-      }
-      return $total;
+    public function increaseQuantity($itemID){
+      $quantity = $this->getQuantity($itemID) + 1;
+      $stmt = $this->conn->prepare("UPDATE cartdetails
+                                  set quantity = ?
+                                  where cartID = ? and productID = ?");
+      $stmt->bind_param("iii", $quantity, $this->userID, $itemID);
+      $stmt->execute();
+      if ($stmt->affected_rows == 1) return true;
+      else return false;
     }
 
-    public function getCartArr(){
-      return $this->cartArr;
+    public function decreaseQuantity($itemID){
+      if ($this->getQuantity($itemID) ==1) return false;
+      $quantity = $this->getQuantity($itemID) - 1;
+      $stmt = $this->conn->prepare("UPDATE cartdetails
+                                  set quantity = ?
+                                  where cartID = ? and productID = ?");
+      $stmt->bind_param("iii", $quantity, $this->userID, $itemID);
+      $stmt->execute();
+      if ($stmt->affected_rows == 1) return true;
+      else return false;
+    }
+
+    public function getQuantity($itemID){
+      $stmt = $this->conn->prepare("SELECT *
+                                  from cartdetails
+                                  where cartID = ? and productID = ?");
+      $stmt->bind_param("ii", $this->userID, $itemID);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $result = $result->fetch_assoc();
+      return $result['quantity'];
+    }
+
+    public function removeItem($itemID){
+      $stmt = $this->conn->prepare
+        ("DELETE
+        from cartdetails
+        where cartID = ? and productID = ?");
+      $stmt->bind_param("ii", $this->userID, $itemID);
+      $stmt->execute();
+      if ($stmt->affected_rows == 1) return true;
+      else return false;
+    }
+
+    public function removeAll(){
+      $stmt = $this->conn->prepare
+        ("DELETE
+        from cartdetails
+        where cartID = ?");
+      $stmt->bind_param("i", $this->userID);
+      $stmt->execute();
+      if ($stmt->affected_rows == 1) return true;
+      else return false;
+    }
+
+    public function getTotalQuantity(){
+      $stmt = $this->conn->prepare
+        ("SELECT sum(quantity) as 'totalQuantity'
+        from cartdetails
+        where cartID = ?");
+      $stmt->bind_param("i", $this->userID);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $result = $result->fetch_assoc();
+      return $result['totalQuantity'];
+    }
+
+    public function getTotalPrice(){
+      $stmt = $this->conn->prepare
+        ("SELECT SUM(p.price*cd.quantity) as 'totalPrice'
+        from cartdetails cd, products p
+        where cd.cartID = ? and cd.productID = p.productID");
+      $stmt->bind_param("i", $this->userID);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $result = $result->fetch_assoc();
+      return (number_format($result['totalPrice']) . '₫');
     }
   }
 ?>

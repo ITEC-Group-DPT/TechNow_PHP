@@ -1,6 +1,5 @@
 <?php
-include "database/db.php";
-include "./functions/header_func.php";
+  include "./functions/header_func.php";
 ?>
 
 <!doctype html>
@@ -59,7 +58,7 @@ include "./functions/header_func.php";
                 <button type="button" class="btn rounded-circle icon-upper p-0">
                   <i class="bi bi-cart fa-lg" style="color: black;"></i>
                 </button>
-                <span class="badge badge-pill badge-danger number-item-cart">0</span>
+                <span class="badge badge-pill badge-danger number-item-cart"><?php echo $cart->getTotalQuantity(); ?></span>
               </div>
               <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
             </a>
@@ -139,7 +138,7 @@ include "./functions/header_func.php";
                       <button type="button" class="btn rounded-circle p-0" id="cart-icon" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
                         <i class="bi bi-cart fa-1x text-white"></i>
                       </button>
-                      <span class="badge badge-pill badge-danger number-item-cart">0</span>
+                      <span class="badge badge-pill badge-danger number-item-cart"><?php echo $cart->getTotalQuantity(); ?></span>
                     </div>
                     <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>
                   </a>
