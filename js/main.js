@@ -65,10 +65,12 @@ function addProductToCart(productID) {
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onload = function() {
       if(this.status == 200) {
-        if(this.responseText != "error") {
+        if(this.responseText != "not signed in") {
           updateNoItemInCart(this.responseText);
         }
-        else console.log("error");
+        else {
+          console.log("not signed in");
+        }
       }
   }
   xhr.send("id=" + productID + "&add");
