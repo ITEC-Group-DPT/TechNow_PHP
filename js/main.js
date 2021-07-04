@@ -17,7 +17,7 @@ $(document).ready(() => {
   console.log("CART ON PAGE LOAD");
   console.log(cartList);
 
-  numberItemCart = document.querySelectorAll(".number-item-cart");
+  numberItemCart = document.querySelector(".number-item-cart");
   //updateNoItemInCart();
 });
 
@@ -75,9 +75,7 @@ function addProductToCart(productID) {
 }
 
 function updateNoItemInCart(noItem) {
-  numberItemCart.forEach((item) => {
-    item.innerText = noItem;
-  });
+  numberItemCart.innerText = noItem;
 }
 
 let cartBtns = document.querySelectorAll(".cart-btn");

@@ -107,20 +107,20 @@ function removeAll() {
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onload = function() {
       if(this.status == 200) {
-        window.location.reload();
-        // console.log(this.responseText);
-        // if(this.responseText != "error") {
-        //   removeProductUI(removeBtn);
-        //   updateTotalPrice(0);
-        //   updateNoItemInCart(0);
-        // }
-        // else {
-        //   console.log("error");
-        // }
+        console.log(this.responseText);
+        if(this.responseText != "error") {
+          data = this.responseText.split(" ");
+          removeProductUI(removeBtn);
+          updateTotalPrice(data[0]);
+          updateNoItemInCart(data[1]);
+        }
+        else {
+          console.log("error");
+        }
       }
   }
   xhr.send("remove_all");
-
+  location.reload();
 }
 // UI functions
 function removeProductUI(removeBtn) {

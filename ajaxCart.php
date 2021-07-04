@@ -26,10 +26,8 @@
   }
 
   if(isset($_POST['remove_all'])) {
-    $cart->removeAll();
-    // $location = "Location: cart.php";
-    // header($location);
-    //   echo $cart->getTotalPrice() . " " . $cart->getTotalQuantity();
-    // else echo "error";
+    if($cart->removeAll())
+      echo $cart->getTotalPrice() . " " . $cart->getTotalQuantity();
+    else echo "error";
   }
  ?>
