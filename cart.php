@@ -90,7 +90,7 @@
   </div>
 
 <?php else: ?>
-  <div class="cart-available">
+  <div class="cart-available cart-container">
     <div class="cart-title-wrapper mt-4 pr-4">
       <div class="row">
         <div class="col-md-8 d-flex">
