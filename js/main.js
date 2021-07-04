@@ -8,13 +8,15 @@ let cartList = [];
 $(document).ready(() => {
   getProducts(products);
   loadSlider();
-  searchbarfunc();
+  // searchbarfunc();
+  addToCart();
   
   let temp = JSON.parse(localStorage.getItem("cartList"));
   if (temp != null) cartList = temp;
 
   console.log("CART ON PAGE LOAD");
   console.log(cartList);
+
 
   numberItemCart = document.querySelectorAll(".number-item-cart");
   updateNoItemInCart();
@@ -28,7 +30,6 @@ const getProducts = (item) => {
     if (this.status == 200) {
       item = JSON.parse(this.responseText).Products;
       products = item;
-      addToCart();
     }
   }
   xhr.send();
@@ -79,6 +80,8 @@ function addProductToCart(id) {
   console.log(cartList);
   storeLocalStorage(cartList);
   updateNoItemInCart();
+  //Ajax index
+
   popOver();
 }
 
