@@ -64,12 +64,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             let inputarr = document.querySelectorAll('.tab-content input')
 
-
-
             for (const input of inputarr) {
                 if (input.value == '') {
                     toolbarbtn.classList.add('disabled')
-                    console.log('hehe:' , input);
                     document.querySelector(".fillinput").classList.remove('d-none')
                     $('#smartwizard').smartWizard("stepState", [3], "disable");
                     return;
@@ -80,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             if (cartList.length != 0) {
                 toolbarbtn.classList.remove('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "enable");
-            }else{
+            } else {
                 toolbarbtn.classList.add('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "disable");
             }
@@ -92,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             toolbarbtn.classList.add('finish')
             toolbarbtn.innerHTML = 'Back to Homepage'
             updateDeliInfoAndCreateOrder()
-            
+
 
             // let xhttp = new XMLHttpRequest();
             // xhttp.open("POST", "classes/DeliveryInfo.php", true);
@@ -110,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             // document.querySelector('.addressbook').classList.remove('invisible')
             let addressbook = document.getElementsByName('addressbook')
             for (const input of addressbook) {
-                input.removeAttribute("disabled");   
+                input.removeAttribute("disabled");
             }
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.remove('finish')
@@ -172,7 +169,7 @@ async function displayDeliverybook(user_id) {
         xhttp.send("getdelivery=1&user_id=" + user_id);
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-               
+
                 if (this.responseText != 'No rows') {
                     let deliarr = JSON.parse(this.response)
                     // console.log(deliarr)
