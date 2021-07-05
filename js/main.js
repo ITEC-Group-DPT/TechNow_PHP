@@ -1,42 +1,16 @@
 let products;
 let addToCartBtns;
-let addToCartSearchBtns;
+
 let numberItemCart;
-let cartList = [];
 
 $(document).ready(() => {
-  getProducts(products);
   loadSlider();
-  searchbarfunc();
   addToCart();
-
-
   console.log("CART ON PAGE LOAD");
-  console.log(cartList);
 
   numberItemCart = document.querySelectorAll(".number-item-cart");
   console.log(numberItemCart);
-  //updateNoItemInCart();
 });
-
-const getProducts = (item) => {
-  let url = 'https://technow-4b3ab.firebaseio.com/.json';
-  let xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-  xhr.onload = function () {
-    if (this.status == 200) {
-      item = JSON.parse(this.responseText).Products;
-      products = item;
-    }
-  }
-  xhr.send();
-}
-// add to cart
-function getProductIndexByID(id) {
-  return cartList.findIndex(product => {
-    return product.id == id;
-  });
-}
 
 function addToCart() {
   addToCartBtns = document.querySelectorAll(".add-cart");
@@ -47,15 +21,6 @@ function addToCart() {
     });
   });
 }
-
-// function addToCartSearch() {
-//   addToCartSearchBtns = document.querySelectorAll(".add-cart-search");
-//   addToCartSearchBtns.forEach(addSearchBtn => {
-//     addSearchBtn.addEventListener("click", () => {
-//       addProductToCart(addSearchBtn.id);
-//     });
-//   });
-// }
 
 function addProductToCart(productID) {
   let xhr = new XMLHttpRequest();
@@ -78,17 +43,8 @@ function addProductToCart(productID) {
 function updateNoItemInCart(noItem) {
   numberItemCart.forEach((item) => {
     item.innerText = noItem;
-    console.log(item);
   });
 }
-
-let cartBtns = document.querySelectorAll(".cart-btn");
-
-cartBtns.forEach(cartBtn => {
-  cartBtn.addEventListener("click", () => {
-    location.href = "pages/Cart/cart.html";
-  });
-});
 
 // UI
 let popUpNavItems = document.querySelectorAll(".pop-up-items")
@@ -152,7 +108,6 @@ function popOver() {
 }
 
 //top rating
-let list = [];
 
 function loadSlider() {
   let slider = tns({
@@ -192,95 +147,20 @@ function searchbarfunc() {
   let searchInp = document.querySelector("#searchbarinp");
   let searchList = document.querySelector('#dropdownsearchbar');
   let filter = searchInp.value.toUpperCase();
-  item = searchList.getElementsByTagName("li");
+  let item = searchList.getElementsByTagName("li");
 
   if (searchInp.value == '') {
     searchList.style.display = 'none';
   }else{
     searchList.style.display = 'block';
+    // sua lai UI search bar
     for (var i = 0; i < item.length; i++) {
       let a = item[i].getElementsByTagName('a')[0];
-      txtValue = a.textContext || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1)
-        li[i].style.display = "";
-      else li[i].style.display = "none";
+      let title = a.querySelector(".card-title");
+      title = title.textContext || title.innerText;
+      if (title.toUpperCase().indexOf(filter) > -1)
+        item[i].style.display = "block";
+      else item[i].style.display = "none";
     }
   }
-
-
-  // searchval.addEventListener('click', function (e) {
-  //   if (searchval.value.trim() == '') {
-  //     searchdropdown.style.opacity = 0;
-  //   } else {
-  //     searchdropdown.style.opacity = 1;
-  //   }
-  // })
-  //
-  // searchval.addEventListener('keyup', function (e) {
-  //   let limit = 5;
-  //   let dropdown = document.querySelector("#dropdownsearchbar");
-  //   dropdown.innerHTML = '';
-  //   let searchstr = removeVietnameseTones(searchval.value).toLowerCase()
-  //   for (let index = 0; index < list.length; index++) {
-  //     if (removeVietnameseTones(list[index].name).toLowerCase().includes(searchstr)) {
-  //       //console.log(removeVietnameseTones(list[index].name).toLowerCase());
-  //       let data = `
-  //       <li>
-  //         <div class="product p-1">
-  //           <div class="card d-flex flex-row product shadow-sm rounded w-100 h-50">
-  //             <img class="card-img-top" src="${list[index].avatarURL}" alt="Card image cap">
-  //             <div class="card-body">
-  //               <h5 class="card-title rounded">${list[index].name}</h5>
-  //               <div class="bottom-price-star">
-  //             </div>
-  //             <p href="#" class="text-danger mb-0 price">${list[index].price.toLocaleString()}₫</p>
-  //           </div>
-  //
-  //         </div>
-  //       </li>`
-  //       $("#dropdownsearchbar").append(data)
-  //       console.log(list[index].id);
-  //       limit--;
-  //     }
-  //     if (limit == 0) break;
-  //   }
-  //   if (limit == 5 || searchstr.trim() == '') {
-  //     //không tim duoc product match search
-  //     searchdropdown.style.opacity = 0;
-  //   } else {
-  //     searchdropdown.style.opacity = 1;
-  //   }
-  //   $("#dropdownsearchbar").addClass("show")
-  //   addToCartSearch();
-  // })
-
-}
-
-function removeVietnameseTones(str) {
-  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
-  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
-  str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
-  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
-  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
-  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
-  str = str.replace(/đ/g, "d");
-  str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
-  str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
-  str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
-  str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
-  str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
-  str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
-  str = str.replace(/Đ/g, "D");
-  // Some system encode vietnamese combining accent as individual utf-8 characters
-  // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
-  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
-  str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
-  // Remove extra spaces
-  // Bỏ các khoảng trắng liền nhau
-  str = str.replace(/ + /g, " ");
-  str = str.trim();
-  // Remove punctuations
-  // Bỏ dấu câu, kí tự đặc biệt
-  str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
-  return str;
 }

@@ -48,8 +48,8 @@
 
             <div class="dropdown input-group w-100 ">
 
-              <input type="text" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
-              <ul class="dropdown-menu w-100" id="dropdownsearchbar" >
+              <input type="text" onkeyup="searchbarfunc()" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
+              <ul class="dropdown-menu w-100" id="dropdownsearchbar" style="display: none;">
                 <!-- echo product list here -->
                 <?php
                   $products = Product::getAllProducts($conn);

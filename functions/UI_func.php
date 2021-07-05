@@ -74,7 +74,7 @@
         $ratingStar = getStarRating(intval($product['rating']));
         echo
         "<li>
-          <div class='product p-1'>
+          <a class='product p-1' href='#'>
             <div class='card d-flex flex-row product shadow-sm rounded w-100 h-50'>
               <img class='card-img-top' src='{$product['img1']}' alt='Card image cap'>
               <div class='card-body'>
@@ -87,7 +87,7 @@
                 <p class='text-danger mb-0 price'>{$format_price} ₫</p>
               </div>
             </div>
-          </div>
+          </a>
         </li>";
       }
     }
