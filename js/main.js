@@ -15,6 +15,7 @@ $(document).ready(() => {
   console.log(cartList);
 
   numberItemCart = document.querySelectorAll(".number-item-cart");
+  console.log(numberItemCart);
   //updateNoItemInCart();
 });
 
@@ -64,6 +65,7 @@ function addProductToCart(productID) {
       if(this.status == 200) {
         if(this.responseText != "not signed in") {
           updateNoItemInCart(this.responseText);
+          popOver();
         }
         else {
           console.log("not signed in");
@@ -76,6 +78,7 @@ function addProductToCart(productID) {
 function updateNoItemInCart(noItem) {
   numberItemCart.forEach((item) => {
     item.innerText = noItem;
+    console.log(item);
   });
 }
 
@@ -100,8 +103,8 @@ $(document).scroll(function () {
   } else if (y <= 100 && fade == true) {
     fadeOut(popUpNavItems);
 
-    $('#cart-icon-desktop').popover('hide');
-    $('#cart-icon-mobile').popover('hide');
+    // $('#cart-icon-desktop').popover('hide');
+    // $('#cart-icon-mobile').popover('hide');
     fade = false;
   }
 
@@ -140,6 +143,7 @@ function popOver() {
   }
 
   else {
+    console.log("popover");
     $('#cart-icon-desktop').popover('show');
     setTimeout(() => {
       $('#cart-icon-desktop').popover('hide');

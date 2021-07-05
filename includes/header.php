@@ -30,7 +30,7 @@
   <?php
   if ($current_page == "payment")
     echo '<link rel="stylesheet" href="css/cart.css">';
-    echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />'
+  echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />'
   ?>
 </head>
 
@@ -89,6 +89,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
                   <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                  <a class="dropdown-item" href="favorite.php"><i class="bi bi-heart mr-2"></i>Favorite</a>
+                  <a class="dropdown-item" href="address.php"><i class="bi bi-geo-alt mr-2"></i>Address</a>
                   <div class="dropdown-divider"></div>
                   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
@@ -113,10 +115,69 @@
   <?php endif; ?>
 
   <?php if ($current_page != "signin" && $current_page != "signup") : ?>
-    <nav class="navbar sticky-top navbar-expand-md navbar-light nav-footer-theme">
-      <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar sticky-top navbar-expand-md navbar-dark nav-footer-theme">
+
+      <div class="nav-wrapper-mobile d-flex">
+
+        <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="nav-item popup ml-auto pr-0 mr-0" id="pop-up-mobile" style="display: none;">
+
+          <ul class="navbar-nav pop-up-items d-flex flex-row h-100" style="display: none !important;">
+            <li class="nav-item">
+              <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="./pages/Cart/cart.html">
+                <div class="cart-icon-wrapper mr-2">
+                  <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
+
+                    <i class="bi bi-cart fa-1x text-white" style="color: black;"></i>
+                  </button>
+                  <span class="badge badge-pill badge-danger number-item-cart"><?php
+                                                                                if (isset($cart))
+                                                                                  echo $cart->getTotalQuantity();
+                                                                                else echo "0";
+                                                                                ?></span>
+                </div>
+                <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <?php if ($_SESSION['signedIn']) : ?>
+                <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="user-icon-wrapper">
+                    <button type="button" class="btn rounded-circle icon-upper p-0">
+                      <i class="bi bi-person fa-lg text-white"></i>
+                    </button>
+                  </div>
+                  <p class="text-center m-0 name text-white" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000; position: absolute; left: auto; right: 10px;">
+                  <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                  <a class="dropdown-item" href="favorite.php"><i class="bi bi-heart mr-2"></i>Favorite</a>
+                  <a class="dropdown-item" href="address.php"><i class="bi bi-geo-alt mr-2"></i>Address</a>
+                  <div class="dropdown-divider"></div>
+                  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                    <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
+                  </form>
+                </div>
+              <?php else : ?>
+                <a class="user-btn user-mobile d-flex align-items-center h-100" data-toggle="modal" data-target="#user-login">
+                  <div class="user-icon-wrapper mr-2">
+                    <button type="button" class="btn rounded-circle p-0" id="user-icon">
+                      <i class="bi bi-person fa-1x text-white" style="color: black;"></i>
+                    </button>
+                  </div>
+                  <p class="text-center m-0 name text-white" style="font-size: 15px;">Login</p>
+                </a>
+              <?php endif; ?>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
       <div class="collapse navbar-collapse" id="collapsibleNavId">
         <div class="navbar-container">
           <ul class="navbar-nav mr-auto row">
@@ -144,12 +205,12 @@
                 <span class="text-white">Contact us</span>
               </a>
             </li>
-            <li class="nav-item popup ml-auto pr-0 mr-0">
+            <li class="nav-item popup ml-auto pr-0 mr-0" id="pop-up-desktop">
               <ul class="navbar-nav pop-up-items d-flex" style="display: none;">
                 <li class="nav-item">
                   <a class="cart-btn d-flex align-items-center" href="cart.php">
                     <div class="cart-icon-wrapper mr-2">
-                      <button type="button" class="btn rounded-circle p-0" id="cart-icon" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
+                      <button type="button" class="btn rounded-circle p-0" id="cart-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
                         <i class="bi bi-cart fa-1x text-white"></i>
                       </button>
                       <span class="badge badge-pill badge-danger number-item-cart">
@@ -174,6 +235,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
                       <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                      <a class="dropdown-item" href="favorite.php"><i class="bi bi-heart mr-2"></i>Favorite</a>
+                      <a class="dropdown-item" href="address.php"><i class="bi bi-geo-alt mr-2"></i>Address</a>
                       <div class="dropdown-divider"></div>
                       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                         <button type="submit" name="signout" class="dropdown-item text-danger"><i class="bi bi-box-arrow-right mr-2"></i>Sign out</button>
@@ -195,5 +258,6 @@
           </ul>
         </div>
       </div>
+
     </nav>
   <?php endif; ?>
