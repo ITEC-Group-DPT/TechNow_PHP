@@ -4,15 +4,12 @@ let addToCartSearchBtns;
 let numberItemCart;
 let cartList = [];
 
-
 $(document).ready(() => {
   getProducts(products);
   loadSlider();
-  // searchbarfunc();
+  searchbarfunc();
   addToCart();
 
-  // let temp = JSON.parse(localStorage.getItem("cartList"));
-  // if (temp != null) cartList = temp;
 
   console.log("CART ON PAGE LOAD");
   console.log(cartList);
@@ -188,53 +185,70 @@ function loadSlider() {
 
 //searchbar
 function searchbarfunc() {
-  let searchval = document.querySelector("#searchbarinp")
-  let searchdropdown = document.querySelector('#dropdownsearchbar')
-  searchval.addEventListener('click', function (e) {
-    if (searchval.value.trim() == '') {
-      searchdropdown.style.opacity = 0;
-    } else {
-      searchdropdown.style.opacity = 1;
-    }
-  })
+  let searchInp = document.querySelector("#searchbarinp");
+  let searchList = document.querySelector('#dropdownsearchbar');
+  let filter = searchInp.value.toUpperCase();
+  item = searchList.getElementsByTagName("li");
 
-  searchval.addEventListener('keyup', function (e) {
-    let limit = 5;
-    let dropdown = document.querySelector("#dropdownsearchbar");
-    dropdown.innerHTML = '';
-    let searchstr = removeVietnameseTones(searchval.value).toLowerCase()
-    for (let index = 0; index < list.length; index++) {
-      if (removeVietnameseTones(list[index].name).toLowerCase().includes(searchstr)) {
-        //console.log(removeVietnameseTones(list[index].name).toLowerCase());
-        let data = `
-        <li>
-          <div class="product p-1">
-            <div class="card d-flex flex-row product shadow-sm rounded w-100 h-50">
-              <img class="card-img-top" src="${list[index].avatarURL}" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title rounded">${list[index].name}</h5>
-                <div class="bottom-price-star">
-              </div>
-              <p href="#" class="text-danger mb-0 price">${list[index].price.toLocaleString()}₫</p>
-            </div>
+  if (searchInp.value == '') {
+    searchList.style.display = 'none';
+  }else{
+    searchList.style.display = 'block';
+    for (var i = 0; i < item.length; i++) {
+      let a = item[i].getElementsByTagName('a')[0];
+      txtValue = a.textContext || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1)
+        li[i].style.display = "";
+      else li[i].style.display = "none";
+    }
+  }
 
-          </div>
-        </li>`
-        $("#dropdownsearchbar").append(data)
-        console.log(list[index].id);
-        limit--;
-      }
-      if (limit == 0) break;
-    }
-    if (limit == 5 || searchstr.trim() == '') {
-      //không tim duoc product match search
-      searchdropdown.style.opacity = 0;
-    } else {
-      searchdropdown.style.opacity = 1;
-    }
-    $("#dropdownsearchbar").addClass("show")
-    addToCartSearch();
-  })
+
+  // searchval.addEventListener('click', function (e) {
+  //   if (searchval.value.trim() == '') {
+  //     searchdropdown.style.opacity = 0;
+  //   } else {
+  //     searchdropdown.style.opacity = 1;
+  //   }
+  // })
+  //
+  // searchval.addEventListener('keyup', function (e) {
+  //   let limit = 5;
+  //   let dropdown = document.querySelector("#dropdownsearchbar");
+  //   dropdown.innerHTML = '';
+  //   let searchstr = removeVietnameseTones(searchval.value).toLowerCase()
+  //   for (let index = 0; index < list.length; index++) {
+  //     if (removeVietnameseTones(list[index].name).toLowerCase().includes(searchstr)) {
+  //       //console.log(removeVietnameseTones(list[index].name).toLowerCase());
+  //       let data = `
+  //       <li>
+  //         <div class="product p-1">
+  //           <div class="card d-flex flex-row product shadow-sm rounded w-100 h-50">
+  //             <img class="card-img-top" src="${list[index].avatarURL}" alt="Card image cap">
+  //             <div class="card-body">
+  //               <h5 class="card-title rounded">${list[index].name}</h5>
+  //               <div class="bottom-price-star">
+  //             </div>
+  //             <p href="#" class="text-danger mb-0 price">${list[index].price.toLocaleString()}₫</p>
+  //           </div>
+  //
+  //         </div>
+  //       </li>`
+  //       $("#dropdownsearchbar").append(data)
+  //       console.log(list[index].id);
+  //       limit--;
+  //     }
+  //     if (limit == 0) break;
+  //   }
+  //   if (limit == 5 || searchstr.trim() == '') {
+  //     //không tim duoc product match search
+  //     searchdropdown.style.opacity = 0;
+  //   } else {
+  //     searchdropdown.style.opacity = 1;
+  //   }
+  //   $("#dropdownsearchbar").addClass("show")
+  //   addToCartSearch();
+  // })
 
 }
 
@@ -266,7 +280,3 @@ function removeVietnameseTones(str) {
   str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, " ");
   return str;
 }
-
-$("#dropdownsearchbar").click(function (e) {
-  e.stopPropagation()
-});

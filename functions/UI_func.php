@@ -1,7 +1,6 @@
 <?php
     //helper
-    function getStarRating($rating)
-    {
+    function getStarRating($rating){
       $ratingStar = "";
 
       for ($i = 0; $i < $rating; $i++) {
@@ -14,9 +13,11 @@
 
       return $ratingStar;
     }
+
+
     function renderProductCategory($categories) {
         foreach ($categories as $product) {
-            
+
             $ratingStar = getStarRating(intval($product['rating']));
 
             $format_price = number_format($product['price'],0);
@@ -33,17 +34,16 @@
                     <div class = 'add-cart' id='{$product['productID']}'>
                       <i class='bi bi-cart2'></i>
                     </div>
-                  
+
                 </div>
-      
+
               </div>
             </div>";
           }
     }
-    function renderTopRating($list)
-    {
-      foreach ($list as $product) {
 
+    function renderTopRating($list){
+      foreach ($list as $product) {
         $format_price = number_format($product['price'],0);
 
         $ratingStar = getStarRating(intval($product['rating']));
@@ -54,8 +54,7 @@
             <h5 class='card-title rounded'>{$product['name']}</h5>
             <div class='bottom-price-star'>
               <div class='rating'>
-                {$ratingStar}
-                <span>({$product['sold']})</span>
+                {$ratingStar}<span>({$product['sold']})</span>
               </div>
             </div>
             <p href='#' class='text-danger mb-0 price'>{$format_price}đ</p>
@@ -66,5 +65,30 @@
         </div>
       </div>";
       }
-      
     }
+
+    function renderSearchList($products){
+      $output = '';
+      foreach ($products as $product) {
+        $format_price = number_format($product['price'],0);
+        $ratingStar = getStarRating(intval($product['rating']));
+        echo
+        "<li>
+          <div class='product p-1'>
+            <div class='card d-flex flex-row product shadow-sm rounded w-100 h-50'>
+              <img class='card-img-top' src='{$product['img1']}' alt='Card image cap'>
+              <div class='card-body'>
+                <h5 class='card-title rounded'>{$product['name']}</h5>
+                <div class='bottom-price-star'>
+                  <div class='rating'>
+                    {$ratingStar}<span>({$product['sold']})</span>
+                  </div>
+                </div>
+                <p class='text-danger mb-0 price'>{$format_price} ₫</p>
+              </div>
+            </div>
+          </div>
+        </li>";
+      }
+    }
+?>
