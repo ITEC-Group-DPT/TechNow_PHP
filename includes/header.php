@@ -24,10 +24,9 @@
   <!-- Slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
   <?php
-    if ($current_page == "payment"){
+    if ($current_page == "payment")
       echo '<link rel="stylesheet" href="css/cart.css">';
-      echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
-    }
+    echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   ?>
 </head>
 
