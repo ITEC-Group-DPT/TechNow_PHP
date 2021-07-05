@@ -1,22 +1,17 @@
 let products;
 let addToCartBtns;
-
 let numberItemCart;
 
 $(document).ready(() => {
   loadSlider();
   addToCart();
-  console.log("CART ON PAGE LOAD");
-
   numberItemCart = document.querySelectorAll(".number-item-cart");
-  console.log(numberItemCart);
 });
 
 function addToCart() {
   addToCartBtns = document.querySelectorAll(".add-cart");
   addToCartBtns.forEach(addBtn => {
     addBtn.addEventListener("click", () => {
-      console.log('addBtnID: ', addBtn.id);
       addProductToCart(addBtn.id);
     });
   });
@@ -32,9 +27,7 @@ function addProductToCart(productID) {
           updateNoItemInCart(this.responseText);
           popOver();
         }
-        else {
-          console.log("not signed in");
-        }
+        else console.log("not signed in");
       }
   }
   xhr.send("id=" + productID + "&add");
@@ -53,24 +46,20 @@ let fade = false;
 $(document).scroll(function () {
   let y = $(this).scrollTop();
   if (y > 100 && fade == false) {
-
     fadeIn(popUpNavItems);
     fade = true;
   } else if (y <= 100 && fade == true) {
     fadeOut(popUpNavItems);
-
     // $('#cart-icon-desktop').popover('hide');
     // $('#cart-icon-mobile').popover('hide');
     fade = false;
   }
-
 });
 
 function fadeIn(elList) {
   elList.forEach(el => {
     document.querySelector('#dropdownsearchbar').style.opacity = 0;
     el.classList.remove("d-none")
-
     el.classList.add("d-flex")
     setTimeout(function () {
       el.style = "opacity: 1";
@@ -97,17 +86,13 @@ function popOver() {
       $('#cart-icon-mobile').popover('hide');
     }, 4000);
   }
-
   else {
-    console.log("popover");
     $('#cart-icon-desktop').popover('show');
     setTimeout(() => {
       $('#cart-icon-desktop').popover('hide');
     }, 4000);
   }
 }
-
-//top rating
 
 function loadSlider() {
   let slider = tns({
@@ -140,7 +125,6 @@ function loadSlider() {
     },
   });
 }
-//top rating
 
 //searchbar
 function searchbarfunc() {
@@ -148,7 +132,6 @@ function searchbarfunc() {
   let searchList = document.querySelector('#dropdownsearchbar');
   let filter = searchInp.value.toUpperCase();
   let item = searchList.getElementsByTagName("li");
-
   if (searchInp.value == '') {
     searchList.style.display = 'none';
   }else{
