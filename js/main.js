@@ -138,10 +138,12 @@ function searchbarfunc() {
     searchList.style.display = 'block';
     // sua lai UI search bar
     for (var i = 0; i < item.length; i++) {
-      let a = item[i].getElementsByTagName('a')[0];
+      let a = item[i].querySelector(".product p-1");
       let title = a.querySelector(".card-title");
+
       title = title.textContext || title.innerText;
       if (title.toUpperCase().indexOf(filter) > -1)
+      
         item[i].style.display = "block";
       else item[i].style.display = "none";
     }
