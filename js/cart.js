@@ -48,7 +48,6 @@ function decreaseQuantity(decreaseBtn) {
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onload = function() {
       if(this.status == 200) {
-        console.log(this.responseText);
         if(this.responseText != "error") {
           data = this.responseText.split(" ");
           updateTotalPrice(data[0]);
@@ -56,7 +55,6 @@ function decreaseQuantity(decreaseBtn) {
           let inp = decreaseBtn.nextElementSibling ;
           inp.value = data[2];
         }
-        else console.log("error");
       }
   }
   xhr.send("id=" + productID + "&decrease");
@@ -76,7 +74,6 @@ function increaseQuantity(increaseBtn) {
           let inp = increaseBtn.previousElementSibling;
           inp.value = data[2];
         }
-        else console.log("error");
       }
   }
   xhr.send("id=" + productID + "&increase");
@@ -95,7 +92,6 @@ function removeProduct(removeBtn) {
           updateTotalPrice(data[0]);
           updateNoItemInCart(data[1]);
         }
-        else console.log("error");
       }
   }
   xhr.send("id=" + productID + "&remove");

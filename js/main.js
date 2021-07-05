@@ -39,6 +39,67 @@ function updateNoItemInCart(noItem) {
   });
 }
 
+function searchFunc() {
+  let searchInp = document.querySelector("#searchbarinp");
+  let searchList = document.querySelector('#dropdownsearchbar');
+  if (searchInp.value == '') {
+    searchList.style.display = 'none';
+  }else{
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "ajaxSearch.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onload = function() {
+        if(this.status == 200) {
+          if(this.responseText != "no product") {
+            let arrProducts = JSON.parse(this.responseText);
+            searchList.innerHTML = renderSearchList(arrProducts);
+            searchList.style.display = 'block';
+          }
+          else {
+            searchList.innerHTML = '<li><div class="ml-5">No item found</div></li>';
+            searchList.style.display = 'block';
+          }
+        }
+    }
+    xhr.send("value=" + searchInp.value);
+  }
+}
+
+function getStarRating(rating) {
+  let ratingStar = "";
+  for (var i = 0; i < rating; i++)
+    ratingStar += '<span class="fa fa-star text-warning"></span>';
+  for (var i = 0; i < 5-rating; i++)
+    ratingStar += '<span class="fa fa-star"></span>';
+  return ratingStar;
+}
+
+function renderSearchList(arrProducts) {
+  let data = '';
+  arrProducts.forEach((product) => {
+    let format_price = product.price.toLocaleString() + " ₫";
+    let ratingStar = getStarRating(product.rating);
+    data += `
+    <li>
+      <div class='product p-1'>
+        <div class='card d-flex flex-row product shadow-sm rounded w-100 h-50'>
+          <a href = '#'><img class='card-img-top' src='${product.img1}' alt='Product Image'></a>
+          <div class='card-body'>
+            <h5 class='card-title rounded'><a href='#'>${product.name}</a></h5>
+            <div class='bottom-price-star'>
+              <div class='rating'>
+                ${ratingStar}<span>(${product.sold})</span>
+              </div>
+            </div>
+            <p class='text-danger mb-0 price'>${format_price}</p>
+          </div>
+        </div>
+      </div>
+    </li>`;
+  });
+  return data;
+}
+
 // UI
 let popUpNavItems = document.querySelectorAll(".pop-up-items")
 let fade = false;
@@ -124,34 +185,4 @@ function loadSlider() {
       }
     },
   });
-}
-
-//searchbar
-function searchbarfunc() {
-  let searchInp = document.querySelector("#searchbarinp");
-  let searchList = document.querySelector('#dropdownsearchbar');
-  let filter = searchInp.value.toUpperCase();
-  let item = searchList.getElementsByTagName("li");
-
-  searchInp.value;
-
-  AjaxSearch(searchInp.value);
-  //SELECT * FROM product, productimg WHERE , LIMIT 5
-
-  // if (searchInp.value == '') {
-  //   searchList.style.display = 'none';
-  // }else{
-  //   searchList.style.display = 'block';
-  //   // sua lai UI search bar
-  //   for (var i = 0; i < item.length; i++) {
-  //     let a = item[i].querySelector(".product p-1");
-  //     let title = a.querySelector(".card-title");
-
-  //     title = title.textContext || title.innerText;
-  //     if (title.toUpperCase().indexOf(filter) > -1)
-      
-  //       item[i].style.display = "block";
-  //     else item[i].style.display = "none";
-  //   }
-  // }
 }

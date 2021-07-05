@@ -10,10 +10,8 @@
         private $sold;
         private $conn;
 
-
         //constructor
-        public function __construct($conn)
-        {
+        public function __construct($conn){
             $this->conn = $conn;
         }
 
@@ -24,25 +22,31 @@
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sii", $type,$offset,$limit);
             $stmt->execute();
-
             $results = $stmt->get_result();
             return $results->fetch_all(MYSQLI_ASSOC);
         }
+
         public static function getTopRating(&$conn, $limit = 20) {
             $sql = "SELECT * FROM products p, productimage pimg WHERE p.productID = pimg.productID ORDER BY p.sold desc LIMIT ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i",$limit);
             $stmt->execute();
-
             $results = $stmt->get_result();
             return $results->fetch_all(MYSQLI_ASSOC);
         }
 
-        public static function getAllProducts(&$conn){
-          $sql = "SELECT * FROM products p, productimage pimg WHERE p.productID = pimg.productID";
+        public static function getProducts(&$conn, $value, $limit){
+          $value = "%". $value ."%";
+          $sql = "SELECT p.name, p.price, pimg.img1, p.rating, p.sold
+                  FROM products p, productimage pimg
+                  WHERE p.productID = pimg.productID and p.name like ?
+                  limit ?";
           $stmt = $conn->prepare($sql);
+          $stmt->bind_param("si", $value, $limit);
           $stmt->execute();
           $results = $stmt->get_result();
-          return $results->fetch_all(MYSQLI_ASSOC);
+          if ($results->num_rows != 0)
+            return $results->fetch_all(MYSQLI_ASSOC);
+          else return false;
         }
     }
