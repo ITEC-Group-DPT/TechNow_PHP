@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         }
         else if (stepIndex == 3) {
+            $('#smartwizard').smartWizard("stepState", [0,1,2], "disable");
             document.querySelector('.addressbook').classList.add('invisible')
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.add('finish')
