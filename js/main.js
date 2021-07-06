@@ -27,7 +27,9 @@
             updateNoItemInCart(this.responseText);
             popOver();
           }
-          else console.log("not signed in");
+          else{
+            // show a notice that user need to sign in
+          }
         }
     }
     xhr.send("id=" + productID + "&add");
@@ -42,7 +44,6 @@
   function searchFunc() {
     let searchInp = document.querySelector("#searchbarinp");
     let searchList = document.querySelector('#dropdownsearchbar');
-    console.log(searchInp.value);
     if (searchInp.value == '') searchList.style.display = 'none';
     else{
       if(searchList.style.display == 'none')  searchList.style.display = 'block';
