@@ -1,15 +1,12 @@
-  let products;
-  let addToCartBtns;
-  let numberItemCart;
+  let addToCartBtns = document.querySelectorAll(".add-cart");
+  let numberItemCart = document.querySelectorAll(".number-item-cart");
 
   $(document).ready(() => {
     loadSlider();
     addToCart();
-    numberItemCart = document.querySelectorAll(".number-item-cart");
   });
 
   function addToCart() {
-    addToCartBtns = document.querySelectorAll(".add-cart");
     addToCartBtns.forEach(addBtn => {
       addBtn.addEventListener("click", () => {
         addProductToCart(addBtn.id);

@@ -102,22 +102,12 @@
     xhr.open("POST", "ajaxCart.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
-        if(this.status == 200) {
+        if(this.status == 200)
           window.location.reload();
-          // console.log(this.responseText);
-          // if(this.responseText != "error") {
-          //   removeProductUI(removeBtn);
-          //   updateTotalPrice(0);
-          //   updateNoItemInCart(0);
-          // }
-          // else {
-          //   console.log("error");
-          // }
-        }
     }
     xhr.send("remove_all");
-
   }
+  
   // UI functions
   function removeProductUI(removeBtn) {
     fadeOutRemoveItem(removeBtn.parentElement.parentElement);
