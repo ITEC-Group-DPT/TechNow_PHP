@@ -42,9 +42,11 @@
   function searchFunc() {
     let searchInp = document.querySelector("#searchbarinp");
     let searchList = document.querySelector('#dropdownsearchbar');
-    if (searchInp.value == '') {
-      searchList.style.display = 'none';
-    }else{
+    console.log(searchInp.value);
+    if (searchInp.value == '') searchList.style.display = 'none';
+    else{
+      if(searchList.style.display == 'none')  searchList.style.display = 'block';
+      if(searchList.style.opacity == '0')   searchList.style.opacity = '1';
       let xhr = new XMLHttpRequest();
       xhr.open("POST", "ajaxSearch.php", true);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -53,12 +55,8 @@
             if(this.responseText != "no product") {
               let arrProducts = JSON.parse(this.responseText);
               searchList.innerHTML = renderSearchList(arrProducts);
-              searchList.style.display = 'block';
             }
-            else {
-              searchList.innerHTML = '<li><div class="ml-5">No item found</div></li>';
-              searchList.style.display = 'block';
-            }
+            else  searchList.innerHTML = '<li><div class="ml-5">No item found</div></li>';
           }
       }
       xhr.send("value=" + searchInp.value);
@@ -85,7 +83,7 @@
           <div class='card d-flex flex-row product shadow-sm rounded w-100 h-50'>
             <a href = '#'><img class='card-img-top' src='${product.img1}' alt='Product Image'></a>
             <div class='card-body'>
-              <h5 class='card-title rounded'><a href='#'>${product.name}</a></h5>
+              <h5 class='card-title rounded'>${product.name}</h5>
               <div class='bottom-price-star'>
                 <div class='rating'>
                   ${ratingStar}<span>(${product.sold})</span>
