@@ -9,7 +9,6 @@ $(document).ready(() => {
 
 function favoriteFunc(){
     let value = favorite.getAttribute("data-value");
-    if (value == '') return false;
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "ajaxFavorite.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
