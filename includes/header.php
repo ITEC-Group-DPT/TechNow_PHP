@@ -29,7 +29,6 @@
     echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   ?>
 </head>
-
 <body>
   <?php if ($current_page == "index") : ?>
     <div class="upper-nav">
