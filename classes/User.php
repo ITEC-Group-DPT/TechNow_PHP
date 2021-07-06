@@ -24,14 +24,17 @@
             }
             else return false;
         }
+
         private function checkValidUsername($username) {
             if (mb_strlen($username, "utf-8") < 5 || mb_strlen($username, "utf-8") > 20)
                 $this->errors["username"] = "Username must be between 5 and 20 characters";
         }
+
         private function checkValidEmail($email) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
                 $this->errors["email"] = "Email is invalid";
         }
+
         private function checkValidPasswords($password1, $password2) {
             if (mb_strlen($password1, "utf-8") < 6)
                 $this->errors["password1"] = "Password must be atleast 6 characters";
@@ -53,6 +56,7 @@
                 $this->createUser();
             }
         }
+
         private function createUser() {
             $sql = "INSERT INTO users (email, username, password) VALUES (?,?,?)";
             $stmt = $this->conn->prepare($sql);
@@ -70,6 +74,7 @@
             }
             else $this->errors["database"] = "Database error";
         }
+
         public function checkSignIn($email, $password) {
             $this->checkValidEmail($email);
             if(empty($this->errors)) {
@@ -86,6 +91,7 @@
                 else $this->errors["email"] = "Email not found";
             }
         }
+        
         private function logIn() {
             $_SESSION['signedIn'] = true;
             $_SESSION['userID'] = $this->userID;

@@ -1,6 +1,5 @@
 <?php
-    function chooseJSFile($page_name)
-    {
+    function chooseJSFile($page_name){
         $js = "js/";
         if ($page_name == "index")
             $js .= "main";
