@@ -1,6 +1,10 @@
 <?php
-  include "./includes/config.php";
+  include "includes/config.php";
   include 'includes/header.php';
+  include 'classes/Favorite.php';
+  if(Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id'])){
+    $icon = "<i class='fas fa-heart' id='fav-icon'></i>";
+  }else $icon = "<i class='far fa-heart' id='fav-icon'></i>";
 ?>
 
   <div class="container mt-5">
@@ -41,6 +45,7 @@
         <span class="product-price"> 3,990,000₫ </span>
         <br>
         <a class="btn btn-primary w-50 buy-now mt-3" href="#" role="button">Buy Now</a>
+        <a class="btn btn-danger w-50 favorite mt-3" href="#" role="button" id='favorite' data-value='<?php echo $_GET['id']; ?>'> <?php echo $icon; ?> Add to favorite</a>
       </div>
     </div> <!-- end of row -->
     <div class="row product-detail mt-5 w-100">
