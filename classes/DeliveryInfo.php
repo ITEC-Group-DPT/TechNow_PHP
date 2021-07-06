@@ -31,6 +31,14 @@ class DeliveryInfo {
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param('sssi', $address,$name,$phone,$userid);
         $stmt->execute();
+        $row = $this->conn->insert_id;
+        return $row;
+    }
+    function deleteDelivery($deliID){
+        $sql = 'delete from deliveryinfo where deliveryID = ?';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('i', $deliID);
+        $stmt->execute();
     }
 }
 
@@ -46,6 +54,11 @@ elseif (isset($_POST['update'])){
 }
 elseif (isset($_POST['create'])){
     $book = new DeliveryInfo($conn);
-    $book->createDeliveryInfo($_POST['name'],$_POST['address'],$_POST['phone'],$_POST['userid']);
+    $id = $book->createDeliveryInfo($_POST['name'],$_POST['address'],$_POST['phone'],$_POST['userid']);
+    echo $id;
+}
+elseif (isset($_POST['delete'])){
+    $book = new DeliveryInfo($conn);
+    $book->deleteDelivery($_POST['deliID']);
 }
 ?>

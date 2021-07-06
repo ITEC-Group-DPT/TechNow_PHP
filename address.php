@@ -44,8 +44,8 @@ include 'includes/header.php';
     </div> -->
   </div>
   </div>
-  <div class='text-center'>
-    <button type="button" class="btn btn-outline-primary p-1"><i class="bi bi-file-plus"></i> Create new address</button>
+  <div class='text-center mt-3 container'>
+    <button type="button" class="btn btn-outline-primary p-1 create"><i class="bi bi-file-plus"></i> Create new address</button>
   </div>
 <?php endif; ?>
 

@@ -2,3 +2,14 @@ label{
     margin: 0.2rem 0.2rem !important;
     margin-top: 0.5rem !important;
 }
+
+.shrinkStart {
+    height: 200px;
+    transform: scale(1);
+    transition: transform 500ms, height 800ms;
+  }
+  
+  .shrinkFinish {
+    height: 0px;
+    transform: scale(0);
+  }
