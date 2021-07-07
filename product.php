@@ -35,16 +35,16 @@
                 <?php endif; ?>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="image d-block w-100 h-100" src="<?php echo $res['img1'] ?>" alt="First slide">
+                        <img class="image d-block" src="<?php echo $res['img1'] ?>">
                     </div>
                     <?php if (!empty($res['img2'])): ?>
                         <div class="carousel-item">
-                            <img class="image d-block w-100 h-100" src="<?php echo $res['img2'] ?>" alt="Second slide">
+                            <img class="image d-block" src="<?php echo $res['img2'] ?>">
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($res['img3'])): ?>
                         <div class="carousel-item">
-                            <img class="image d-block w-100 h-100" src="<?php echo $res['img3'] ?>" alt="Third slide">
+                            <img class="image d-block" src="<?php echo $res['img3'] ?>">
                         </div>
                     <?php endif; ?>
                 </div>
