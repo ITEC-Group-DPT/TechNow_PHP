@@ -313,6 +313,7 @@ img.card-img-top {
 .card-product-wrapper .product:hover, .card-product-wrapper-ts .product:hover{
     transform: scale(1.03);
     transition: all 350ms;
+    text-decoration: none !important;
     border-width: 0px !important;
 }
 
@@ -327,6 +328,7 @@ img.card-img-top {
 .card-product-wrapper{
     padding: 5px 5px !important;
     border:0.5px solid rgb(0,0,0,0.25);
+    text-decoration: none;
 }
 
 .card-product-wrapper:nth-child(1)
@@ -352,6 +354,24 @@ img.card-img-top {
 ,.card-product-wrapper:nth-child(8) {
     border-right: 0px !important;
 }
+
+.card-product-wrapper >*,.card-product-wrapper-ts >* {
+    color: black;
+}
+
+.card-product-wrapper:hover,.card-product-wrapper-ts:hover  {
+    text-decoration: none !important;
+}
+
+/* a {
+    text-decoration: none !important;
+    color: black !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+    color: black !important;
+} */
 
 .card-product-wrapper-ts {
     padding: 5px 5px !important;

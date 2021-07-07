@@ -63,16 +63,6 @@ p, a,li,span {
     font-size: 0.6rem !important;
 }
 
-a {
-    text-decoration: none !important;
-    color: black !important;
-}
-
-a:hover {
-    text-decoration: none !important;
-    color: black !important;
-}
-
 @media only screen and (max-width: 992px) {
     .nav-item.main {
         margin: 0 !important;
