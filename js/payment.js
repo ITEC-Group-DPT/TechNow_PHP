@@ -74,7 +74,7 @@
                         return;
                     }
                 }
-                document.querySelector(".fillinput").classList.add('d-none') //alert, empty input 
+                document.querySelector(".fillinput").classList.add('d-none') //alert, empty input
 
                 if (cartList.length != 0) {
                     toolbarbtn.classList.remove('disabled')
@@ -84,14 +84,15 @@
                     $('#smartwizard').smartWizard("stepState", [3], "disable");
                 }
 
-            }
-            else if (stepIndex == 3) {
-                document.querySelector('.addressbook').classList.add('invisible')
-                let toolbarbtn = document.querySelector(".sw-btn-next")
-                toolbarbtn.classList.add('finish')
-                toolbarbtn.innerHTML = 'Back to Homepage'
-                updateDeliInfoAndCreateOrder()
-                
+        }
+        else if (stepIndex == 3) {
+            $('#smartwizard').smartWizard("stepState", [0,1,2], "disable");
+            document.querySelector('.addressbook').classList.add('invisible')
+            let toolbarbtn = document.querySelector(".sw-btn-next")
+            toolbarbtn.classList.add('finish')
+            toolbarbtn.innerHTML = 'Back to Homepage'
+            updateDeliInfoAndCreateOrder()
+
 
                 // let xhttp = new XMLHttpRequest();
                 // xhttp.open("POST", "classes/DeliveryInfo.php", true);
@@ -109,7 +110,7 @@
                 // document.querySelector('.addressbook').classList.remove('invisible')
                 let addressbook = document.getElementsByName('addressbook')
                 for (const input of addressbook) {
-                    input.removeAttribute("disabled");   
+                    input.removeAttribute("disabled");
                 }
                 let toolbarbtn = document.querySelector(".sw-btn-next")
                 toolbarbtn.classList.remove('finish')
@@ -132,7 +133,7 @@
         let country = inputarr[5].value
         address = address + ', ' + city + ', ' + state + ', ' + country
         console.log(name, phone, address);
-        //insert in order 
+        //insert in order
         // removeAllcartinDTB();
         let str = 'create'
         let userid = parseInt(document.querySelector("[userid]").getAttribute('userid'), 10)
@@ -171,7 +172,7 @@
             xhttp.send("getdelivery=1&user_id=" + user_id);
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
-                
+
                     if (this.responseText != 'No rows') {
                         let deliarr = JSON.parse(this.response)
                         // console.log(deliarr)
@@ -289,8 +290,8 @@
 
             <div class="product-info ml-2 d-flex align-items-center">
                 <div class="product-info-wrapper">
-            
-                <div class="product-name-wrapper">           
+
+                <div class="product-name-wrapper">
                     <p class="product-name">${product.name}</p>
                 </div>
 
@@ -315,9 +316,9 @@
                     <input type="number" class="quantity-input" id="${product.productID}" value="${product.quantity}" step="1" min="1" disabled name="quantity">
                 </div>
                 <div class="px-2 text-center"><i class="fas fa-times"></i></div>
-                
 
-                <div class="product-price-wrapper d-flex align-items-center">          
+
+                <div class="product-price-wrapper d-flex align-items-center">
                     <p href="#" class="product-price m-0">${product.price.toLocaleString()}₫</p>
                 </div>
                 </div>
