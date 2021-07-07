@@ -1,0 +1,117 @@
+.card-product-wrapper .product:hover, .card-product-wrapper-ts .product:hover{
+    transform: scale(1.03);
+    transition: all 350ms;
+    text-decoration: none !important;
+    border-width: 0px !important;
+}
+.card-product-wrapper .product:hover {
+    box-shadow: 1px 1px 9px rgb(0 0 0 / 25%);
+}
+
+.card-product-wrapper .product, .card-product-wrapper-ts .product {
+    border-width: 0 !important;
+}
+
+.card-product-wrapper{
+    padding: 5px 5px !important;
+    border:0.5px solid rgb(0,0,0,0.25);
+    text-decoration: none;
+}
+
+.card-product-wrapper:nth-child(1)
+,.card-product-wrapper:nth-child(2),
+.card-product-wrapper:nth-child(3),
+.card-product-wrapper:nth-child(4){
+    margin-top: 5px;
+    border-top: 0px !important;
+    border-left: 0px !important;
+}
+
+.card-product-wrapper:nth-child(5)
+,.card-product-wrapper:nth-child(6),
+.card-product-wrapper:nth-child(7),
+.card-product-wrapper:nth-child(8) {
+    margin-bottom: 5px;
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-bottom: 0px !important;
+}
+
+.card-product-wrapper:nth-child(4)
+,.card-product-wrapper:nth-child(8) {
+    border-right: 0px !important;
+}
+
+.card-product-wrapper >*,.card-product-wrapper-ts >* {
+    color: black;
+}
+
+.card-product-wrapper:hover,.card-product-wrapper-ts:hover  {
+    text-decoration: none !important;
+}
+
+.card-product-wrapper-ts {
+    padding: 5px 5px !important;
+    border:0.5px solid rgb(0,0,0,0.25);
+    margin: 0 15px;
+}
+
+.img-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+}
+
+.product {
+    cursor: pointer;
+    border-radius: 0 !important;
+}
+
+a.product {
+    text-decoration: none;
+    color: black;
+}
+
+a.product:hover{
+  text-decoration: none;
+  color: black;
+}
+
+img.card-img-top {
+    padding-top: 10px;
+    max-height: 200px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+h5.card-title.rounded{
+    height: 90px;
+    padding: 0;
+    margin: 0;
+}
+
+.rating > * {
+    font-size: 0.7rem;
+}
+
+.add-cart {
+    font-size: 1.8rem;
+    position: absolute;
+    bottom: 20px;
+    right: 15px;
+}
+.add-favorite{
+    font-size: 1.8rem;
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}
+
+.add-cart:hover, .add-favorite:hover {
+    animation: float 1s ease-in-out infinite;
+}

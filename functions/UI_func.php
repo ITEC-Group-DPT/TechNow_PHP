@@ -17,7 +17,7 @@
             $format_price = number_format($product['price'],0);
             echo "<a class='col-lg-3 col-6 card-product-wrapper' href='product.php?id={$product['productID']}'>
                     <div class='card product'>
-                      <div ' class='img-card'>
+                      <div class='img-card'>
                         <img class='card-img-top' src='{$product['img1']}' alt='Card image cap'>
                       </div>
                       <div class='card-body h-75'>
@@ -61,4 +61,33 @@
       }
 
     }
+
+    function renderFavoriteList($list) {
+      foreach ($list as $product) {
+          $ratingStar = getStarRating(intval($product['rating']));
+          $format_price = number_format($product['price'],0);
+          echo "<a class='col-lg-6 offset-lg-3 card-product-wrapper' href='product.php?id={$product['productID']}'>
+                  <div class='row'>
+                    <div class='col-md-2 img-card'>
+                      <img class='card-img-top' src='{$product['img1']}' alt='Card image cap'>
+                    </div>
+                    <div class='col-md-8 card-body h-75'>
+                      <h5 class='card-title rounded'>{$product['name']}</h5>
+                      <div class='rating'>
+                        {$ratingStar}
+                        <span>({$product['sold']})</span>
+                      </div>
+                      <p href='#' class='mb-0 price'>{$format_price} đ</p>
+                      <div class = 'add-cart' id='{$product['productID']}'>
+                        <i class='bi bi-cart2'></i>
+                      </div>
+                      <div class='add-favorite' id='favorite' data-value='{$product['productID']}'>
+                        <i class='bi bi-heart-fill text-danger' id='fav-icon'></i>
+                      </div>
+                    </div>
+                  </div>
+                </a>";
+        }
+  }
+
 ?>
