@@ -109,7 +109,7 @@
     }
 
     public function decreaseQuantity($itemID){
-      if ($this->getQuantity($itemID) ==1) return false;
+      if ($this->getQuantity($itemID) == 1) return false;
       $quantity = $this->getQuantity($itemID) - 1;
       $stmt = $this->conn->prepare("UPDATE cartdetails
                                   set quantity = ?

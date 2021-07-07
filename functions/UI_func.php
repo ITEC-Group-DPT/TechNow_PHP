@@ -1,24 +1,19 @@
 <?php
     //helper
-    function getStarRating($rating)
-    {
+    function getStarRating($rating){
       $ratingStar = "";
-
       for ($i = 0; $i < $rating; $i++) {
         $ratingStar .= '<span class="fa fa-star text-warning"></span>';
       }
-
       for ($i = 0; $i < 5-$rating; $i++) {
         $ratingStar .= '<span class="fa fa-star"></span>';
       }
-
       return $ratingStar;
     }
+
     function renderProductCategory($categories) {
         foreach ($categories as $product) {
-
             $ratingStar = getStarRating(intval($product['rating']));
-
             $format_price = number_format($product['price'],0);
             echo "<a class='col-lg-3 col-6 card-product-wrapper' href='product.php?id={$product['productID']}'>
                     <div class='card product'>
@@ -40,12 +35,10 @@
                   </a>";
           }
     }
-    function renderTopRating($list)
-    {
+
+    function renderTopRating($list){
       foreach ($list as $product) {
-
         $format_price = number_format($product['price'],0);
-
         $ratingStar = getStarRating(intval($product['rating']));
         echo "<a class='product card-product-wrapper-ts' href='product.php?id={$product['productID']}'>
                 <div class='card product rounded w-100 h-100'>
@@ -68,3 +61,4 @@
       }
 
     }
+?>

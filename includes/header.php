@@ -1,10 +1,6 @@
-<?php
-include "./functions/header_func.php";
-?>
-
+<?php include "./functions/header_func.php"; ?>
 <!doctype html>
 <html lang="en">
-
 <head>
   <title>TechNow</title>
   <!-- Required meta tags -->
@@ -28,47 +24,39 @@ include "./functions/header_func.php";
   <!-- Slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
   <?php
-  if ($current_page == "payment")
-    echo '<link rel="stylesheet" href="css/cart.css">';
-  echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />'
+    if ($current_page == "payment")
+      echo '<link rel="stylesheet" href="css/cart.css">';
+    echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   ?>
 </head>
-
 <body>
   <?php if ($current_page == "index") : ?>
     <div class="upper-nav">
       <div class="upper-container">
         <div class="row">
-
           <a class="col-md-3 logo-wrapper text-center pt-1" href="index.php">
             <img src="img/logo_sub.webp" style="width: 165px; height: 34px;" alt="">
           </a>
-
           <div class="col-md-6 d-flex search-wrapper justify-content-center align-items-center">
-
             <div class="dropdown input-group w-100 ">
-
-              <input type="text" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
-              <ul class="dropdown-menu w-100" id="dropdownsearchbar">
-
+              <input type="text" onkeyup="searchFunc()" onfocus="searchFunc()" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
+              <ul class="dropdown-menu w-100" id="dropdownsearchbar" style="display: none;">
+                <!-- echo product list here using JS -->
               </ul>
             </div>
-
           </div>
 
           <div class="col-md-3 d-flex cart-user-wrapper align-items-center justify-content-center pt-2 pt-md-0">
-
             <a class="cart-btn menu-upper d-flex align-items-center justify-content-center" href="cart.php">
               <div class="cart-icon-wrapper mr-2">
                 <button type="button" class="btn rounded-circle icon-upper p-0">
                   <i class="bi bi-cart fa-lg" style="color: black;"></i>
                 </button>
                 <span class="badge badge-pill badge-danger number-item-cart">
-                  <?php
-                  if (isset($cart))
-                    echo $cart->getTotalQuantity();
-                  else echo "0";
-                  ?></span>
+                  <?php if (isset($cart))
+                          echo $cart->getTotalQuantity();
+                        else echo "0"; ?>
+                </span>
               </div>
               <p class="text-center m-0 name" style="font-size: 15px;">Cart</p>
             </a>
@@ -103,7 +91,6 @@ include "./functions/header_func.php";
                 <p class="text-center m-0 name" style="font-size: 15px;">Login</p>
               </a>
             <?php endif; ?>
-
           </div>
         </div>
       </div>
@@ -112,33 +99,28 @@ include "./functions/header_func.php";
 
   <?php if ($current_page != "signin" && $current_page != "signup") : ?>
     <nav class="navbar sticky-top navbar-expand-md navbar-dark nav-footer-theme">
-
       <div class="nav-wrapper-mobile d-flex">
-
         <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="nav-item popup ml-auto pr-0 mr-0" id="pop-up-mobile" style="display: none;">
-
           <ul class="navbar-nav pop-up-items d-flex flex-row h-100" style="display: none !important;">
             <li class="nav-item">
               <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="./pages/Cart/cart.html">
                 <div class="cart-icon-wrapper mr-2">
                   <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
-
                     <i class="bi bi-cart fa-1x text-white" style="color: black;"></i>
                   </button>
-                  <span class="badge badge-pill badge-danger number-item-cart"><?php
-                                                                                if (isset($cart))
-                                                                                  echo $cart->getTotalQuantity();
-                                                                                else echo "0";
-                                                                                ?></span>
+                  <span class="badge badge-pill badge-danger number-item-cart">
+                    <?php
+                      if (isset($cart))
+                        echo $cart->getTotalQuantity();
+                      else echo "0"; ?>
+                  </span>
                 </div>
                 <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>
               </a>
             </li>
-
             <li class="nav-item">
               <?php if ($_SESSION['signedIn']) : ?>
                 <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -170,7 +152,6 @@ include "./functions/header_func.php";
               <?php endif; ?>
             </li>
           </ul>
-
         </div>
       </div>
 
@@ -211,9 +192,9 @@ include "./functions/header_func.php";
                       </button>
                       <span class="badge badge-pill badge-danger number-item-cart">
                         <?php
-                        if (isset($cart))
-                          echo $cart->getTotalQuantity();
-                        else echo "0";
+                          if (isset($cart))
+                            echo $cart->getTotalQuantity();
+                          else echo "0";
                         ?></span>
                     </div>
                     <p class="text-center m-0 name text-white" style="font-size: 15px;">Cart</p>
@@ -254,6 +235,5 @@ include "./functions/header_func.php";
           </ul>
         </div>
       </div>
-
     </nav>
   <?php endif; ?>

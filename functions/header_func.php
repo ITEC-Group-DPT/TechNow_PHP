@@ -1,12 +1,9 @@
 <?php
-    function chooseCSSFile($page_name)
-    {
+    function chooseCSSFile($page_name){
         $css = "css/";
-        if ($page_name == "index")  
+        if ($page_name == "index")
             $css .= "style";
-        else
-            $css .= $page_name;
-        
+        else $css .= $page_name;
         $css .= ".css";
         echo $css;
     }
