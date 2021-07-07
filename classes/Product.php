@@ -16,16 +16,21 @@
             $this->conn = $conn;
         }
 
-        public function getProductByID($id) {
-            $sql = "SELECT FROM products WHERE productID = ?";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows == 1) {
-                return $result->fetch_assoc();
+        public function getProduct() {
+            if(isset($_GET['id'])) {
+                $sql = "SELECT * FROM products p, productimage i WHERE p.productID = ? AND p.productID = i.productID";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("i", $_GET['id']);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows == 1) {
+                    return $result->fetch_assoc();
+                }
+                else return false;
             }
-            else return false;
+            else {
+                return false;
+            }
         }
 
         //static

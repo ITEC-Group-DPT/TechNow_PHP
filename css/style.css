@@ -198,7 +198,7 @@ h5{
 
 h5.card-title.rounded{
   height: 90px;
-  font-weight: 600;
+  /* font-weight: 600; */
   padding: 0;
   margin: 0;
 }
@@ -368,6 +368,16 @@ img.card-img-top {
 .card-product-wrapper:nth-child(4)
 ,.card-product-wrapper:nth-child(8) {
     border-right: 0px !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: black !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+    color: black !important;
 }
 
 .card-product-wrapper-ts {
