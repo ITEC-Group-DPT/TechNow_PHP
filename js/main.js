@@ -1,5 +1,7 @@
   let addToCartBtns = document.querySelectorAll(".add-cart");
   let numberItemCart = document.querySelectorAll(".number-item-cart");
+  let popUpNavItems = document.querySelectorAll(".pop-up-items")
+  let fade = false;
 
   $(document).ready(() => {
     loadSlider();
@@ -101,8 +103,6 @@
 
   // UI
   $(document).scroll(function () {
-    let popUpNavItems = document.querySelectorAll(".pop-up-items")
-    let fade = false;
     let y = $(this).scrollTop();
     if (y > 100 && fade == false) {
       fadeIn(popUpNavItems);
