@@ -13,9 +13,9 @@
     }
 
     if(isset($_GET['id'])){
-        if(Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id']))
-            $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
-        else $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
+        if(!isset($_SESSION['userID']) || !Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id']))
+            $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
+        else $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
     }
 ?>
 

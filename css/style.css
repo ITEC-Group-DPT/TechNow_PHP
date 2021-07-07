@@ -529,12 +529,26 @@ div#carouselId {
       height: 5rem;
   }
   #dropdownsearchbar .card{
-      height: 5.5rem !important;
+      height: 6.5rem !important;
   }
 
   #dropdownsearchbar .product:hover {
       transform: none
   }
+
+  a.product {
+      text-decoration: none;
+      color: black;
+  }
+
+  a.product:hover{
+    text-decoration: none;
+    color: black;
+}
+
+#dropdownsearchbar {
+    padding: 0 !important;
+}
 
 @media only screen and (max-width: 992px) {
     .card-body {

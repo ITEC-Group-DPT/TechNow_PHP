@@ -117,6 +117,13 @@ h5.card-title.rounded {
 .product-wrapper {
     position: relative;
     transition: all 1000ms;
+    text-decoration: none;
+    color: black;
+}
+
+.product-wrapper:hover {
+    text-decoration: none;
+    color: black;
 }
 
 .closeSlide {

@@ -54,7 +54,7 @@
 
         public static function getProducts(&$conn, $value, $limit){
           $value = "%". $value ."%";
-          $sql = "SELECT p.name, p.price, pimg.img1, p.rating, p.sold
+          $sql = "SELECT p.productID, p.name, p.price, pimg.img1, p.rating, p.sold
                   FROM products p, productimage pimg
                   WHERE p.productID = pimg.productID and p.name like ?
                   limit ?";

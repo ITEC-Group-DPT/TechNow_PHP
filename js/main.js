@@ -8,7 +8,7 @@
 
   function addToCart() {
     addToCartBtns.forEach(addBtn => {
-      addBtn.addEventListener("click", () => {
+      addBtn.addEventListener("click", (e) => {
         addProductToCart(addBtn.id);
       });
     });
@@ -77,9 +77,11 @@
       let ratingStar = getStarRating(product.rating);
       data += `
       <li>
-        <div class='product p-1'>
-          <div class='card d-flex flex-row product shadow-sm rounded w-100 h-50'>
-            <a href = '#'><img class='card-img-top' src='${product.img1}' alt='Product Image'></a>
+        <a class='product' href='product.php?id=${product.productID}'>
+          <div class='card d-flex flex-row product shadow-sm rounded w-100'>
+            <div>
+              <img class='card-img-top' src='${product.img1}' alt='Product Image'>
+            </div>
             <div class='card-body'>
               <h5 class='card-title rounded'>${product.name}</h5>
               <div class='bottom-price-star'>
@@ -90,7 +92,7 @@
               <p class='text-danger mb-0 price'>${format_price}</p>
             </div>
           </div>
-        </div>
+        </a>
       </li>`;
     });
     return data;
