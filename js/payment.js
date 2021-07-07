@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
         },
         keyboardSettings: {
-            keyNavigation: true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+            keyNavigation: false, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
             keyLeft: [37], // Left key code
             keyRight: [39] // Right key code
         },
@@ -62,37 +62,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 input.setAttributeNode(attr);
             }
 
-            let inputarr = document.querySelectorAll('.tab-content input')
-
-            for (const input of inputarr) {
-                if (input.value == '') {
-                    toolbarbtn.classList.add('disabled')
-                    document.querySelector(".fillinput").classList.remove('d-none')
-                    $('#smartwizard').smartWizard("stepState", [3], "disable");
-                    return;
-                }
-            }
-            document.querySelector(".fillinput").classList.add('d-none') //alert, empty input 
-
-            if (cartList.length != 0) {
+            let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
+            if (checkFillinput(inputarr) && cartList.length != 0){
+                document.querySelector(".fillinput").classList.add('d-none') 
                 toolbarbtn.classList.remove('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "enable");
-            } else {
+            }
+            else{
+                document.querySelector(".fillinput").classList.remove('d-none') 
                 toolbarbtn.classList.add('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "disable");
             }
-
         }
         else if (stepIndex == 3) {
             document.querySelector('.addressbook').classList.add('invisible')
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.add('finish')
+            toolbarbtn.classList.remove('disabled')
             toolbarbtn.innerHTML = 'Back to Homepage'
             updateDeliInfoAndCreateOrder()
+            $('#smartwizard').smartWizard("stepState", [0,1,2], "disable");
 
 
             // let xhttp = new XMLHttpRequest();
-            // xhttp.open("POST", "classes/DeliveryInfo.php", true);
+            // xhttp.open("POST", "ajaxDeliveryInfo.php", true);
             // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             // xhttp.send("orderinfo="+ JSON.stringify(productIDs));
 
@@ -120,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 });
 
-function updateDeliInfoAndCreateOrder() {
+async function updateDeliInfoAndCreateOrder() {
     let inputarr = document.querySelectorAll('.tab-content input')
     let name = inputarr[0].value
     let phone = inputarr[1].value
@@ -135,44 +128,48 @@ function updateDeliInfoAndCreateOrder() {
     let str = 'create'
     let userid = parseInt(document.querySelector("[userid]").getAttribute('userid'), 10)
     if (selectedaddress != 0) str = 'update'
-
-    let xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "classes/DeliveryInfo.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}=1`);
-
+    let alterDeli = new XMLHttpRequest();
+    alterDeli.open("POST", "ajaxDeliveryInfo.php", true);
+    alterDeli.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    alterDeli.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}`);
+    alterDeli.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(`${str} address`);
+        }
+    };
 
     let productIDs = []
     for (const product of cartList) {
         let arr = [product.productID, product.quantity]
         productIDs.push(arr)
     }
-    console.log(productIDs);
-    console.log(JSON.stringify(productIDs));
     str = "order"
-    xhttp.open("POST", "classes/Order.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&${str}=1`);
-
-    xhttp.onreadystatechange = function () {
+    let alterOrder = new XMLHttpRequest();
+    alterOrder.open("POST", "ajaxOrder.php", true);
+    alterOrder.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    alterOrder.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&${str}`);
+    alterOrder.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            if (this.responseText == 'success') {
-                xhttp.open("POST", "ajaxCart.php", true);
-                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send(`remove_all`);
-            }
+            console.log(`${str} ${JSON.stringify(productIDs)}`);
         }
     };
     
-
+    let removeCart = new XMLHttpRequest();
+    removeCart.open("POST", "ajaxCart.php", true);
+    removeCart.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    removeCart.send(`remove_all`);
+    removeCart.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('remove all');
+        }
+    };
 }
 
 
 async function displayDeliverybook(user_id) {
     let myPromise = new Promise(function (myResolve, myReject) {
         let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "classes/DeliveryInfo.php", true);
+        xhttp.open("POST", "ajaxDeliveryInfo.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("getdelivery=1&user_id=" + user_id);
         xhttp.onreadystatechange = function () {
@@ -342,4 +339,12 @@ function updateTotalPrice(cartList) {
         sumPrice += product.price * product.quantity;
     });
     totalPrice.innerText = sumPrice.toLocaleString() + "₫";
+}
+function checkFillinput(arrinput) {
+    for (const input of arrinput) {
+        if (input.value == '') {
+            return false; //least 1 empty fill
+        }
+    } 
+    return true //no empty fill
 }
