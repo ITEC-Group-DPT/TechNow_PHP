@@ -1,4 +1,6 @@
-numberItemCart = document.querySelectorAll(".number-item-cart");
+let numberItemCart = document.querySelectorAll(".number-item-cart");
+let favorite = document.querySelector('#favorite');
+let favIcon = document.querySelector('#fav-icon');
 addToCart();
 
 function addToCart() {
@@ -53,8 +55,7 @@ function popOver() {
       }, 4000);
     }
   }
-let favorite = document.querySelector('#favorite');
-let favIcon = document.querySelector('#fav-icon');
+
 
 $(document).ready(() => {
     favorite.addEventListener("click", () => {
@@ -70,12 +71,14 @@ function favoriteFunc(){
     xhr.onload = function() {
         if(this.status == 200) {
             if(this.responseText == "added to favorite") {
-                favIcon.classList.remove("far");
-                favIcon.classList.add("fas");
+                favIcon.classList.remove("bi-heart");
+                favIcon.classList.add("bi-heart-fill");
+                favIcon.classList.add("text-danger");
             }
             else{
-                favIcon.classList.remove("fas");
-                favIcon.classList.add("far");
+                favIcon.classList.remove("bi-heart-fill");
+                favIcon.classList.remove("text-danger");
+                favIcon.classList.add("bi-heart");
             }
         }
     }

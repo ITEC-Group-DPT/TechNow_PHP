@@ -1,6 +1,7 @@
 <?php
     include "./includes/config.php";
     include "./classes/Product.php";
+    include 'classes/Favorite.php';
     include "./functions/UI_func.php";
     include "./includes/header.php";
 
@@ -9,6 +10,12 @@
     if ($res != false) {
         $ratingStar = getStarRating(intval($res['rating']));
         $format_price = number_format($res['price'],0);
+    }
+
+    if(isset($_GET['id'])){
+        if(Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id']))
+            $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
+        else $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
     }
 ?>
 
@@ -67,7 +74,7 @@
                 <hr class="mt-5">
                 <p class='price text-right'><?php echo $format_price; ?> đ</p>
                 <div class="functions d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-primary add-favorite mr-3" id="<?php echo $res['productID']; ?>"><i class="bi bi-heart"></i> Add to Favorite</button>
+                    <button type="button" class="btn btn-primary add-favorite mr-3" id='favorite' data-value="<?php echo $res['productID']; ?>"><?php echo $icon; ?> Add to Favorite</button>
                     <button type="button" class="btn btn-primary add-cart" id="<?php echo $res['productID']; ?>"><i class="bi bi-cart-plus"></i> Add to Cart</button>
                 </div>
 
