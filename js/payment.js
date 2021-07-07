@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 input.setAttributeNode(attr);
             }
 
-            let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
+            let inputarr = document.querySelectorAll('#smartwizard #smartwizard .tab-content input.form-control.form-control')
             if (checkFillinput(inputarr) && cartList.length != 0){
                 document.querySelector(".fillinput").classList.add('d-none') 
                 toolbarbtn.classList.remove('disabled')
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 async function updateDeliInfoAndCreateOrder() {
-    let inputarr = document.querySelectorAll('.tab-content input')
+    let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
     let name = inputarr[0].value
     let phone = inputarr[1].value
     let address = inputarr[2].value
@@ -209,7 +209,7 @@ async function displayDeliverybook(user_id) {
             selectedaddress = id;
             if (id != 0) //not create new address
             {
-                let inputarr = document.querySelectorAll('.tab-content input')
+                let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
                 inputarr[0].value = document.getElementById('name' + id).innerText
                 inputarr[1].value = document.getElementById('phone' + id).innerText
 
@@ -220,7 +220,7 @@ async function displayDeliverybook(user_id) {
                 inputarr[5].value = address[3]
             }
             else { //empty input to create new address
-                let inputarr = document.querySelectorAll('.tab-content input')
+                let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
                 for (const input of inputarr) {
                     input.value = ''
                 }
