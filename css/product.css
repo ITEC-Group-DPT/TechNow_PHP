@@ -36,20 +36,20 @@ p {
 }
 
 .product-title {
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 .add-favorite {
     background-color: transparent !important;
     border-color: transparent !important;
-    font-size: 0.9rem !important;
+    font-size: 1rem !important;
     color: black !important;
 }
 
 .add-cart {
     background-color: #333333 !important;
     border-color: #333333 !important;
-    font-size: 0.8rem !important;
+    font-size: 0.9rem !important;
     padding: 0.7rem 4rem !important;
 }
 

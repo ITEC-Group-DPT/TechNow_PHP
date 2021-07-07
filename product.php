@@ -27,16 +27,16 @@
                     </ol>
                 <?php endif; ?>
                 <div class="carousel-inner">
-                    <div class="carousel-item w-100 active">
+                    <div class="carousel-item active">
                         <img class="image d-block w-100 h-100" src="<?php echo $res['img1'] ?>" alt="First slide">
                     </div>
                     <?php if (!empty($res['img2'])): ?>
-                        <div class="carousel-item w-100">
+                        <div class="carousel-item">
                             <img class="image d-block w-100 h-100" src="<?php echo $res['img2'] ?>" alt="Second slide">
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($res['img3'])): ?>
-                        <div class="carousel-item w-100">
+                        <div class="carousel-item">
                             <img class="image d-block w-100 h-100" src="<?php echo $res['img3'] ?>" alt="Third slide">
                         </div>
                     <?php endif; ?>
