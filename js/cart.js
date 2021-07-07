@@ -14,21 +14,24 @@
   function addListeners() {
     removeBtns = document.querySelectorAll(".remove-btn");
     removeBtns.forEach(removeBtn => {
-      removeBtn.addEventListener("click", () => {
+      removeBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         removeProduct(removeBtn);
       });
     });
 
     increaseBtns = document.querySelectorAll(".quantity-btn-plus");
     increaseBtns.forEach(increaseBtn => {
-      increaseBtn.addEventListener("click", () => {
+      increaseBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         increaseQuantity(increaseBtn);
       });
     });
 
     decreaseBtns = document.querySelectorAll(".quantity-btn-minus");
     decreaseBtns.forEach(decreaseBtn => {
-      decreaseBtn.addEventListener("click", () => {
+      decreaseBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         decreaseQuantity(decreaseBtn);
       });
     });
@@ -107,7 +110,7 @@
     }
     xhr.send("remove_all");
   }
-  
+
   // UI functions
   function removeProductUI(removeBtn) {
     fadeOutRemoveItem(removeBtn.parentElement.parentElement);

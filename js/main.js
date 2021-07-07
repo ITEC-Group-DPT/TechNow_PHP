@@ -9,6 +9,7 @@
   function addToCart() {
     addToCartBtns.forEach(addBtn => {
       addBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         addProductToCart(addBtn.id);
       });
     });
