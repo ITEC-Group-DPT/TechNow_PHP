@@ -14,7 +14,7 @@
     //var_dump($res);
 ?>
 
-<div class="main-container mt-5" style="min-height: 70vh;">
+<div class="main-container mt-5" style="min-height: 80vh;">
     <div class="row">
     <?php if ($res != false): ?>
         <div class="col-md-6">
@@ -52,13 +52,15 @@
                     <?php echo $ratingStar; ?>
                     <span><?php echo $res['sold']; ?></span>
                 </div>
+                <h5 class="product-title mt-4">Description</h5>
                 <p class="product-desc"><?php echo $res['description'] ?></p>
+                <h5 class="product-title mt-4">Specs</h5>
                 <p class="product-spec"><?php echo $res['spec'] ?></p>
-                <p class='mb-0 price'><?php echo $format_price; ?> đ</p>
-                <div class="functions d-flex">
+                <p class='price mt-5 text-right'><?php echo $format_price; ?> đ</p>
 
-                <button type="button" class="btn btn-primary add-favorite" id="<?php echo $res['productID']; ?>"><i class="bi bi-heart"></i> Add to Favorite</button>
-                <button type="button" class="btn btn-primary add-cart" id="<?php echo $res['productID']; ?>"><i class="bi bi-cart-plus"></i> Add to Cart</button>
+                <div class="functions d-flex justify-content-end mt-3">
+                    <button type="button" class="btn btn-primary add-favorite mr-3" id="<?php echo $res['productID']; ?>"><i class="bi bi-heart"></i> Add to Favorite</button>
+                    <button type="button" class="btn btn-primary add-cart" id="<?php echo $res['productID']; ?>"><i class="bi bi-cart-plus"></i> Add to Cart</button>
                 </div>
 
         </div>

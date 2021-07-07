@@ -8,8 +8,16 @@
 
 .price{
     color: #ff0000 !important;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     font-weight: 800 !important;
+}
+
+p {
+    margin: 0 !important;
+}
+
+.product-title {
+    font-size: 1rem;
 }
 
 .add-favorite {
@@ -23,6 +31,6 @@
     background-color: #333333 !important;
     border-color: #333333 !important;
     font-size: 0.8rem !important;
-    padding: 0.5rem 2.5rem !important;
+    padding: 0.7rem 3.5rem !important;
 }
 
