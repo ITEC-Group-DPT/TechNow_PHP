@@ -75,26 +75,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
         }
         else if (stepIndex == 3) {
-            document.querySelector('.addressbook').classList.add('invisible')
             let toolbarbtn = document.querySelector(".sw-btn-next")
             toolbarbtn.classList.add('finish')
             toolbarbtn.classList.remove('disabled')
             toolbarbtn.innerHTML = 'Back to Homepage'
             updateDeliInfoAndCreateOrder()
             $('#smartwizard').smartWizard("stepState", [0,1,2], "disable");
-
-
             // let xhttp = new XMLHttpRequest();
             // xhttp.open("POST", "ajaxDeliveryInfo.php", true);
             // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             // xhttp.send("orderinfo="+ JSON.stringify(productIDs));
-
-
             $(".finish").click(function (e) {
                 window.location.href = 'index.php'
             });
-
-
 
         } else {
             // document.querySelector('.addressbook').classList.remove('invisible')
