@@ -353,16 +353,6 @@ img.card-img-top {
     border-right: 0px !important;
 }
 
-a {
-    text-decoration: none !important;
-    color: black !important;
-}
-
-a:hover {
-    text-decoration: none !important;
-    color: black !important;
-}
-
 .card-product-wrapper-ts {
     padding: 5px 5px !important;
     border:0.5px solid rgb(0,0,0,0.25);

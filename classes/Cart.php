@@ -50,7 +50,7 @@
       $cardList = $this->getCartList();
       foreach ($cardList as $item) {
         $output .=
-        "<li class='product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center'>
+        "<a class='product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center' href='product.php?id={$item['productID']}'>
           <div class='product d-flex h-100'>
             <div class='product-img-wrapper'>
               <img class='product-img' src='". $item['img1'] ."' alt='product-img'>
@@ -92,7 +92,7 @@
               <i class='bi bi-x fa-lg'></i>
             </button>
           </div>
-        </li>";
+        </a>";
        }
        return $output;
     }
