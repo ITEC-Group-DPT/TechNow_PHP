@@ -154,9 +154,17 @@ function updateDeliInfoAndCreateOrder() {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&${str}=1`);
 
-    xhttp.open("POST", "ajaxCart.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(`remove_all`);
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            if (this.responseText == 'success') {
+                xhttp.open("POST", "ajaxCart.php", true);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send(`remove_all`);
+            }
+        }
+    };
+    
 
 }
 
