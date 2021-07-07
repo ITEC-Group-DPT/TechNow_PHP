@@ -134,7 +134,7 @@ async function updateDeliInfoAndCreateOrder() {
     alterDeli.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}`);
     alterDeli.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(`${str} address`);
+            console.log(`create address`);
         }
     };
 
@@ -150,7 +150,7 @@ async function updateDeliInfoAndCreateOrder() {
     alterOrder.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&${str}`);
     alterOrder.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(`${str} ${JSON.stringify(productIDs)}`);
+            console.log(`order ${JSON.stringify(productIDs)}`);
         }
     };
     
