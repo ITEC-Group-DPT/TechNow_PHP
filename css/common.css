@@ -39,6 +39,30 @@ p, a,li,span {
     text-decoration: none;
 }
 
+.nav-item.main>*:hover,
+.pop-up-items .cart-btn:hover,
+.pop-up-items .user-btn:hover,
+.current-site {
+    background: #737373;
+}
+
+.cart-icon-wrapper button,.user-icon-wrapper button {
+    border: transparent;
+    height: 40px;
+    width: 40px;
+}
+
+.cart-icon-wrapper {
+    position: relative;
+}
+
+.number-item-cart {
+    position: absolute;
+    right: -10px;
+    top: -3px;
+    font-size: 0.6rem !important;
+}
+
 @media only screen and (max-width: 992px) {
     .nav-item.main {
         margin: 0 !important;

@@ -23,12 +23,6 @@
     background-color: #494949;
     color: white;
 }
-.number-item-cart {
-    position: absolute;
-    right: -10px;
-    top: -3px;
-    font-size: 0.6rem !important;
-}
 
 input::-webkit-input-placeholder {
     font-size: 16px;

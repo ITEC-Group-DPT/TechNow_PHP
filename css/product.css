@@ -1,0 +1,28 @@
+.main-container {
+    margin: 0 12% 10px;
+}
+
+.rating > * {
+    font-size: 0.7rem;
+}
+
+.price{
+    color: #ff0000 !important;
+    font-size: 0.9rem;
+    font-weight: 800 !important;
+}
+
+.add-favorite {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    font-size: 0.9rem !important;
+    color: black !important;
+}
+
+.add-cart {
+    background-color: #333333 !important;
+    border-color: #333333 !important;
+    font-size: 0.8rem !important;
+    padding: 0.5rem 2.5rem !important;
+}
+
