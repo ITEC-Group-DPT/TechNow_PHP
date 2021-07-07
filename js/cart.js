@@ -1,5 +1,5 @@
   //variables
-  let numberItemCart = document.querySelector(".number-item-cart");
+  let numberItemCart = document.querySelectorAll(".number-item-cart");
   let totalPrice = document.querySelector(".total-price");
   let decreaseBtns;
   let increaseBtns;
@@ -117,7 +117,9 @@
   }
 
   function updateNoItemInCart(noItem) {
-    numberItemCart.innerText = noItem;
+    numberItemCart.forEach(item => {
+      item.innerText = noItem;
+    });
   }
 
   function fadeOutRemoveItem(el) {
