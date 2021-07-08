@@ -45,7 +45,7 @@ class Order
 
         $sql = 'insert into orders (address,name,phone,userid) values (?,?,?,?)';
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param('sssi', $this->address, $this->user, $this->phone, $this->user);
+        $stmt->bind_param('sssi', $this->address, $this->name, $this->phone, $this->user);
         $stmt->execute();
         $row = $this->conn->insert_id;
 
@@ -54,14 +54,13 @@ class Order
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param('sss', $row, $product[0], $product[1]);
             $stmt->execute();
-            $row = $this->conn->insert_id;
 
-            foreach ($productlist as $product) {
-                $sql = 'insert into orderdetails (orderID,productID,quantity) values (?,?,?)';
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param('sss', $row, $product[0],$product[1]);
-                $stmt->execute();
-            }
+            // foreach ($productlist as $product) {
+            //     $sql = 'insert into orderdetails (orderID,productID,quantity) values (?,?,?)';
+            //     $stmt = $this->conn->prepare($sql);
+            //     $stmt->bind_param('sss', $row, $product[0],$product[1]);
+            //     $stmt->execute();
+            // }
         }
         //delete
     }
