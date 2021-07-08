@@ -21,10 +21,10 @@ function addProductToCart(productID) {
         if (this.status == 200) {
             if (this.responseText != "not signed in") {
                 updateNoItemInCart(this.responseText);
-                popOver();
+                popOver('#cart-icon-mobile', '#cart-icon-desktop');
             }
             else {
-                console.log("not signed in");
+                popOver('#login-icon-mobile', '#login-icon-desktop');
             }
         }
     }
@@ -39,19 +39,17 @@ function updateNoItemInCart(noItem) {
 }
 
 
-function popOver() {
+function popOver(mobile, desktop) {
     if (screen.width <= 768) {
-      $('#cart-icon-mobile').popover('show');
+      $(mobile).popover('show');
       setTimeout(() => {
-        $('#cart-icon-mobile').popover('hide');
+        $(mobile).popover('hide');
       }, 4000);
     }
-
     else {
-      console.log("popover");
-      $('#cart-icon-desktop').popover('show');
+      $(desktop).popover('show');
       setTimeout(() => {
-        $('#cart-icon-desktop').popover('hide');
+        $(desktop).popover('hide');
       }, 4000);
     }
   }

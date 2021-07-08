@@ -143,11 +143,11 @@
               <?php else : ?>
                 <a class="user-btn user-mobile d-flex align-items-center h-100" data-toggle="modal" data-target="#user-login">
                   <div class="user-icon-wrapper mr-2">
-                    <button type="button" class="btn rounded-circle p-0" id="user-icon">
+                    <button type="button" class="btn rounded-circle p-0" id="login-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="You must be logged in to add product to cart">
                       <i class="bi bi-person fa-1x text-white" style="color: black;"></i>
                     </button>
                   </div>
-                  <p class="text-center m-0 name text-white" style="font-size: 15px;">Login</p>
+                  <p class="text-center m-0 name text-white " style="font-size: 15px;">Login</p>
                 </a>
               <?php endif; ?>
             </li>
@@ -222,7 +222,7 @@
                   <?php else : ?>
                     <a class="user-btn d-flex align-items-center" href="signin.php">
                       <div class="user-icon-wrapper">
-                        <button type="button" class="btn rounded-circle p-0">
+                        <button type="button" class="btn rounded-circle p-0" id="login-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="You must be logged in to add product to cart">
                           <i class="bi bi-person fa-1x text-white"></i>
                         </button>
                       </div>
