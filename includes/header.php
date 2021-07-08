@@ -24,9 +24,12 @@
   <!-- Slider -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css">
   <?php
-    if ($current_page == "payment")
-      echo '<link rel="stylesheet" href="css/cart.css">';
+  if ($current_page == "payment")
+  {
     echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
+  }
+  else if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail")
+    echo '<link rel="stylesheet" href="css/cart.css">';
   ?>
 </head>
 <body>
