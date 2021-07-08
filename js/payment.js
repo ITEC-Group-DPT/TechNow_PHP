@@ -278,16 +278,20 @@ function outputCartList(cartList) {
         let data = `
       <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
         <div class="product d-flex h-100">
+
           <div class="product-img-wrapper">
             <img class="product-img" src="${product.img1}" alt="product-img">
           </div>
+
           <div class="product-info ml-2 d-flex align-items-center">
             <div class="product-info-wrapper">
           
               <div class="product-name-wrapper">           
                 <p class="product-name">${product.name}</p>
               </div>
+
               <div class="product-rating-wrapper">
+
                 <div class="product-rating">
                   <span class="fa fa-star text-warning"></span>
                   <span class="fa fa-star text-warning"></span>
@@ -296,9 +300,11 @@ function outputCartList(cartList) {
                   <span class="fa fa-star"></span>
                   <span>(${product.sold})</span>
                 </div>
+
               </div>
             </div>
           </div>
+
           <div class="quantity-price-wrapper d-flex align-items-center">
             <div class="quantity-price w-100">
               <div class="quantity-control rounded">
@@ -306,6 +312,7 @@ function outputCartList(cartList) {
               </div>
               <div class="px-2 text-center"><i class="fas fa-times"></i></div>
               
+
               <div class="product-price-wrapper d-flex align-items-center">          
                 <p href="#" class="product-price m-0">${product.price.toLocaleString()}₫</p>
               </div>
