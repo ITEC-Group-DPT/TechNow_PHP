@@ -39,7 +39,11 @@ include "./includes/header.php";
         </div>
         <div class = "final-price mt-5 d-flex justify-content-between align-items-center">
             <h2>Total Price: </h2>
-            <h3 class = "text-danger">8.190.000 đ</h3>
+            <h3 class = "text-danger"><?php
+                $total = intval($order->getTotalPrice());
+                $total = number_format($total,0);
+                echo $total . "đ";
+            ?></h3>
         </div>
     </div>
 </div>

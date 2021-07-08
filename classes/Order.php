@@ -31,6 +31,7 @@ class Order
             $this->address = $ord[0]['address'];
             $this->phone = $ord[0]['phone'];
             $this->datecreated = $ord[0]['dateCreated'];
+            $this->total = $ord[0]['totalPrice'];
 
             $this->products = $ord;
         }
@@ -87,6 +88,11 @@ class Order
     {
         return $this->products;
     }
+    public function getTotalPrice()
+    {
+        return $this->total;
+    }
+
     //static
     public static function getUserOrders(&$conn, $userid)
     {
