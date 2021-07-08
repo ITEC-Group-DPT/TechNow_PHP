@@ -137,13 +137,14 @@ async function updateDeliInfoAndCreateOrder() {
         productIDs.push(arr)
     }
     str = "order"
+    let totalprice = document.querySelector('.total-price').innerText.replace(/,|₫/g,'')
     let alterOrder = new XMLHttpRequest();
     alterOrder.open("POST", "ajaxOrder.php", true);
     alterOrder.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    alterOrder.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&${str}`);
+    alterOrder.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&total=${totalprice}&${str}`);
     alterOrder.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(`order ${JSON.stringify(productIDs)}`);
+            console.log(`order ${JSON.stringify(productIDs)} ${totalprice}`);
         }
     };
     

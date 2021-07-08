@@ -8,6 +8,7 @@ class Order
     private $phone;
     private $user;
     private $datecreated;
+    private $total;
     private $products = [];
 
     public function __construct($conn)
@@ -35,17 +36,17 @@ class Order
         }
         return $this->products;
     }
-    public function createOrder($name, $address, $phone, $userid, $productlist)
+    public function createOrder($name, $address, $phone, $userid, $productlist,$total)
     {
         $this->name = $name;
         $this->address = $address;
         $this->phone = $phone;
         $this->user = $userid;
         $this->products = $productlist;
-
-        $sql = 'insert into orders (address,name,phone,userid) values (?,?,?,?)';
+        $this->total = $total;
+        $sql = 'insert into orders (address,name,phone,userid,totalPrice) values (?,?,?,?,?)';
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param('sssi', $this->address, $this->name, $this->phone, $this->user);
+        $stmt->bind_param('sssis', $this->address, $this->name, $this->phone, $this->user,$this->total);
         $stmt->execute();
         $row = $this->conn->insert_id;
 
