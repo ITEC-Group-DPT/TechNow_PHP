@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 04, 2021 at 06:04 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.4.16
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jul 08, 2021 at 02:41 PM
+-- Server version: 8.0.21
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,11 +27,21 @@ SET time_zone = "+00:00";
 -- Table structure for table `cartdetails`
 --
 
-CREATE TABLE `cartdetails` (
-  `cartID` bigint(20) NOT NULL,
-  `productID` bigint(20) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1
+DROP TABLE IF EXISTS `cartdetails`;
+CREATE TABLE IF NOT EXISTS `cartdetails` (
+  `cartID` bigint NOT NULL,
+  `productID` bigint NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`cartID`,`productID`),
+  KEY `FK_productid_cartdetail` (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cartdetails`
+--
+
+INSERT INTO `cartdetails` (`cartID`, `productID`, `quantity`) VALUES
+(4, 218, 1);
 
 -- --------------------------------------------------------
 
@@ -39,10 +49,23 @@ CREATE TABLE `cartdetails` (
 -- Table structure for table `carts`
 --
 
-CREATE TABLE `carts` (
-  `cartID` bigint(20) NOT NULL,
-  `userID` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `carts`;
+CREATE TABLE IF NOT EXISTS `carts` (
+  `cartID` bigint NOT NULL AUTO_INCREMENT,
+  `userID` bigint NOT NULL,
+  PRIMARY KEY (`cartID`),
+  KEY `FK_userid_cart` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`cartID`, `userID`) VALUES
+(1, 14),
+(2, 15),
+(3, 16),
+(4, 17);
 
 -- --------------------------------------------------------
 
@@ -50,14 +73,18 @@ CREATE TABLE `carts` (
 -- Table structure for table `comments`
 --
 
-CREATE TABLE `comments` (
-  `commentID` bigint(20) NOT NULL,
-  `userID` bigint(20) NOT NULL,
-  `productID` bigint(20) NOT NULL,
-  `parent` bigint(20) DEFAULT NULL,
-  `content` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rating` int(11) NOT NULL,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `commentID` bigint NOT NULL AUTO_INCREMENT,
+  `userID` bigint NOT NULL,
+  `productID` bigint NOT NULL,
+  `parent` bigint DEFAULT NULL,
+  `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` int NOT NULL,
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`commentID`),
+  KEY `FK_userid_comment` (`userID`),
+  KEY `FK_productid_comment` (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -66,13 +93,31 @@ CREATE TABLE `comments` (
 -- Table structure for table `deliveryinfo`
 --
 
-CREATE TABLE `deliveryinfo` (
-  `deliveryID` int(11) NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `userID` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `deliveryinfo`;
+CREATE TABLE IF NOT EXISTS `deliveryinfo` (
+  `deliveryID` int NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userID` bigint NOT NULL,
+  PRIMARY KEY (`deliveryID`),
+  KEY `FK_userID_delivery` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `deliveryinfo`
+--
+
+INSERT INTO `deliveryinfo` (`deliveryID`, `address`, `name`, `phone`, `userID`) VALUES
+(21, '12, Nguyen Cuu Dam, asd, asd', 'Phu Tr123asdasd', '1231312312', 14),
+(22, 'Nguyen Cuu Dam, Nguyen Cuu Dam, asdas, asdasd', 'Phu Truong1234', '12312', 14),
+(23, 'Nguyen Cuu Dam, Nguyen Cuu Dam, asdasd, asdasd', 'Phu Truong', '223', 14),
+(26, 'delete from deliveryinfo where deliveryID = 23, delete from deliveryinfo where deliveryID = 23, delete from deliveryinfo where deliveryID = 23, delete from deliveryinfo where deliveryID = 23', 'delete from deliveryinfo where deliveryID = 23', '1231', 14),
+(27, '1231, 123123, 123123, 123123', 'Phu Truong', '123123', 15),
+(28, '123, 123, 1231, 3123', 'qweqwegsfg', '231', 16),
+(31, 'turơng minh, nam Phú 123, PSd, ướ', 'phú trương', '123123', 14),
+(33, 'phúqweqeqwe, asd, asd, asd', 'asdasdasdasd', '123', 17),
+(34, '57, Nguyễn Cửu Đàm, phường Tân Sơn Nhì, quận Tân Phú, tan son nhì, Thành phố Hồ Chí Minh, Vietnam', 'qwe', '0945461850', 17);
 
 -- --------------------------------------------------------
 
@@ -80,10 +125,13 @@ CREATE TABLE `deliveryinfo` (
 -- Table structure for table `favorites`
 --
 
-CREATE TABLE `favorites` (
-  `userID` bigint(20) NOT NULL,
-  `productID` bigint(20) NOT NULL,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
+DROP TABLE IF EXISTS `favorites`;
+CREATE TABLE IF NOT EXISTS `favorites` (
+  `userID` bigint NOT NULL,
+  `productID` bigint NOT NULL,
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`,`productID`),
+  KEY `FK_product_favorite` (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -92,11 +140,23 @@ CREATE TABLE `favorites` (
 -- Table structure for table `orderdetails`
 --
 
-CREATE TABLE `orderdetails` (
-  `orderID` bigint(20) NOT NULL,
-  `productID` bigint(20) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1
+DROP TABLE IF EXISTS `orderdetails`;
+CREATE TABLE IF NOT EXISTS `orderdetails` (
+  `orderID` bigint NOT NULL,
+  `productID` bigint NOT NULL,
+  `quantity` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`orderID`,`productID`),
+  KEY `FK_productID_orderdetail` (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orderdetails`
+--
+
+INSERT INTO `orderdetails` (`orderID`, `productID`, `quantity`) VALUES
+(23, 111, 1),
+(23, 218, 1),
+(24, 160, 6);
 
 -- --------------------------------------------------------
 
@@ -104,14 +164,26 @@ CREATE TABLE `orderdetails` (
 -- Table structure for table `orders`
 --
 
-CREATE TABLE `orders` (
-  `orderID` bigint(20) NOT NULL,
-  `userID` bigint(20) NOT NULL,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp(),
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `orderID` bigint NOT NULL AUTO_INCREMENT,
+  `userID` bigint NOT NULL,
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `totalPrice` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`orderID`),
+  KEY `FK_userid_order` (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `userID`, `dateCreated`, `name`, `address`, `phone`, `totalPrice`) VALUES
+(23, 14, '2021-07-08 21:39:00', 'Phu Tr123asdasd', '12, Nguyen Cuu Dam, asd, asd', '1231312312', '41135000'),
+(24, 14, '2021-07-08 21:40:28', 'phú trương', 'turơng minh, nam Phú 123, PSd, ướ', '123123', '1020000000');
 
 -- --------------------------------------------------------
 
@@ -119,12 +191,14 @@ CREATE TABLE `orders` (
 -- Table structure for table `productimage`
 --
 
-CREATE TABLE `productimage` (
-  `productID` bigint(20) NOT NULL,
-  `img1` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `img2` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `img3` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `img4` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+DROP TABLE IF EXISTS `productimage`;
+CREATE TABLE IF NOT EXISTS `productimage` (
+  `productID` bigint NOT NULL,
+  `img1` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img2` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `img3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `img4` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  PRIMARY KEY (`productID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -421,17 +495,19 @@ INSERT INTO `productimage` (`productID`, `img1`, `img2`, `img3`, `img4`) VALUES
 -- Table structure for table `products`
 --
 
-CREATE TABLE `products` (
-  `productID` bigint(20) NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `spec` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `productID` bigint NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `spec` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` float NOT NULL,
-  `rating` float NOT NULL DEFAULT 0,
-  `sold` int(11) NOT NULL DEFAULT 0,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `rating` float NOT NULL DEFAULT '0',
+  `sold` int NOT NULL DEFAULT '0',
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`productID`)
+) ENGINE=InnoDB AUTO_INCREMENT=281 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
@@ -728,14 +804,16 @@ INSERT INTO `products` (`productID`, `type`, `description`, `spec`, `name`, `pri
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `userID` bigint(20) NOT NULL,
-  `userRole` int(11) NOT NULL DEFAULT 1,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `userID` bigint NOT NULL AUTO_INCREMENT,
+  `userRole` int NOT NULL DEFAULT '1',
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dateCreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -745,119 +823,11 @@ INSERT INTO `users` (`userID`, `userRole`, `email`, `username`, `password`, `dat
 (8, 0, 'quantriminh@gmail.com', 'JustTory', '$2y$10$n/xHioSbakSVhQuWLraDp.GjPUa93o4elRz6xzn8RxMLEPnPlpm2m', '2021-06-29 14:34:13'),
 (11, 1, 'test@gmail.com', 'tester', '$2y$10$QzeFcbPjhN9doU4rzrBUY.2dWfg.iiGOuxY9KBh5Zgq/B8W/vONeW', '2021-06-29 17:53:08'),
 (12, 1, 'hehe@gmail.com', 'heheboi', '$2y$10$ZW3kaFSwNGtOYGqLTP2gP.XnblZ.0dxGZaAz/qrX3i2q795ghiQdC', '2021-07-03 16:10:30'),
-(13, 1, 'tranngminhdao@gmail.com', 'kurozemi', '$2y$10$fUk86wnu7AJNdt9qCpUn6eKFG.sD8deURghMG.4KnlIfa9x0jgvr2', '2021-07-03 09:22:26');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cartdetails`
---
-ALTER TABLE `cartdetails`
-  ADD PRIMARY KEY (`cartID`,`productID`),
-  ADD KEY `FK_productid_cartdetail` (`productID`);
-
---
--- Indexes for table `carts`
---
-ALTER TABLE `carts`
-  ADD PRIMARY KEY (`cartID`),
-  ADD KEY `FK_userid_cart` (`userID`);
-
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`commentID`),
-  ADD KEY `FK_userid_comment` (`userID`),
-  ADD KEY `FK_productid_comment` (`productID`);
-
---
--- Indexes for table `deliveryinfo`
---
-ALTER TABLE `deliveryinfo`
-  ADD PRIMARY KEY (`deliveryID`),
-  ADD KEY `FK_userID_delivery` (`userID`);
-
---
--- Indexes for table `favorites`
---
-ALTER TABLE `favorites`
-  ADD PRIMARY KEY (`userID`,`productID`),
-  ADD KEY `FK_product_favorite` (`productID`);
-
---
--- Indexes for table `orderdetails`
---
-ALTER TABLE `orderdetails`
-  ADD PRIMARY KEY (`orderID`,`productID`),
-  ADD KEY `FK_productID_orderdetail` (`productID`);
-
---
--- Indexes for table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`orderID`),
-  ADD KEY `FK_userid_order` (`userID`);
-
---
--- Indexes for table `productimage`
---
-ALTER TABLE `productimage`
-  ADD PRIMARY KEY (`productID`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`productID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `carts`
---
-ALTER TABLE `carts`
-  MODIFY `cartID` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `commentID` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `deliveryinfo`
---
-ALTER TABLE `deliveryinfo`
-  MODIFY `deliveryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `orderID` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `products`
---
-ALTER TABLE `products`
-  MODIFY `productID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `userID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+(13, 1, 'tranngminhdao@gmail.com', 'kurozemi', '$2y$10$fUk86wnu7AJNdt9qCpUn6eKFG.sD8deURghMG.4KnlIfa9x0jgvr2', '2021-07-03 09:22:26'),
+(14, 1, 'tezukashuko@gmail.com', 'admin1', '$2y$10$pHZ9qxl4/fzStTiRpEZJf.6bQ8sFrTSONBFVetpzxB3QlHntuv9hq', '2021-07-04 22:34:48'),
+(15, 1, 'tezukashuko1@gmail.com', '19120212', '$2y$10$KRCoY4ut4GsISoPq1ItnbOLn1aaQZI4rlgA75rMeiN3.i7QB98taC', '2021-07-07 15:25:23'),
+(16, 1, 'tezukashuko2@gmail.com', '19120212', '$2y$10$aSormIPGhwvBhKK/5Pc0qO6MFGjfQg7t.peRwpeApCDLbAFkRB3lK', '2021-07-07 15:40:57'),
+(17, 1, 'asd09@asd.com', 'asdasd', '$2y$10$krqVStsk.MwJbk9n/bn4tO9.dqS5JcxqvwX0wjbEdpASV9tdqBHR.', '2021-07-07 15:55:02');
 
 --
 -- Constraints for dumped tables
