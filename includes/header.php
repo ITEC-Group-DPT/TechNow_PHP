@@ -30,10 +30,9 @@ include "./functions/header_func.php";
   <?php
   if ($current_page == "payment")
   {
-    echo '<link rel="stylesheet" href="css/cart.css">';
     echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   }
-  else if ($current_page == "profile")
+  else if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail")
     echo '<link rel="stylesheet" href="css/cart.css">';
   ?>
 </head>
