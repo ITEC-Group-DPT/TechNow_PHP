@@ -90,7 +90,7 @@ class Order
     //static
     public static function getUserOrders(&$conn, $userid)
     {
-        $sql = "SELECT ord.orderID,ordz.quantity, p.*,pimg.img1 FROM orders ord, orderdetails ordz,products p, productimage pimg WHERE ord.userID = ? and ord.orderID = ordz.orderID and p.productID = pimg.productID and p.productID = ordz.productID";
+        $sql = "SELECT ord.orderID,ordz.quantity, p.*,pimg.img1 FROM orders ord, orderdetails ordz,products p, productimage pimg WHERE ord.userID = ? and ord.orderID = ordz.orderID and p.productID = pimg.productID and p.productID = ordz.productID ORDER BY ord.orderID desc";
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param("i", $userid);

@@ -49,18 +49,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         hiddenSteps: [] // Hidden steps
     });
 
-        $("#smartwizard").on("showStep", function (e, anchorObject, stepIndex, stepDirection) {
-            if (stepIndex == 2) {
-                let toolbarbtn = document.querySelector(".sw-btn-next")
-                toolbarbtn.classList.remove('finish')
-                toolbarbtn.innerHTML = 'Checkout'
-                // document.querySelector('.addressbook').classList.add('invisible') //cannot change address in step 3
+    $("#smartwizard").on("showStep", function (e, anchorObject, stepIndex, stepDirection) {
+        if (stepIndex == 2) {
+            let toolbarbtn = document.querySelector(".sw-btn-next")
+            toolbarbtn.classList.remove('finish')
+            toolbarbtn.innerHTML = 'Checkout'
+            // document.querySelector('.addressbook').classList.add('invisible') //cannot change address in step 3
 
-                let addressbook = document.getElementsByName('addressbook')
-                for (const input of addressbook) {
-                    let attr = document.createAttribute("disabled");
-                    input.setAttributeNode(attr);
-                }
+            let addressbook = document.getElementsByName('addressbook')
+            for (const input of addressbook) {
+                let attr = document.createAttribute("disabled");
+                input.setAttributeNode(attr);
+            }
 
             let inputarr = document.querySelectorAll('#smartwizard #smartwizard .tab-content input.form-control.form-control')
             if (checkFillinput(inputarr) && cartList.length != 0){
@@ -95,11 +95,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
             for (const input of addressbook) {
                 input.removeAttribute("disabled");
             }
-        });
-
-
-
+            let toolbarbtn = document.querySelector(".sw-btn-next")
+            toolbarbtn.classList.remove('finish')
+            toolbarbtn.innerHTML = 'Next'
+            document.querySelector(".alert").classList.add('d-none')
+        }
     });
+
+
+
+});
 
 async function updateDeliInfoAndCreateOrder() {
     let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
@@ -168,7 +173,31 @@ async function displayDeliverybook(user_id) {
                     // console.log(deliarr)
                     myResolve(deliarr);
                 }
-            };
+                else myReject('Norows')
+            }
+        };
+    });
+    let arr = await myPromise;
+    console.log(arr);
+    if (arr != 'No rows') {
+        let str = ''
+        arr.forEach(deli => {
+            let name = deli['name']
+            let address = deli['address']
+            let phone = deli['phone']
+            let deliID = deli['deliveryID']
+
+            let radiobox = `<div class="form-check">
+            <input class="form-check-input" type="radio" name="addressbook" id="flexRadioDefault${deliID}">
+            <label class="form-check-label" for="flexRadioDefault${deliID}">
+            <p class="m-0">Name: <span id="name${deliID}">${name}</span><br>
+            Address: <span id="address${deliID}">${address}</span><br>
+            Phone: <span id="phone${deliID}">${phone}</span>
+            </p>
+            </label>
+            </div>`
+
+            document.getElementsByClassName('addressbook')[0].insertAdjacentHTML('beforeend', radiobox)
         });
     }
     radioarray = document.getElementsByClassName('form-check-input')
@@ -195,104 +224,98 @@ async function displayDeliverybook(user_id) {
                 for (const input of inputarr) {
                     input.value = ''
                 }
+            }
 
 
-            })
-        }
+        })
     }
-    async function CreateCartListStep3() {
-        let getcartlist = new Promise(function (myResolve, myReject) {
-            let xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "ajaxCart.php", true);
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("getcartlist=1");
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    let arr = JSON.parse(this.response)
-                    //console.log(arr)
-                    myResolve(arr);
-                }
-            };
-        });
+}
+async function CreateCartListStep3() {
+    let getcartlist = new Promise(function (myResolve, myReject) {
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "ajaxCart.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("getcartlist=1");
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                let arr = JSON.parse(this.response)
+                //console.log(arr)
+                myResolve(arr);
+            }
+        };
+    });
 
-        cartList = await getcartlist;
-        checkCartList(cartList);
-        //updateNoItemInCart();
-        outputCartList(cartList);
-        updateTotalPrice(cartList);
-        // addListeners();
+    cartList = await getcartlist;
+    checkCartList(cartList);
+    //updateNoItemInCart();
+    outputCartList(cartList);
+    updateTotalPrice(cartList);
+    // addListeners();
+}
+function checkCartList(cartList) {
+    let cartAvailable = document.querySelector(".cart-available");
+    let cartEmpty = document.querySelector(".cart-empty");
+    if (cartList == null || cartList.length == 0) {
+        cartAvailable.style = "display: none";
+        cartEmpty.style = "display: block";
+
+    } else {
+        cartEmpty.style = "display: none";
+        cartAvailable.style = "display: initial";
     }
-    function checkCartList(cartList) {
-        let cartAvailable = document.querySelector(".cart-available");
-        let cartEmpty = document.querySelector(".cart-empty");
-        if (cartList == null || cartList.length == 0) {
-            cartAvailable.style = "display: none";
-            cartEmpty.style = "display: block";
-
-        } else {
-            cartEmpty.style = "display: none";
-            cartAvailable.style = "display: initial";
-        }
-    }
-    function updateNoItemInCart() {
-        let numberItemCart = document.querySelectorAll(".number-item-cart");
-        numberItemCart.forEach(number => {
-            number.innerText = getTotalItemsInCart();
-        });
-    }
-    function outputCartList(cartList) {
-        $(".cart-list").empty();
-        cartList.forEach(product => {
-            console.log(product);
-            if (product.quantity == null) product.quantity = 1;
-            let data = `
-        <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
-            <div class="product d-flex h-100">
-
-            <div class="product-img-wrapper">
-                <img class="product-img" src="${product.img1}" alt="product-img">
+}
+function updateNoItemInCart() {
+    let numberItemCart = document.querySelectorAll(".number-item-cart");
+    numberItemCart.forEach(number => {
+        number.innerText = getTotalItemsInCart();
+    });
+}
+function outputCartList(cartList) {
+    $(".cart-list").empty();
+    cartList.forEach(product => {
+        console.log(product);
+        if (product.quantity == null) product.quantity = 1;
+        let data = `
+      <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
+        <div class="product d-flex h-100">
+          <div class="product-img-wrapper">
+            <img class="product-img" src="${product.img1}" alt="product-img">
+          </div>
+          <div class="product-info ml-2 d-flex align-items-center">
+            <div class="product-info-wrapper">
+          
+              <div class="product-name-wrapper">           
+                <p class="product-name">${product.name}</p>
+              </div>
+              <div class="product-rating-wrapper">
+                <div class="product-rating">
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star text-warning"></span>
+                  <span class="fa fa-star"></span>
+                  <span>(${product.sold})</span>
+                </div>
+              </div>
             </div>
-
-            <div class="product-info ml-2 d-flex align-items-center">
-                <div class="product-info-wrapper">
-
-                <div class="product-name-wrapper">
-                    <p class="product-name">${product.name}</p>
-                </div>
-
-                <div class="product-rating-wrapper">
-
-                    <div class="product-rating">
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star text-warning"></span>
-                    <span class="fa fa-star"></span>
-                    <span>(${product.sold})</span>
-                    </div>
-
-                </div>
-                </div>
+          </div>
+          <div class="quantity-price-wrapper d-flex align-items-center">
+            <div class="quantity-price w-100">
+              <div class="quantity-control rounded">
+                <input type="number" class="quantity-input" id="${product.productID}" value="${product.quantity}" step="1" min="1" disabled name="quantity">
+              </div>
+              <div class="px-2 text-center"><i class="fas fa-times"></i></div>
+              
+              <div class="product-price-wrapper d-flex align-items-center">          
+                <p href="#" class="product-price m-0">${product.price.toLocaleString()}₫</p>
+              </div>
             </div>
+          </div>
+        </div>
+      </li>`
 
-            <div class="quantity-price-wrapper d-flex align-items-center">
-                <div class="quantity-price w-100">
-                <div class="quantity-control rounded">
-                    <input type="number" class="quantity-input" id="${product.productID}" value="${product.quantity}" step="1" min="1" disabled name="quantity">
-                </div>
-                <div class="px-2 text-center"><i class="fas fa-times"></i></div>
-
-
-                <div class="product-price-wrapper d-flex align-items-center">
-                    <p href="#" class="product-price m-0">${product.price.toLocaleString()}₫</p>
-                </div>
-                </div>
-            </div>
-            </div>
-        </li>`
-
-            $(".cart-list").append(data);
-        });
+        $(".cart-list").append(data);
+    });
 
 }
 function updateTotalPrice(cartList) {

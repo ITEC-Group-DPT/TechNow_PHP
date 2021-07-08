@@ -28,7 +28,7 @@
   {
     echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   }
-  else if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail")
+  if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail")
     echo '<link rel="stylesheet" href="css/cart.css">';
   ?>
 </head>
