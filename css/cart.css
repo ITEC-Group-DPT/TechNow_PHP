@@ -359,10 +359,13 @@ button:focus {
         font-size: 15px;
     }
 
+    #pop-up-mobile {
+        display: block !important;
+    }
+
     .search-bar {
         margin-bottom: 15px;
     }
-
 
     .main-container {
         margin: 0;
@@ -374,10 +377,6 @@ button:focus {
 
     .menu-list {
         display: none;
-    }
-
-    .pop-up-items {
-        display: none !important;
     }
 
     .mobile-cart-user {

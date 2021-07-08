@@ -65,6 +65,18 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
+    #pop-up-mobile {
+        display: block !important;
+    }
+
+    li#pop-up-desktop {
+        display: none !important;
+    }
+
+    .pop-up-items .nav-item {
+        margin: 0;
+    }
+
     .main-container {
         margin: 0;
         padding: 20px;

@@ -106,12 +106,13 @@
         <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="nav-item popup ml-auto pr-0 mr-0" id="pop-up-mobile" style="display: none;">
-          <ul class="navbar-nav pop-up-items d-flex flex-row h-100" style="display: none !important;">
+          <ul class="navbar-nav pop-up-items d-flex flex-row h-100">
             <li class="nav-item">
-              <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="./pages/Cart/cart.html">
+              <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="cart.php">
                 <div class="cart-icon-wrapper mr-2">
-                  <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
+                  <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                     <i class="bi bi-cart fa-1x text-white" style="color: black;"></i>
                   </button>
                   <span class="badge badge-pill badge-danger number-item-cart">
@@ -128,7 +129,7 @@
               <?php if ($_SESSION['signedIn']) : ?>
                 <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="user-icon-wrapper">
-                    <button type="button" class="btn rounded-circle icon-upper p-0">
+                    <button type="button" class="btn rounded-circle icon-upper p-0" id="user-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                       <i class="bi bi-person fa-lg text-white"></i>
                     </button>
                   </div>
@@ -144,13 +145,13 @@
                   </form>
                 </div>
               <?php else : ?>
-                <a class="user-btn user-mobile d-flex align-items-center h-100" data-toggle="modal" data-target="#user-login">
+                <a class="user-btn user-mobile d-flex align-items-center h-100" href="signin.php">
                   <div class="user-icon-wrapper mr-2">
-                    <button type="button" class="btn rounded-circle p-0" id="user-icon">
+                    <button type="button" class="btn rounded-circle p-0" id="login-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                       <i class="bi bi-person fa-1x text-white" style="color: black;"></i>
                     </button>
                   </div>
-                  <p class="text-center m-0 name text-white" style="font-size: 15px;">Login</p>
+                  <p class="text-center m-0 name text-white " style="font-size: 15px;">Login</p>
                 </a>
               <?php endif; ?>
             </li>
@@ -168,13 +169,13 @@
               </a>
             </li>
             <li class="nav-item main col-md-2 px-0">
-              <a class="nav-link text-center" href="#">
+              <a class="nav-link text-center" href="#" data-toggle="modal" data-target="#hot-deals">
                 <i class="bi bi-gift mr-2 text-white"></i>
                 <span class="text-white">Hot Discount</span>
               </a>
             </li>
             <li class="nav-item main col-md-2 px-0">
-              <a class="nav-link text-center" href="#">
+              <a class="nav-link text-center" href="#" data-toggle="modal" data-target="#shipping-policy">
                 <i class="bi bi-truck mr-2 text-white"></i>
                 <span class="text-white">Shipping policy</span>
               </a>
@@ -190,7 +191,7 @@
                 <li class="nav-item">
                   <a class="cart-btn d-flex align-items-center" href="cart.php">
                     <div class="cart-icon-wrapper mr-2">
-                      <button type="button" class="btn rounded-circle p-0" id="cart-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
+                      <button type="button" class="btn rounded-circle p-0" id="cart-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                         <i class="bi bi-cart fa-1x text-white"></i>
                       </button>
                       <span class="badge badge-pill badge-danger number-item-cart">
@@ -207,7 +208,7 @@
                   <?php if ($_SESSION['signedIn']) : ?>
                     <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <div class="user-icon-wrapper">
-                        <button type="button" class="btn rounded-circle icon-upper p-0">
+                        <button type="button" class="btn rounded-circle icon-upper p-0" id="user-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                           <i class="bi bi-person fa-lg text-white"></i>
                         </button>
                       </div>
@@ -225,7 +226,7 @@
                   <?php else : ?>
                     <a class="user-btn d-flex align-items-center" href="signin.php">
                       <div class="user-icon-wrapper">
-                        <button type="button" class="btn rounded-circle p-0">
+                        <button type="button" class="btn rounded-circle p-0" id="login-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                           <i class="bi bi-person fa-1x text-white"></i>
                         </button>
                       </div>
