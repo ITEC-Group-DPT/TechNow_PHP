@@ -103,10 +103,11 @@
         <button class="custom-toggler navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="nav-item popup ml-auto pr-0 mr-0" id="pop-up-mobile" style="display: none;">
-          <ul class="navbar-nav pop-up-items d-flex flex-row h-100" style="display: none !important;">
+          <ul class="navbar-nav pop-up-items d-flex flex-row h-100">
             <li class="nav-item">
-              <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="./pages/Cart/cart.html">
+              <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="cart.php">
                 <div class="cart-icon-wrapper mr-2">
                   <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                     <i class="bi bi-cart fa-1x text-white" style="color: black;"></i>
@@ -141,7 +142,7 @@
                   </form>
                 </div>
               <?php else : ?>
-                <a class="user-btn user-mobile d-flex align-items-center h-100" data-toggle="modal" data-target="#user-login">
+                <a class="user-btn user-mobile d-flex align-items-center h-100" href="signin.php">
                   <div class="user-icon-wrapper mr-2">
                     <button type="button" class="btn rounded-circle p-0" id="login-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                       <i class="bi bi-person fa-1x text-white" style="color: black;"></i>
