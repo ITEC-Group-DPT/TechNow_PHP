@@ -166,13 +166,13 @@
               </a>
             </li>
             <li class="nav-item main col-md-2 px-0">
-              <a class="nav-link text-center" href="#">
+              <a class="nav-link text-center" href="#" data-toggle="modal" data-target="#hot-deals">
                 <i class="bi bi-gift mr-2 text-white"></i>
                 <span class="text-white">Hot Discount</span>
               </a>
             </li>
             <li class="nav-item main col-md-2 px-0">
-              <a class="nav-link text-center" href="#">
+              <a class="nav-link text-center" href="#" data-toggle="modal" data-target="#shipping-policy">
                 <i class="bi bi-truck mr-2 text-white"></i>
                 <span class="text-white">Shipping policy</span>
               </a>

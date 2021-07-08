@@ -13,5 +13,4 @@
 
     if(isset($_POST['signout']))
       User::signOut();
-
 ?>

@@ -1,6 +1,7 @@
 <?php
   include "./functions/footer_func.php";
   $current_page = basename($_SERVER['SCRIPT_NAME'], ".php");
+  include "./includes/modal.php";
 ?>
 <?php if ($current_page != "signin" && $current_page != "signup") : ?>
   <footer class="nav-footer-theme text-center text-white mt-5 w-100">
@@ -38,7 +39,7 @@
             </div>
             <div class="col-auto">
               <!-- Submit button -->
-              <button type="submit" class="btn btn-outline-light mb-4">
+              <button class="btn btn-outline-light mb-4" data-toggle="modal" data-target="#newsletter">
                 Subscribe
               </button>
             </div>
