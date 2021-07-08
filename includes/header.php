@@ -108,7 +108,7 @@
             <li class="nav-item">
               <a class="cart-btn cart-mobile d-flex align-items-center h-100" href="./pages/Cart/cart.html">
                 <div class="cart-icon-wrapper mr-2">
-                  <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
+                  <button type="button" class="btn rounded-circle p-0" id="cart-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                     <i class="bi bi-cart fa-1x text-white" style="color: black;"></i>
                   </button>
                   <span class="badge badge-pill badge-danger number-item-cart">
@@ -125,7 +125,7 @@
               <?php if ($_SESSION['signedIn']) : ?>
                 <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="user-icon-wrapper">
-                    <button type="button" class="btn rounded-circle icon-upper p-0">
+                    <button type="button" class="btn rounded-circle icon-upper p-0" id="user-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                       <i class="bi bi-person fa-lg text-white"></i>
                     </button>
                   </div>
@@ -143,7 +143,7 @@
               <?php else : ?>
                 <a class="user-btn user-mobile d-flex align-items-center h-100" data-toggle="modal" data-target="#user-login">
                   <div class="user-icon-wrapper mr-2">
-                    <button type="button" class="btn rounded-circle p-0" id="login-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="You must be logged in to add product to cart">
+                    <button type="button" class="btn rounded-circle p-0" id="login-icon-mobile" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                       <i class="bi bi-person fa-1x text-white" style="color: black;"></i>
                     </button>
                   </div>
@@ -187,7 +187,7 @@
                 <li class="nav-item">
                   <a class="cart-btn d-flex align-items-center" href="cart.php">
                     <div class="cart-icon-wrapper mr-2">
-                      <button type="button" class="btn rounded-circle p-0" id="cart-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Product is added to your cart">
+                      <button type="button" class="btn rounded-circle p-0" id="cart-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                         <i class="bi bi-cart fa-1x text-white"></i>
                       </button>
                       <span class="badge badge-pill badge-danger number-item-cart">
@@ -204,7 +204,7 @@
                   <?php if ($_SESSION['signedIn']) : ?>
                     <a tabindex="0" class="user-btn d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <div class="user-icon-wrapper">
-                        <button type="button" class="btn rounded-circle icon-upper p-0">
+                        <button type="button" class="btn rounded-circle icon-upper p-0" id="user-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                           <i class="bi bi-person fa-lg text-white"></i>
                         </button>
                       </div>
@@ -222,7 +222,7 @@
                   <?php else : ?>
                     <a class="user-btn d-flex align-items-center" href="signin.php">
                       <div class="user-icon-wrapper">
-                        <button type="button" class="btn rounded-circle p-0" id="login-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="You must be logged in to add product to cart">
+                        <button type="button" class="btn rounded-circle p-0" id="login-icon-desktop" data-container="body" data-toggle="popover" data-placement="bottom" data-content="">
                           <i class="bi bi-person fa-1x text-white"></i>
                         </button>
                       </div>
