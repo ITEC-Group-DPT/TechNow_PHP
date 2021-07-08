@@ -44,8 +44,10 @@
   function searchFunc() {
     let searchInp = document.querySelector("#searchbarinp");
     let searchList = document.querySelector('#dropdownsearchbar');
-    if (searchInp.value == '') searchList.style.display = 'none';
-    else{
+    if (searchInp.value == '') {
+      searchList.style.display = 'none';
+      searchList.innerHTML = '';
+    } else{
       if(searchList.style.display == 'none')  searchList.style.display = 'block';
       if(searchList.style.opacity == '0')   searchList.style.opacity = '1';
       let xhr = new XMLHttpRequest();
