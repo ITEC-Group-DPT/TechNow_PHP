@@ -44,12 +44,8 @@
   function searchFunc() {
     let searchInp = document.querySelector("#searchbarinp");
     let searchList = document.querySelector('#dropdownsearchbar');
-    if (searchInp.value == '') {
-      searchList.style.display = 'none';
-      searchList.innerHTML = '';
-    } else{
-      if(searchList.style.display == 'none')  searchList.style.display = 'block';
-      if(searchList.style.opacity == '0')   searchList.style.opacity = '1';
+    if (searchInp.value == '') searchList.innerHTML = '';
+    else{
       let xhr = new XMLHttpRequest();
       xhr.open("POST", "ajaxSearch.php", true);
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -59,7 +55,7 @@
               let arrProducts = JSON.parse(this.responseText);
               searchList.innerHTML = renderSearchList(arrProducts);
             }
-            else  searchList.innerHTML = '<li><div class="ml-5">No item found</div></li>';
+            else searchList.innerHTML = '<li><div class="ml-5">No item found</div></li>';
           }
       }
       xhr.send("value=" + searchInp.value);
