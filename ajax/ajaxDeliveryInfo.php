@@ -1,6 +1,6 @@
 <?php 
-include 'includes/db.php';
-include 'classes/DeliveryInfo.php';
+include '../includes/db.php';
+include '../classes/DeliveryInfo.php';
 if (isset($_POST['getdelivery'])){
     $book = new DeliveryInfo($conn);
     $array = $book->getDeliveryInfo($_POST['user_id']);

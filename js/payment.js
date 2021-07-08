@@ -122,7 +122,7 @@ async function updateDeliInfoAndCreateOrder() {
     let userid = parseInt(document.querySelector("[userid]").getAttribute('userid'), 10)
     if (selectedaddress != 0) str = 'update'
     let alterDeli = new XMLHttpRequest();
-    alterDeli.open("POST", "ajaxDeliveryInfo.php", true);
+    alterDeli.open("POST", "ajax/ajaxDeliveryInfo.php", true);
     alterDeli.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     alterDeli.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}`);
     alterDeli.onreadystatechange = function () {
@@ -139,7 +139,7 @@ async function updateDeliInfoAndCreateOrder() {
     str = "order"
     let totalprice = document.querySelector('.total-price').innerText.replace(/,|₫/g,'')
     let alterOrder = new XMLHttpRequest();
-    alterOrder.open("POST", "ajaxOrder.php", true);
+    alterOrder.open("POST", "ajax/ajaxOrder.php", true);
     alterOrder.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     alterOrder.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&total=${totalprice}&${str}`);
     alterOrder.onreadystatechange = function () {
@@ -149,7 +149,7 @@ async function updateDeliInfoAndCreateOrder() {
     };
     
     let removeCart = new XMLHttpRequest();
-    removeCart.open("POST", "ajaxCart.php", true);
+    removeCart.open("POST", "ajax/ajaxCart.php", true);
     removeCart.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     removeCart.send(`remove_all`);
     removeCart.onreadystatechange = function () {
@@ -163,7 +163,7 @@ async function updateDeliInfoAndCreateOrder() {
 async function displayDeliverybook(user_id) {
     let myPromise = new Promise(function (myResolve, myReject) {
         let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "ajaxDeliveryInfo.php", true);
+        xhttp.open("POST", "ajax/ajaxDeliveryInfo.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("getdelivery=1&user_id=" + user_id);
         xhttp.onreadystatechange = function () {
@@ -234,7 +234,7 @@ async function displayDeliverybook(user_id) {
 async function CreateCartListStep3() {
     let getcartlist = new Promise(function (myResolve, myReject) {
         let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "ajaxCart.php", true);
+        xhttp.open("POST", "ajax/ajaxCart.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("getcartlist=1");
         xhttp.onreadystatechange = function () {

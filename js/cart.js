@@ -47,7 +47,7 @@
   function decreaseQuantity(decreaseBtn) {
     let productID = decreaseBtn.getAttribute("data-id");
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxCart.php", true);
+    xhr.open("POST", "ajax/ajaxCart.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
@@ -66,7 +66,7 @@
   function increaseQuantity(increaseBtn) {
     let productID = increaseBtn.getAttribute("data-id");
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxCart.php", true);
+    xhr.open("POST", "ajax/ajaxCart.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
@@ -85,7 +85,7 @@
   function removeProduct(removeBtn) {
     let productID = removeBtn.getAttribute("data-id");
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxCart.php", true);
+    xhr.open("POST", "ajax/ajaxCart.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
@@ -102,7 +102,7 @@
 
   function removeAll() {
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxCart.php", true);
+    xhr.open("POST", "ajax/ajaxCart.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200)

@@ -5,7 +5,7 @@ displayDeliverybook(userid)
 async function displayDeliverybook(user_id) {
     let myPromise = new Promise(function (myResolve, myReject) {
         let xhttp = new XMLHttpRequest();
-        xhttp.open("POST", "ajaxDeliveryInfo.php", true);
+        xhttp.open("POST", "ajax/ajaxDeliveryInfo.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("getdelivery=1&user_id=" + user_id);
         xhttp.onreadystatechange = function () {
@@ -128,7 +128,7 @@ document.querySelector('.addressbook').addEventListener('click', function (e) {
                 arr[2].innerText = phone
 
                 let xhttp = new XMLHttpRequest();
-                xhttp.open("POST", "ajaxDeliveryInfo.php", true);
+                xhttp.open("POST", "ajax/ajaxDeliveryInfo.php", true);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 xhttp.send(`deliID=${deliID}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&update=1`);
                
@@ -141,7 +141,7 @@ document.querySelector('.addressbook').addEventListener('click', function (e) {
         }
         else if (e.target.innerText == 'Delete') {
             let xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "ajaxDeliveryInfo.php", true);
+            xhttp.open("POST", "ajax/ajaxDeliveryInfo.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send(`deliID=${deliID}&delete=1`);
             deleteAddressBook(deliID)
@@ -195,7 +195,7 @@ document.querySelector('.create').addEventListener('click', function (e) {
                     address = address + ', ' + city + ', ' + state + ', ' + country
 
                     let xhttp = new XMLHttpRequest();
-                    xhttp.open("POST", "ajaxDeliveryInfo.php", true);
+                    xhttp.open("POST", "ajax/ajaxDeliveryInfo.php", true);
                     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhttp.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&create=1`);
                     xhttp.onreadystatechange = function () {

@@ -1,8 +1,20 @@
 <?php
     session_start();
-    include "./classes/User.php";
-    include "./classes/Cart.php";
-    include "./database/db.php";
+
+    if (file_exists("./classes/User.php"))
+      include "./classes/User.php";
+    else
+      include "../classes/User.php";
+
+    if (file_exists("./classes/Cart.php"))
+      include "./classes/Cart.php";
+    else
+      include "../classes/Cart.php";
+    
+    if (file_exists("./database/db.php"))
+      include "./database/db.php";
+    else
+      include "../database/db.php";  
 
     if (!isset($_SESSION['signedIn']))
       $_SESSION['signedIn'] = false;

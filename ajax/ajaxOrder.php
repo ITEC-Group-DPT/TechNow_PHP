@@ -1,6 +1,6 @@
 <?php 
-include 'includes/db.php';
-include 'classes/Order.php';
+include '../includes/db.php';
+include '../classes/Order.php';
 if (isset($_POST['order'])){
     $arr = json_decode($_POST['list']);
     $order = new Order($conn);

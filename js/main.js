@@ -19,7 +19,7 @@ function addToCart() {
 
 function addProductToCart(productID) {
   let xhr = new XMLHttpRequest();
-  xhr.open("POST", "ajaxCart.php", true);
+  xhr.open("POST", "ajax/ajaxCart.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onload = function () {
     if (this.status == 200) {
@@ -49,7 +49,7 @@ function searchFunc() {
     if (searchList.style.display == 'none') searchList.style.display = 'block';
     if (searchList.style.opacity == '0') searchList.style.opacity = '1';
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxSearch.php", true);
+    xhr.open("POST", "ajax/ajaxSearch.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
       if (this.status == 200) {

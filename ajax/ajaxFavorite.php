@@ -1,6 +1,6 @@
 <?php
-    include 'includes/config.php';
-    include 'classes/Favorite.php';
+    include '../includes/config.php';
+    include '../classes/Favorite.php';
     
     if($_SESSION['signedIn'] == true) {
         if(isset($_POST['id'])) {

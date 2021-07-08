@@ -1,5 +1,5 @@
 <?php
-  include "includes/config.php";
+  include "../includes/config.php";
 
   if($_SESSION['signedIn'] == true) {
     if(isset($_POST['id']) && isset($_POST['add'])) {

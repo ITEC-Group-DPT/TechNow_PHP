@@ -27,7 +27,7 @@ function removeFavorite() {
 
 function addProductToCart(productID) {
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxCart.php", true);
+    xhr.open("POST", "ajax/ajaxCart.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
@@ -52,7 +52,7 @@ function updateNoItemInCart(noItem) {
 function favoriteFunc(removeBtn){
     let value = removeBtn.getAttribute("data-value");
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "ajaxFavorite.php", true);
+    xhr.open("POST", "ajax/ajaxFavorite.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
