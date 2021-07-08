@@ -2,6 +2,7 @@
     class DeliveryInfo {
         private $conn;
         public $user_id;
+
         function __construct($conn){
             $this->conn = $conn;
         }
@@ -34,20 +35,14 @@
             $stmt->bind_param('sssi', $address,$name,$phone,$userid);
             $stmt->execute();
         }
-    }
+    
+        function deleteDelivery($deliID){
+            $sql = 'delete from deliveryinfo where deliveryID = ?';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param('i', $deliID);
+            $stmt->execute();
+        }
+}
 
-    include '../includes/db.php';
-    if (isset($_POST['getdelivery'])){
-        $book = new DeliveryInfo($conn);
-        $array = $book->getDeliveryInfo($_POST['user_id']);
-        echo json_encode($array);
-    }
-    elseif (isset($_POST['update'])){
-        $book = new DeliveryInfo($conn);
-        $book->updateDeliveryInfo($_POST['deliID'],$_POST['name'],$_POST['address'],$_POST['phone']);
-    }
-    elseif (isset($_POST['create'])){
-        $book = new DeliveryInfo($conn);
-        $book->createDeliveryInfo($_POST['name'],$_POST['address'],$_POST['phone'],$_POST['userid']);
-    }
+
 ?>
