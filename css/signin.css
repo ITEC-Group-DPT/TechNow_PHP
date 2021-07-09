@@ -5,10 +5,14 @@
 .mobile {
 	display: none;
 }
-
+body {
+	background-image: url("https://wallpaperaccess.com/full/1836506.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
 .main {
 	font-family: 'Montserrat', sans-serif;
-	height: 95vh;
+	height: 102vh;
 	margin: -20px 0 50px;
 }
 
@@ -51,8 +55,8 @@
 
 .btn-custom {
 	border-radius: 20px;
-	border: 1px solid #aad1e6;
-    background-color: #aad1e6;
+	border: 1px solid #272727;
+    background-color: #272727;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -162,7 +166,7 @@ input::-webkit-input-placeholder {
 .overlay {
 	background: linear-gradient(
 		133deg
-		,#aad1e6,#009DF8);
+		,#7d7a7a,#000304);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -251,7 +255,6 @@ a:hover {
 	}
 
 	body {
-		background-image: url(/image.php?loginbg);
 		background-repeat: no-repeat;
 		font-family: 'Montserrat', sans-serif;
 		height: 95vh;

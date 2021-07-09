@@ -14,7 +14,7 @@
     include "includes/header.php";
 ?>
 
-<div class="container main d-flex justify-content-center align-items-center">
+<div class="container main d-flex justify-content-center align-items-center mb-0">
     <div class="tab desktop right-panel-active" id="container">
         <div class="form-container sign-up-container">
             <form class="form-wrapper" action="signup.php" method="post" id="signup">
