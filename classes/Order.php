@@ -37,7 +37,7 @@ class Order
         }
         return $this->products;
     }
-    public function createOrder($name, $address, $phone, $userid, $productlist,$total)
+    public function createOrder($name, $address, $phone, $userid, $productlist, $total)
     {
         $this->name = $name;
         $this->address = $address;
@@ -47,7 +47,7 @@ class Order
         $this->total = $total;
         $sql = 'insert into orders (address,name,phone,userid,totalPrice) values (?,?,?,?,?)';
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param('sssis', $this->address, $this->name, $this->phone, $this->user,$this->total);
+        $stmt->bind_param('sssis', $this->address, $this->name, $this->phone, $this->user, $this->total);
         $stmt->execute();
         $row = $this->conn->insert_id;
 
@@ -80,9 +80,32 @@ class Order
     {
         return $this->phone;
     }
-    public function getDate()
+    public function getDateDiff()
     {
-        return $this->datecreated;
+        $sql = "SELECT TIMESTAMPDIFF(minute, dateCreated, NOW()) as 'datediff' from orders where orderID=?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $this->id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            $datediff = $row['datediff'];
+
+            //convert date diff to days, hours or minutes
+            $type = " minutes";
+            if ($datediff >= 1440) {
+                $datediff /= 1440;
+                $type = " days";
+            } else if ($datediff >= 60) {
+                $datediff /= 60;
+                $type = " hours";
+            };
+
+            return intval($datediff) . $type . " ago";
+        } 
+        else return "Error display this";
     }
     public function getProducts()
     {

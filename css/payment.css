@@ -22,6 +22,9 @@ a.active {
 .sw-theme-arrows>.nav .nav-link.active::after {
     border-left-color: #333333 !important;
 }
+.sw-btn-next {
+    background-color: black !important;
+}
 .sw-theme-arrows .toolbar>.btn {
     background-color: #495057 ;
     border-color:  #495057 ;

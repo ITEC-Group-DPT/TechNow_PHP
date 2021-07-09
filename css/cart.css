@@ -28,9 +28,6 @@ input::-webkit-input-placeholder {
     font-size: 16px;
 }
 
-.icon-upper:hover {
-    background-color: rgb(211, 210, 210) !important;
-}
 .logo-wrapper img {
     overflow: hidden;
     background-color: white;

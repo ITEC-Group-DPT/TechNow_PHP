@@ -9,6 +9,15 @@
     transition: color 300ms;
 }
 
+.product-rating .fa-star {
+    font-size: 1rem;
+}
+
+.product-quantity-wrapper p{
+    font-size: 14px;
+    color: #656565;
+}
+
 @media screen and (min-width: 768px){
     .single-order {
         width: 80%;

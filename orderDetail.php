@@ -19,8 +19,8 @@ include "./includes/header.php";
         <h3>Order #<?php
                     echo $id
                     ?></h3>
-        <p><b>Date created: </b><?php
-            echo $order->getDate();
+        <p><b>Created: </b><?php
+            echo $order->getDateDiff();
             ?></p>
         <div class="detail">
             <h3>Customer details</h3>

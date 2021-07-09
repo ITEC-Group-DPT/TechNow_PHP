@@ -4,7 +4,14 @@
     } 
 }
 
+.product-rating .fa-star {
+    font-size: 1rem;
+}
 
+.product-quantity-wrapper p{
+    font-size: 14px;
+    color: #656565;
+}
 .order-detail{
     padding-top: 0 3% !important;
 }

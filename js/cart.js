@@ -36,7 +36,8 @@
       });
     });
 
-    removeAllBtn.addEventListener("click", removeAll)
+    if (removeAllBtn != null)
+      removeAllBtn.addEventListener("click", removeAll)
   }
 
   //cart functions

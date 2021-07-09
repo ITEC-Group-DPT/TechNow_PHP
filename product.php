@@ -1,90 +1,93 @@
 <?php
-    include "./includes/config.php";
-    include "./classes/Product.php";
-    include 'classes/Favorite.php';
-    include "./functions/UI_func.php";
-    include "./includes/header.php";
+include "./includes/config.php";
+include "./classes/Product.php";
+include 'classes/Favorite.php';
+include "./functions/UI_func.php";
+include "./includes/header.php";
 
-    $product = new Product($conn);
-    $res = $product->getProduct();
-    if ($res != false) {
-        $ratingStar = getStarRating(intval($res['rating']));
-        $format_price = number_format($res['price'],0);
-    }
+$product = new Product($conn);
+$res = $product->getProduct();
+if ($res != false) {
+    $ratingStar = getStarRating(intval($res['rating']));
+    $format_price = number_format($res['price'], 0);
+}
 
-    if(isset($_GET['id'])){
-        if(!isset($_SESSION['userID']) || !Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id']))
-            $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
-        else $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
-    }
+if (isset($_GET['id'])) {
+    if (!isset($_SESSION['userID']) || !Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id']))
+        $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
+    else $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
+}
 ?>
 
 <div class="main-container mt-5 rounded shadow" style="min-height: 80vh;">
     <div class="row">
-    <?php if ($res != false): ?>
-        <div class="col-md-6">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <?php if (!empty($res['img2'])): ?>
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="bg-secondary active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1" class="bg-secondary"></li>
-                        <?php if (!empty($res['img3'])): ?>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2" class="bg-secondary"></li>
-                        <?php endif; ?>
-                    </ol>
-                <?php endif; ?>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="image d-block" src="<?php echo $res['img1'] ?>">
-                    </div>
-                    <?php if (!empty($res['img2'])): ?>
-                        <div class="carousel-item">
-                            <img class="image d-block" src="<?php echo $res['img2'] ?>">
-                        </div>
+        <?php if ($res != false) : ?>
+            <div class="col-md-6">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <?php if (!empty($res['img2'])) : ?>
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="bg-secondary active"></li>
+                            <li data-target="#carouselExampleIndicators" data-slide-to="1" class="bg-secondary"></li>
+                            <?php if (!empty($res['img3'])) : ?>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2" class="bg-secondary"></li>
+                            <?php endif; ?>
+                        </ol>
                     <?php endif; ?>
-                    <?php if (!empty($res['img3'])): ?>
-                        <div class="carousel-item">
-                            <img class="image d-block" src="<?php echo $res['img3'] ?>">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="image d-block" src="<?php echo $res['img1'] ?>">
                         </div>
+                        <?php if (!empty($res['img2'])) : ?>
+                            <div class="carousel-item">
+                                <img class="image d-block" src="<?php echo $res['img2'] ?>">
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($res['img3'])) : ?>
+                            <div class="carousel-item">
+                                <img class="image d-block" src="<?php echo $res['img3'] ?>">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <?php if (!empty($res['img2'])) : ?>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="" aria-hidden="true"><i class="bi bi-arrow-left-short text-black-50 fa-2x"></i></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="" aria-hidden="true"><i class="bi bi-arrow-right-short text-black-50 fa-2x"></i></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                     <?php endif; ?>
                 </div>
-                <?php if (!empty($res['img2'])): ?>
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="" aria-hidden="true"><i class="bi bi-arrow-left-short text-black-50 fa-2x"></i></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="" aria-hidden="true"><i class="bi bi-arrow-right-short text-black-50 fa-2x"></i></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                <?php endif; ?>
             </div>
-        </div>
 
-        <div class="col-md-6">
+            <div class="col-md-6">
                 <h3 class="product-name"><?php echo $res['name'] ?></h3>
                 <div class='rating'>
                     <?php echo $ratingStar; ?>
-                    <span><?php echo $res['sold']; ?></span>
+                    <span>(<?php echo $res['sold']; ?>)</span>
                 </div>
                 <h5 class="product-title mt-4">Description</h5>
                 <p class="product-desc"><?php echo $res['description'] ?></p>
                 <h5 class="product-title mt-4">Specs</h5>
                 <p class="product-spec"><?php echo $res['spec'] ?></p>
                 <hr class="mt-5">
-                <p class='price text-right'><?php echo $format_price; ?> đ</p>
+                <div class="price-section d-flex justify-content-between align-items-center">
+                    <h4 class ="mb-0">Price: </h4>
+                    <p class='price text-right'><?php echo $format_price; ?> đ</p>
+                </div>
                 <div class="functions d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-primary add-favorite mr-3" id='favorite' data-value="<?php echo $res['productID']; ?>"><?php echo $icon; ?> Add to Favorite</button>
                     <button type="button" class="btn btn-primary add-cart" id="<?php echo $res['productID']; ?>"><i class="bi bi-cart-plus"></i> Add to Cart</button>
                 </div>
 
-        </div>
-    <?php else: ?>
-        <h1 class="text-center font-weight-light">Product not found! (Error: 404)</h1>
-    <?php endif; ?>
+            </div>
+        <?php else : ?>
+            <h1 class="text-center font-weight-light">Product not found! (Error: 404)</h1>
+        <?php endif; ?>
 
     </div>
 </div>
 <?php
-    include "includes/footer.php";
+include "includes/footer.php";
 ?>

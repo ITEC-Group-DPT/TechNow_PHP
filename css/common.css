@@ -63,6 +63,23 @@ p, a,li,span {
     font-size: 0.6rem !important;
 }
 
+.user-icon-wrapper button:hover{
+    
+}
+
+.cart-btn {
+    text-decoration: none;
+    padding-right: 10px;
+    color: black;
+}
+.user-btn {
+    padding-right: 10px;
+    text-decoration: none;
+}
+.dropdown-item:active {
+    background-color: rgb(68, 68, 68) !important;
+}
+
 @media only screen and (max-width: 992px) {
     .nav-item.main {
         margin: 0 !important;
