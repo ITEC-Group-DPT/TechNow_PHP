@@ -1,4 +1,4 @@
-.card-product-wrapper .product:hover, .card-product-wrapper-ts .product:hover{
+/* .card-product-wrapper .product:hover, .card-product-wrapper-ts .product:hover{
     transform: scale(1.03);
     transition: all 350ms;
     text-decoration: none !important;
@@ -114,4 +114,10 @@ h5.card-title.rounded{
 
 .add-cart:hover, .add-favorite:hover {
     animation: float 1s ease-in-out infinite;
+} */
+
+@media screen and (min-width: 768px) {
+    .favorite-list {
+        width: 80%;
+    }
 }

@@ -28,7 +28,7 @@
   {
     echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   }
-  if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail")
+  if ($current_page == "order" || $current_page == "payment" || $current_page == "orderDetail" || $current_page == "favorite")
     echo '<link rel="stylesheet" href="css/cart.css">';
   ?>
 </head>
@@ -44,7 +44,7 @@
             <div class="dropdown input-group w-100 ">
               <input type="text" onkeyup="searchFunc()" onfocus="searchFunc()" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
               <ul class="dropdown-menu w-100" id="dropdownsearchbar">
-                
+
               </ul>
             </div>
           </div>
@@ -75,7 +75,7 @@
                   <p class="text-center m-0 name" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
-                  <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                  <a class="dropdown-item" href="order.php"><i class="bi bi-clock mr-2"></i>Order</a>
                   <a class="dropdown-item" href="favorite.php"><i class="bi bi-heart mr-2"></i>Favorite</a>
                   <a class="dropdown-item" href="address.php"><i class="bi bi-geo-alt mr-2"></i>Address</a>
                   <div class="dropdown-divider"></div>
@@ -136,7 +136,7 @@
                   <p class="text-center m-0 name text-white" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000; position: absolute; left: auto; right: 10px;">
-                  <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                  <a class="dropdown-item" href="order.php"><i class="bi bi-clock mr-2"></i>Order</a>
                   <a class="dropdown-item" href="favorite.php"><i class="bi bi-heart mr-2"></i>Favorite</a>
                   <a class="dropdown-item" href="address.php"><i class="bi bi-geo-alt mr-2"></i>Address</a>
                   <div class="dropdown-divider"></div>
@@ -215,7 +215,7 @@
                       <p class="text-center m-0 name text-white" style="font-size: 15px;"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="z-index: 5000;">
-                      <a class="dropdown-item" href="profile.php"><i class="bi bi-person mr-2"></i>Profile</a>
+                      <a class="dropdown-item" href="order.php"><i class="bi bi-clock mr-2"></i>Order</a>
                       <a class="dropdown-item" href="favorite.php"><i class="bi bi-heart mr-2"></i>Favorite</a>
                       <a class="dropdown-item" href="address.php"><i class="bi bi-geo-alt mr-2"></i>Address</a>
                       <div class="dropdown-divider"></div>
