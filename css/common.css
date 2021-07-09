@@ -77,8 +77,16 @@ p, a,li,span {
     text-decoration: none;
 }
 .dropdown-item:active {
-    background-color: rgb(68, 68, 68) !important;
+    background-color: rgb(243, 243, 243) !important;
+    color: initial !important;
 }
+
+.dropdown-item:active {
+    color: #dc3545 !important;
+}
+
+
+
 
 @media only screen and (max-width: 992px) {
     .nav-item.main {

@@ -30,6 +30,11 @@
 	font-size: 1.8rem;
 }
 
+a:hover {
+	text-decoration: none !important;
+	color: black !important;
+}
+
 .content {
 	font-size: 14px;
 	font-weight: 100;
@@ -51,8 +56,8 @@
 
 .btn-custom {
 	border-radius: 20px;
-	border: 1px solid #e91e63;
-    background-color: #e91e63;
+	border: 1px solid #aad1e6;
+    background-color: #aad1e6;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -159,11 +164,9 @@ input::-webkit-input-placeholder {
 }
 
 .overlay {
-	background: #3d70fa;
-	background: -webkit-linear-gradient(to right, #3766ff, #1e1af8);
 	background: linear-gradient(
 		133deg
-		,#003dff, #ff004d);
+		,#aad1e6,#009DF8);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
