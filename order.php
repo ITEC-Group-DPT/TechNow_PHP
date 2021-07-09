@@ -14,7 +14,7 @@ include 'includes/header.php';
     <h2>Your order history is empty</h2>
   <?php else: ?>
     <h2>My Orders</h2>
-    <div class="order-lists d-flex justify-content-center">
+    <div class="order-lists d-flex flex-column align-items-center">
       <?php
         foreach (array_keys($orders) as $key) {
           echo "<div class = 'single-order my-3'>";
