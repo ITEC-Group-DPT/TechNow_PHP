@@ -8,18 +8,32 @@ label{
     transform: scale(1);
     transition: transform 500ms, height 800ms;
   }
-  
+
 .shrinkFinish {
     height: 0px;
     transform: scale(0);
 }
 
 .card-footer button {
-  width: 69px !important;
+  width: 80px !important;
 }
 
 @media screen and (min-width: 781px){
   .addressbook {
     width: 60% !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #pop-up-mobile {
+      display: block !important;
+  }
+
+  li#pop-up-desktop {
+    display: none !important;
+  }
+
+  .pop-up-items .nav-item {
+    margin: 0;
   }
 }
