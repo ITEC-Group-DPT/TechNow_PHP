@@ -89,9 +89,9 @@ document.querySelector('.addressbook').addEventListener('click', function (e) {
             <input type="text" class="form-control" name="address3" placeholder="City">
             <label for="phone">Phone</label>
             <input type="number" class="form-control" name="phone" placeholder="Phone">
-            <div class='text-center my-2' deliID=${deliID}>
-              <button type="button" class="btn btn-outline-danger p-1">Cancel</button>
-              <button type="button" class="btn btn-outline-success p-1">Submit</button>
+            <div class='text-center mt-3 my-2' deliID=${deliID}>
+              <button type="button" class="btn btn-outline-dark p-1">Cancel</button>
+              <button type="button" class="btn btn-dark p-1">Submit</button>
             </div>
             <div class="alert alert-danger h-100 d-none fillinput" role="alert">
             Some of inputs are not filled!!!
@@ -164,8 +164,8 @@ document.querySelector('.create').addEventListener('click', function (e) {
             <label for="phone">Phone</label>
             <input type="number" class="form-control" name="phone" placeholder="Phone">
             <div class='text-center my-2 createbtn'>
-              <button type="button" class="btn btn-outline-danger p-1">Cancel</button>
-              <button type="button" class="btn btn-outline-success p-1">Submit</button>
+              <button type="button" class="btn btn-outline-dark p-1">Cancel</button>
+              <button type="button" class="btn btn-dark p-1">Submit</button>
             </div> 
             <div class="alert alert-danger h-100 d-none fillinput my-2" role="alert">
             Some of inputs are not filled!!!

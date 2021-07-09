@@ -9,7 +9,17 @@ label{
     transition: transform 500ms, height 800ms;
   }
   
-  .shrinkFinish {
+.shrinkFinish {
     height: 0px;
     transform: scale(0);
+}
+
+.card-footer button {
+  width: 69px !important;
+}
+
+@media screen and (min-width: 781px){
+  .addressbook {
+    width: 60% !important;
   }
+}
