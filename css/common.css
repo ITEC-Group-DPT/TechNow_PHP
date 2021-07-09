@@ -64,7 +64,7 @@ p, a,li,span {
 }
 
 .user-icon-wrapper button:hover{
-    
+    color: initial !important;
 }
 
 .cart-btn {
