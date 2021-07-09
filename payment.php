@@ -4,7 +4,7 @@
 ?>
 
 <!-- change userid = session || if no login, noti by jumpbotron-->
-<div class="container m-5 addressbook" userid=<?php echo $_SESSION['userID'] ?>> 
+<div class="container m-5 addressbook" userid=<?php echo $_SESSION['userID'] ?>>
     <h3>Address Book</h3><span><p>(you can edit exists address book by choosing and editing below)</p></span>
     <div class="form-check">
         <input class="form-check-input" type="radio" name="addressbook" id="flexRadioDefault0" checked>
@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-md-6"> <input type="text" name='address' class="form-control" placeholder="Address" required>
                 </div>
-                <div class="col-md-6"> <input type="text" name='Sub-distrcit' class="form-control" placeholder="Sub-district" required>
+                <div class="col-md-6"> <input type="text" name='Sub-distrcit' class="form-control" placeholder="Ward" required>
                 </div>
             </div>
             <div class="row">

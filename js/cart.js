@@ -95,10 +95,26 @@
             removeProductUI(removeBtn);
             updateTotalPrice(data[0]);
             updateNoItemInCart(data[1]);
+            isEmptyCart(data[1]);
           }
         }
     }
     xhr.send("id=" + productID + "&remove");
+  }
+
+  function isEmptyCart(noItem) {
+    if(noItem == 0) {
+      let cartDiv = document.querySelector('.cart-container')
+      cartDiv.innerHTML = `
+      <div class="cart-empty">
+      <div class="empty-img-wrapper text-center">
+        <img src="assets/empty-cart.png" alt="">
+      </div>
+      <div class="btn-continue-wrapper text-center">
+        <a href="index.php"><button type="button" class="btn" style="font-size: 0.9rem;">Continue shopping</button></a>
+      </div>
+    </div>`
+    }
   }
 
   function removeAll() {

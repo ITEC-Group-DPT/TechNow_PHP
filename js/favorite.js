@@ -25,6 +25,15 @@ function removeFavorite() {
     });
 }
 
+function emptyFavorite() {
+    let favDiv = document.querySelector('.fav')
+    favDiv.innerHTML = `
+    <div class="text-center mt-5">
+    <h3 class="mb-0 catalog-name">No favorite item found</h3>
+  </div>
+`
+}
+
 function addProductToCart(productID) {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "ajax/ajaxCart.php", true);
@@ -56,22 +65,16 @@ function favoriteFunc(removeBtn){
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
-            // if(this.responseText == "added to favorite") {
-            //     let favIcon = removeBtn.closest("#fav-icon");
-            //     favIcon.classList.remove("bi-heart");
-            //     favIcon.classList.add("bi-heart-fill");
-            //     favIcon.classList.add("text-danger");
-            // }
-            // else{
-            //     let favIcon = removeBtn.closest("#fav-icon");
-            //     favIcon.classList.remove("bi-heart-fill");
-            //     favIcon.classList.remove("text-danger");
-            //     favIcon.classList.add("bi-heart");
-            // }
-            window.location.reload();
+          console.log(this.responseText);
+            if(this.responseText == "remove from favorite") {
+              removeProductUI(removeBtn);
+            }
+            else if(this.responseText == "empty favorite"){
+              emptyFavorite()
+            }
         }
     }
-    xhr.send("id=" + value);
+    xhr.send("id=" + value + "&favorite");
 }
 
 function popOver() {
@@ -87,4 +90,15 @@ function popOver() {
         $('#cart-icon-desktop').popover('hide');
       }, 4000);
     }
+}
+
+function removeProductUI(removeBtn) {
+  fadeOutRemoveItem(removeBtn.parentElement);
+}
+
+function fadeOutRemoveItem(el) {
+  el.style = "opacity: 0;";
+  setTimeout(function () {
+    el.remove();
+  }, 300);
 }

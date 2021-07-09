@@ -28,7 +28,7 @@
   {
     echo '<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />';
   }
-  if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail")
+  if ($current_page == "profile" || $current_page == "payment" || $current_page == "orderDetail" || $current_page == "favorite")
     echo '<link rel="stylesheet" href="css/cart.css">';
   ?>
 </head>
@@ -44,7 +44,7 @@
             <div class="dropdown input-group w-100 ">
               <input type="text" onkeyup="searchFunc()" onfocus="searchFunc()" class="form-control rounded dropdown-toggle" id="searchbarinp" placeholder="What are you looking for today?" data-toggle="dropdown">
               <ul class="dropdown-menu w-100" id="dropdownsearchbar">
-                
+
               </ul>
             </div>
           </div>
