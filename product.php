@@ -13,9 +13,13 @@ if ($res != false) {
 }
 
 if (isset($_GET['id'])) {
-    if (!isset($_SESSION['userID']) || !Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id']))
+    if (!isset($_SESSION['userID']) || !Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id'])){
         $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
-    else $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
+        $action = "add";
+    }else{
+        $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
+        $$action = "remove";
+    }
 }
 ?>
 
@@ -77,7 +81,7 @@ if (isset($_GET['id'])) {
                     <p class='price text-right'><?php echo $format_price; ?> đ</p>
                 </div>
                 <div class="functions d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-primary add-favorite mr-3" id='favorite' data-value="<?php echo $res['productID']; ?>"><?php echo $icon; ?> Add to Favorite</button>
+                    <button type="button" class="btn btn-primary add-favorite mr-3" data-action="<?php echo $action ?>" id='favorite' data-value="<?php echo $res['productID']; ?>"><?php echo $icon; ?> Add to Favorite</button>
                     <button type="button" class="btn btn-primary add-cart" id="<?php echo $res['productID']; ?>"><i class="bi bi-cart-plus"></i> Add to Cart</button>
                 </div>
 

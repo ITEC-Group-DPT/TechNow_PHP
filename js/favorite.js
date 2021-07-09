@@ -60,6 +60,7 @@ function updateNoItemInCart(noItem) {
 
 function favoriteFunc(removeBtn){
     let value = removeBtn.getAttribute("data-value");
+    let action = removeBtn.getAttribute("data-action");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "ajax/ajaxFavorite.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -70,11 +71,11 @@ function favoriteFunc(removeBtn){
               removeProductUI(removeBtn);
             }
             else if(this.responseText == "empty favorite"){
-              emptyFavorite()
+              emptyFavorite();
             }
         }
     }
-    xhr.send("id=" + value + "&favorite");
+    xhr.send("id=" + value + "&favorite&" + action);
 }
 
 function popOver() {

@@ -1,7 +1,6 @@
 <?php
 //helper
-function getStarRating($rating)
-{
+function getStarRating($rating){
   $ratingStar = "";
 
   for ($i = 0; $i < $rating; $i++) {
@@ -14,6 +13,7 @@ function getStarRating($rating)
 
   return $ratingStar;
 }
+
 function renderProductCategory($categories) {
   foreach ($categories as $product) {
       $ratingStar = getStarRating(intval($product['rating']));
@@ -38,8 +38,8 @@ function renderProductCategory($categories) {
             </a>";
     }
 }
-function renderTopRating($list)
-{
+
+function renderTopRating($list){
   foreach ($list as $product) {
 
     $format_price = number_format($product['price'], 0);
@@ -66,8 +66,7 @@ function renderTopRating($list)
   }
 }
 
-function renderProductRow($list)
-{
+function renderProductRow($list){
   foreach ($list as $product) {
     $ratingStar = getStarRating(intval($product['rating']));
     $format_price = number_format($product['price'], 0);
@@ -152,7 +151,7 @@ function renderFavoriteList($list) {
           </div>
         </div>
       </div>
-      <button type='button' class='btn btn-light remove-btn' data-value='{$product['productID']}' id='favorite' data-toggle='tooltip' data-placement='right' title='Remove Item'>
+      <button type='button' class='btn btn-light remove-btn' data-action='remove' data-value='{$product['productID']}' id='favorite' data-toggle='tooltip' data-placement='right' title='Remove Item'>
               <i class='bi bi-x fa-lg'></i>
         </button>
     </a>";

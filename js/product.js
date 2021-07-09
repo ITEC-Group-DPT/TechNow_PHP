@@ -46,18 +46,21 @@ $(document).ready(() => {
 
 function favoriteFunc() {
     let value = favorite.getAttribute("data-value");
+    let action = favorite.getAttribute("data-action");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "ajax/ajaxFavorite.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function () {
         if (this.status == 200) {
             if (this.responseText == "added to favorite") {
+                favorite.setAttribute("data-action", "remove");
                 favIcon.classList.remove("bi-heart");
                 favIcon.classList.add("bi-heart-fill");
                 favIcon.classList.add("text-danger");
                 popOver('#user-icon-mobile', '#user-icon-desktop', "Product is added to your favorite list")
             }
             else if (this.responseText == "remove from favorite"){
+                favorite.setAttribute("data-action", "add");
                 favIcon.classList.remove("bi-heart-fill");
                 favIcon.classList.remove("text-danger");
                 favIcon.classList.add("bi-heart");
@@ -69,7 +72,7 @@ function favoriteFunc() {
             }
         }
     }
-    xhr.send("id=" + value);
+    xhr.send("id=" + value + "&" + action);
 }
 
 
