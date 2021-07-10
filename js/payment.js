@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 input.setAttributeNode(attr);
             }
 
-            let inputarr = document.querySelectorAll('#smartwizard #smartwizard .tab-content input.form-control.form-control')
+            let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control.form-control')
+
             if (checkFillinput(inputarr) && cartList.length != 0){
                 document.querySelector(".fillinput").classList.add('d-none') 
                 toolbarbtn.classList.remove('disabled')
