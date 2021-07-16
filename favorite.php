@@ -5,7 +5,8 @@
   include 'functions/UI_func.php';
   $list = false;
   if (isset($_SESSION['userID'])) {
-    $list = Favorite::getFavoriteList($conn, $_SESSION['userID']);
+    $favorite = new Favorite($conn, $_SESSION['userID']);
+    $list = $favorite->getFavoriteList();
   }
 ?>
 

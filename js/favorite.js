@@ -29,9 +29,9 @@ function emptyFavorite() {
     let favDiv = document.querySelector('.fav')
     favDiv.innerHTML = `
     <div class="text-center mt-5">
-    <h3 class="mb-0 catalog-name">No favorite item found</h3>
-  </div>
-`
+      <h3 class="mb-0 catalog-name">No favorite item found</h3>
+    </div>
+    `;
 }
 
 function addProductToCart(productID) {
@@ -66,13 +66,10 @@ function favoriteFunc(removeBtn){
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
         if(this.status == 200) {
-          console.log(this.responseText);
-            if(this.responseText == "remove from favorite") {
+            if(this.responseText == "remove from favorite") 
               removeProductUI(removeBtn);
-            }
-            else if(this.responseText == "empty favorite"){
+            else if(this.responseText == "empty favorite")
               emptyFavorite();
-            }
         }
     }
     xhr.send("id=" + value + "&favorite&" + action);

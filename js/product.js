@@ -7,7 +7,6 @@ function addToCart() {
     addToCartBtns = document.querySelectorAll(".add-cart");
     addToCartBtns.forEach(addBtn => {
         addBtn.addEventListener("click", () => {
-            console.log('addBtnID: ', addBtn.id);
             addProductToCart(addBtn.id);
         });
     });
@@ -34,7 +33,6 @@ function addProductToCart(productID) {
 function updateNoItemInCart(noItem) {
     numberItemCart.forEach((item) => {
         item.innerText = noItem;
-        console.log(item);
     });
 }
 
@@ -67,7 +65,6 @@ function favoriteFunc() {
                 popOver('#user-icon-mobile', '#user-icon-desktop', "Product is removed from your favorite list")
             }
             else {
-                console.log("heheboi");
                 popOver('#login-icon-mobile', '#login-icon-desktop', "You must be logged in to add a product to your favorite list")
             }
         }
