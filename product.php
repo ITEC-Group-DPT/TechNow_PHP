@@ -13,14 +13,12 @@ if ($res != false) {
 }
 
 if (isset($_GET['id'])) {
-    $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
-    $action = "add";
-    if(isset($_SESSION['userID'])){
-        $favorite = new Favorite($conn, $_SESSION['userID']);
-        if(!$favorite->getFavoriteProduct($_GET['id'])){
-            $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
-            $action = "remove";
-        }
+    if (!isset($_SESSION['userID']) || !Favorite::getFavoriteProduct($conn, $_SESSION['userID'], $_GET['id'])){
+        $icon = "<i class='bi bi-heart' id='fav-icon'></i>";
+        $action = "add";
+    }else{
+        $icon = "<i class='bi bi-heart-fill text-danger' id='fav-icon'></i>";
+        $$action = "remove";
     }
 }
 ?>

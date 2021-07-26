@@ -4,15 +4,13 @@
 
     if($_SESSION['signedIn'] == true) {
         if(isset($_POST['id'])) {
-          $favorite = new Favorite($conn, $_SESSION['userID']);
           if(isset($_POST['add'])){
-            $favorite->addToFavorite($_POST['id']);
+            Favorite::addToFavorite($conn, $_SESSION['userID'], $_POST['id']);
             echo "added to favorite";
           }elseif(isset($_POST['remove'])){
-            $favorite->removeFavorite($_POST['id']);
+            Favorite::removeFavorite($conn, $_SESSION['userID'], $_POST['id']);
             if(isset($_POST['favorite'])) {
-              $list = $favorite->getFavoriteList();
-              if(!$list) {
+              if(!Favorite::getFavoriteList($conn, $_SESSION['userID'])) {
                 echo "empty favorite";
                 return;
               }

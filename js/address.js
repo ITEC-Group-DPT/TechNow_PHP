@@ -12,6 +12,7 @@ async function displayDeliverybook(user_id) {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText != 'No rows') {
                     let deliarr = JSON.parse(this.response)
+                    // console.log(deliarr)
                     myResolve(deliarr);
                 }
                 else myReject('Norows')
@@ -19,6 +20,7 @@ async function displayDeliverybook(user_id) {
         };
     });
     let arr = await myPromise;
+    // console.log(arr);
     if (arr != 'No rows') {
         let str = ''
         arr.forEach(deli => {
@@ -55,6 +57,8 @@ function editAddressBook(deliID) {
     inputarr[3].value = address[2]
     inputarr[4].value = address[3]
     inputarr[5].value = phone
+    console.log(address);
+    // console.log(arr);
 }
 function deleteAddressBook(deliID) {
     let addresscard = document.querySelector('#deliID' + deliID)
@@ -68,7 +72,9 @@ function deleteAddressBook(deliID) {
 }
 document.querySelector('.addressbook').addEventListener('click', function (e) {
     if (e.target.type == 'button') {
+        console.log(e.target.innerText);
         let deliID = e.target.parentNode.parentNode.id.split('deliID')[1]
+        console.log(deliID);
         if (e.target.innerText == 'Edit') {
             let form = `<div class='text-left p-3' id='editform${deliID}'>
             <label for="name">Name</label>
@@ -97,6 +103,7 @@ document.querySelector('.addressbook').addEventListener('click', function (e) {
         }
         else if (e.target.innerText == 'Cancel') {
             deliID = e.target.parentNode.getAttribute('deliID')
+            console.log(deliID);
             editbtn = document.querySelector('#deliID' + deliID).querySelector('.edit')
             editbtn.disabled = false
             e.target.parentNode.parentNode.remove()
@@ -169,11 +176,13 @@ document.querySelector('.create').addEventListener('click', function (e) {
 
     document.querySelector('.createbtn').addEventListener('click', function (e) {
         if (e.target.type == 'button') {
+            console.log(e.target);
             if (e.target.innerText == 'Cancel') {
                 document.querySelector('.create').disabled = false
                 e.target.parentNode.parentNode.remove()
             }
             else if (e.target.innerText == 'Submit') {
+                console.log(userid);
                 let inputarr = document.querySelector('#createform').querySelectorAll('input')
                 if (checkFillinput(inputarr)) {
                     document.querySelector('#createform .alert').classList.add("d-none")

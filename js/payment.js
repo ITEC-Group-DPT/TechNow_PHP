@@ -51,9 +51,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $("#smartwizard").on("showStep", function (e, anchorObject, stepIndex, stepDirection) {
         if (stepIndex == 2) {
-            let toolbarbtn = document.querySelector(".sw-btn-next");
-            toolbarbtn.classList.remove('finish');
-            toolbarbtn.innerHTML = 'Checkout';
+            let toolbarbtn = document.querySelector(".sw-btn-next")
+            toolbarbtn.classList.remove('finish')
+            toolbarbtn.innerHTML = 'Checkout'
+            // document.querySelector('.addressbook').classList.add('invisible') //cannot change address in step 3
 
             let addressbook = document.getElementsByName('addressbook')
             for (const input of addressbook) {
@@ -63,36 +64,41 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             let inputarr = document.querySelectorAll('#smartwizard #smartwizard .tab-content input.form-control.form-control')
             if (checkFillinput(inputarr) && cartList.length != 0){
-                document.querySelector(".fillinput").classList.add('d-none') ;
-                toolbarbtn.classList.remove('disabled');
+                document.querySelector(".fillinput").classList.add('d-none') 
+                toolbarbtn.classList.remove('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "enable");
             }
             else{
-                document.querySelector(".fillinput").classList.remove('d-none') ;
-                toolbarbtn.classList.add('disabled');
+                document.querySelector(".fillinput").classList.remove('d-none') 
+                toolbarbtn.classList.add('disabled')
                 $('#smartwizard').smartWizard("stepState", [3], "disable");
             }
         }
         else if (stepIndex == 3) {
-            let toolbarbtn = document.querySelector(".sw-btn-next");
-            toolbarbtn.classList.add('finish');
-            toolbarbtn.classList.remove('disabled');
-            toolbarbtn.innerHTML = 'Back to Homepage';
-            updateDeliInfoAndCreateOrder();
+            let toolbarbtn = document.querySelector(".sw-btn-next")
+            toolbarbtn.classList.add('finish')
+            toolbarbtn.classList.remove('disabled')
+            toolbarbtn.innerHTML = 'Back to Homepage'
+            updateDeliInfoAndCreateOrder()
             $('#smartwizard').smartWizard("stepState", [0,1,2], "disable");
+            // let xhttp = new XMLHttpRequest();
+            // xhttp.open("POST", "ajaxDeliveryInfo.php", true);
+            // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // xhttp.send("orderinfo="+ JSON.stringify(productIDs));
             $(".finish").click(function (e) {
-                window.location.href = 'index.php';
+                window.location.href = 'index.php'
             });
 
         } else {
+            // document.querySelector('.addressbook').classList.remove('invisible')
             let addressbook = document.getElementsByName('addressbook')
             for (const input of addressbook) {
                 input.removeAttribute("disabled");
             }
-            let toolbarbtn = document.querySelector(".sw-btn-next");
-            toolbarbtn.classList.remove('finish');
-            toolbarbtn.innerHTML = 'Next';
-            document.querySelector(".alert").classList.add('d-none');
+            let toolbarbtn = document.querySelector(".sw-btn-next")
+            toolbarbtn.classList.remove('finish')
+            toolbarbtn.innerHTML = 'Next'
+            document.querySelector(".alert").classList.add('d-none')
         }
     });
 
@@ -101,40 +107,58 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 async function updateDeliInfoAndCreateOrder() {
-    let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control');
-    let name = inputarr[0].value;
-    let phone = inputarr[1].value;
-    let address = inputarr[2].value;
-    let city = inputarr[3].value;
-    let state = inputarr[4].value;
-    let country = inputarr[5].value;
-    address = address + ', ' + city + ', ' + state + ', ' + country;
-    let str = 'create';
-    let userid = parseInt(document.querySelector("[userid]").getAttribute('userid'), 10);
-    if (selectedaddress != 0) str = 'update';
+    let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
+    let name = inputarr[0].value
+    let phone = inputarr[1].value
+    let address = inputarr[2].value
+    let city = inputarr[3].value
+    let state = inputarr[4].value
+    let country = inputarr[5].value
+    address = address + ', ' + city + ', ' + state + ', ' + country
+    console.log(name, phone, address);
+    //insert in order 
+    // removeAllcartinDTB();
+    let str = 'create'
+    let userid = parseInt(document.querySelector("[userid]").getAttribute('userid'), 10)
+    if (selectedaddress != 0) str = 'update'
     let alterDeli = new XMLHttpRequest();
     alterDeli.open("POST", "ajax/ajaxDeliveryInfo.php", true);
     alterDeli.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     alterDeli.send(`deliID=${selectedaddress}&name=${name}&phone=${phone}&address=${address}&userid=${userid}&${str}`);
+    alterDeli.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(`create address`);
+        }
+    };
 
-    let productIDs = [];
+    let productIDs = []
     for (const product of cartList) {
-        let arr = [product.productID, product.quantity];
-        productIDs.push(arr);
+        let arr = [product.productID, product.quantity]
+        productIDs.push(arr)
     }
-
-    str = "order";
-    let totalprice = document.querySelector('.total-price').innerText.replace(/,|₫/g,'');
+    str = "order"
+    let totalprice = document.querySelector('.total-price').innerText.replace(/,|₫/g,'')
     let alterOrder = new XMLHttpRequest();
     alterOrder.open("POST", "ajax/ajaxOrder.php", true);
     alterOrder.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     alterOrder.send(`name=${name}&phone=${phone}&address=${address}&userid=${userid}&list=${JSON.stringify(productIDs)}&total=${totalprice}&${str}`);
-
+    alterOrder.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(`order ${JSON.stringify(productIDs)} ${totalprice}`);
+        }
+    };
+    
     let removeCart = new XMLHttpRequest();
     removeCart.open("POST", "ajax/ajaxCart.php", true);
     removeCart.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     removeCart.send(`remove_all`);
+    removeCart.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log('remove all');
+        }
+    };
 }
+
 
 async function displayDeliverybook(user_id) {
     let myPromise = new Promise(function (myResolve, myReject) {
@@ -144,8 +168,10 @@ async function displayDeliverybook(user_id) {
         xhttp.send("getdelivery=1&user_id=" + user_id);
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+
                 if (this.responseText != 'No rows') {
-                    let deliarr = JSON.parse(this.response);
+                    let deliarr = JSON.parse(this.response)
+                    // console.log(deliarr)
                     myResolve(deliarr);
                 }
                 else myReject('Norows')
@@ -153,7 +179,9 @@ async function displayDeliverybook(user_id) {
         };
     });
     let arr = await myPromise;
+    console.log(arr);
     if (arr != 'No rows') {
+        let str = ''
         arr.forEach(deli => {
             let name = deli['name']
             let address = deli['address']
@@ -168,33 +196,39 @@ async function displayDeliverybook(user_id) {
             Phone: <span id="phone${deliID}">${phone}</span>
             </p>
             </label>
-            </div>`;
-            document.getElementsByClassName('addressbook')[0].insertAdjacentHTML('beforeend', radiobox);
+            </div>`
+
+            document.getElementsByClassName('addressbook')[0].insertAdjacentHTML('beforeend', radiobox)
         });
     }
-    radioarray = document.getElementsByClassName('form-check-input');
+    radioarray = document.getElementsByClassName('form-check-input')
     for (const radio of radioarray) {
         radio.addEventListener('click', function (e) {
-            let id = parseInt(e.target.getAttribute('id').replace('flexRadioDefault', ''), 10);
+            //console.log(e.target.getAttribute('id'));
+            let id = parseInt(e.target.getAttribute('id').replace('flexRadioDefault', ''), 10)
+            //console.log(id);
             selectedaddress = id;
-            if (id != 0){ //not create new address
-                let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control');
-                inputarr[0].value = document.getElementById('name' + id).innerText;
-                inputarr[1].value = document.getElementById('phone' + id).innerText;
+            if (id != 0) //not create new address
+            {
+                let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
+                inputarr[0].value = document.getElementById('name' + id).innerText
+                inputarr[1].value = document.getElementById('phone' + id).innerText
 
-                let address = document.getElementById('address' + id).innerText.split(', ');
-                inputarr[2].value = address[0];
-                inputarr[3].value = address[1];
-                inputarr[4].value = address[2];
-                inputarr[5].value = address[3];
+                let address = document.getElementById('address' + id).innerText.split(', ')
+                inputarr[2].value = address[0]
+                inputarr[3].value = address[1]
+                inputarr[4].value = address[2]
+                inputarr[5].value = address[3]
             }
             else { //empty input to create new address
-                let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control');
+                let inputarr = document.querySelectorAll('#smartwizard .tab-content input.form-control')
                 for (const input of inputarr) {
-                    input.value = '';
+                    input.value = ''
                 }
             }
-        });
+
+
+        })
     }
 }
 async function CreateCartListStep3() {
@@ -206,6 +240,7 @@ async function CreateCartListStep3() {
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 let arr = JSON.parse(this.response)
+                //console.log(arr)
                 myResolve(arr);
             }
         };
@@ -213,8 +248,10 @@ async function CreateCartListStep3() {
 
     cartList = await getcartlist;
     checkCartList(cartList);
+    //updateNoItemInCart();
     outputCartList(cartList);
     updateTotalPrice(cartList);
+    // addListeners();
 }
 function checkCartList(cartList) {
     let cartAvailable = document.querySelector(".cart-available");
@@ -222,6 +259,7 @@ function checkCartList(cartList) {
     if (cartList == null || cartList.length == 0) {
         cartAvailable.style = "display: none";
         cartEmpty.style = "display: block";
+
     } else {
         cartEmpty.style = "display: none";
         cartAvailable.style = "display: initial";
@@ -236,19 +274,25 @@ function updateNoItemInCart() {
 function outputCartList(cartList) {
     $(".cart-list").empty();
     cartList.forEach(product => {
+        console.log(product);
         if (product.quantity == null) product.quantity = 1;
         let data = `
       <li class="product-wrapper container card shadow p-2 m-3 d-flex align-items-center justify-content-center">
         <div class="product d-flex h-100">
+
           <div class="product-img-wrapper">
             <img class="product-img" src="${product.img1}" alt="product-img">
           </div>
+
           <div class="product-info ml-2 d-flex align-items-center">
             <div class="product-info-wrapper">
+          
               <div class="product-name-wrapper">           
                 <p class="product-name">${product.name}</p>
               </div>
+
               <div class="product-rating-wrapper">
+
                 <div class="product-rating">
                   <span class="fa fa-star text-warning"></span>
                   <span class="fa fa-star text-warning"></span>
@@ -257,22 +301,27 @@ function outputCartList(cartList) {
                   <span class="fa fa-star"></span>
                   <span>(${product.sold})</span>
                 </div>
+
               </div>
             </div>
           </div>
+
           <div class="quantity-price-wrapper d-flex align-items-center">
             <div class="quantity-price w-100">
               <div class="quantity-control rounded">
                 <input type="number" class="quantity-input" id="${product.productID}" value="${product.quantity}" step="1" min="1" disabled name="quantity">
               </div>
               <div class="px-2 text-center"><i class="fas fa-times"></i></div>
+              
+
               <div class="product-price-wrapper d-flex align-items-center">          
                 <p href="#" class="product-price m-0">${product.price.toLocaleString()}₫</p>
               </div>
             </div>
           </div>
         </div>
-      </li>`;
+      </li>`
+
         $(".cart-list").append(data);
     });
 
@@ -291,5 +340,5 @@ function checkFillinput(arrinput) {
             return false; //least 1 empty fill
         }
     } 
-    return true; //no empty fill
+    return true //no empty fill
 }
