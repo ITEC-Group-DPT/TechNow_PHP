@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
   // include "./includes/config.php";
   // include "./classes/Product.php";
   // include "./functions/UI_func.php";
@@ -10,7 +10,7 @@ echo "heheheobioi";
 
   // include "./includes/header.php"
 ?>
-
+<!-- 
 <div class="menu-banners">
   <div class="row">
 
