@@ -1,14 +1,14 @@
-<?php
-  include "./includes/config.php";
-  include "./classes/Product.php";
-  include "./functions/UI_func.php";
+<!-- <?php
+  // include "./includes/config.php";
+  // include "./classes/Product.php";
+  // include "./functions/UI_func.php";
+echo "heheheobioi";
+  // $topRating = Product::getTopRating($conn);
+  // $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
+  // $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
+  // $monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
 
-  $topRating = Product::getTopRating($conn);
-  $laptops = Product::getProductsByCategory("Laptop", $conn, 8, 9);
-  $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
-  $monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
-
-  include "./includes/header.php"
+  // include "./includes/header.php"
 ?>
 
 <div class="menu-banners">
@@ -103,7 +103,7 @@
       <div class="my-3 mx-4 py-2 px-3">
         <div class="my-slider d-flex">
           <?php
-            renderTopRating($topRating);
+            //renderTopRating($topRating);
           ?>
         </div>
       </div>
@@ -115,7 +115,7 @@
   </div>
   <div class="row Laptop-row w-100 mx-0 rounded">
     <?php
-    renderProductCategory($laptops)
+    //renderProductCategory($laptops)
     ?>
   </div>
 
@@ -124,7 +124,7 @@
   </div>
   <div class="row CPU-row w-100 mx-0 rounded">
     <?php
-    renderProductCategory($cpus)
+    //renderProductCategory($cpus)
     ?>
   </div>
 
@@ -133,12 +133,12 @@
   </div>
   <div class="row Monitor-row w-100 mx-0 rounded">
     <?php
-    renderProductCategory($monitors)
+    //renderProductCategory($monitors)
     ?>
   </div>
 
 </div>
 
 <?php
-  include 'includes/footer.php';
-?>
+  //include 'includes/footer.php';
+?> -->
