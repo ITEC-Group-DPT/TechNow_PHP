@@ -8,7 +8,7 @@
   $cpus = Product::getProductsByCategory("CPU", $conn, 8, 9);
   $monitors = Product::getProductsByCategory("Monitor", $conn, 8, 9);
 
-  include "./includes/header.php"
+  include "./includes/header.php";
 ?>
 
 <div class="menu-banners">
