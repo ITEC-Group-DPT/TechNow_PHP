@@ -1,6 +1,7 @@
 <?php
   include "./functions/footer_func.php";
   $current_page = basename($_SERVER['SCRIPT_NAME'], ".php");
+  	if ($current_page == 'Index') $current_page = 'index';
   include "./includes/modal.php";
 ?>
 <?php if ($current_page != "signin" && $current_page != "signup") : ?>
