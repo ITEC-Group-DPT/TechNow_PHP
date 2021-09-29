@@ -1,5 +1,5 @@
 <?php 
-include '../includes/db.php';
+include "../includes/config.php";
 include '../classes/DeliveryInfo.php';
 if (isset($_POST['getdelivery'])){
     $book = new DeliveryInfo($conn);

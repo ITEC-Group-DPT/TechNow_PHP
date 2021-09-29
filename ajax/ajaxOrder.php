@@ -1,5 +1,5 @@
 <?php 
-include '../includes/db.php';
+include "../includes/config.php";
 include '../classes/Order.php';
 if (isset($_POST['order'])){
     $arr = json_decode($_POST['list']);
